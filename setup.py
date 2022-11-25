@@ -2,6 +2,7 @@ from setuptools import (
     setup,
     find_packages,
 )
+from pathlib import Path
 
 
 with open('requirements.txt') as f:
@@ -13,7 +14,7 @@ with open('VERSION') as f:
 setup(
     name='luisy',
     version=version,
-    description='Framework on top of luigi',
+    description='Framework to build data pipelines',
     author='Robert Bosch GmbH',
     entry_points={
         'console_scripts': [
@@ -24,6 +25,8 @@ setup(
     install_requires=requirements_install,
     tests_require=[],
     license="Apache-2.0",
+    long_description=(Path(__file__).parent / "README.md").read_text(),
+    long_description_content_type='text/markdown',
     extras_require={
         'dev': ['check-manifest'],
         'test': ['coverage'],
