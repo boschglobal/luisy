@@ -16,6 +16,8 @@ reproducable and complex data pipelines for batch jobs.
 * [How to contribute?](#contributing)
 * [Third-Party licences](#3rd-party-licenses)
 
+The full documention is lives [here ](https://boschglobal.github.io/luisy/).
+
 ---
 
 ## <a name="installing">How to install?</a>
