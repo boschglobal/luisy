@@ -8,7 +8,8 @@ docs](https://github.com/boschglobal/luisy/actions/workflows/test_docs.yml/badge
 
 This tool is an extension for the Python Framework
 [luigi](https://luigi.readthedocs.io/en/stable/) which helps to build
-reproducable and complex data pipelines for batch jobs.
+reproducable and complex data pipelines for batch jobs. Visit our
+[docs](https://boschglobal.github.io/luisy/) to learn more!
 
 
 * [How to install?](#installing)
