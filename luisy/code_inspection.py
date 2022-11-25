@@ -60,7 +60,7 @@ def walk_nodes(variable_name, module_name, parent="", parent_module=""):
     """
     Function that recursively visits AST nodes.
     Theses nodes are either ClassDefs, FunctionDefs or simply Name nodes.
-    For each node:
+    For each node
 
     * the sourcecode within the node body is hashed and added to a return list
     * the names of external packages used inside the node body is added to a return list
@@ -68,18 +68,17 @@ def walk_nodes(variable_name, module_name, parent="", parent_module=""):
       the node, the function also visits these nodes
 
      Args:
-        variable_name (str): name of AST node. Class name, Function name, or a module-level
-            variable.
         module_name (str): module name of current node
         parent (str): name of parent node
         parent_module (str): name of module of parent node
+        variable_name (str): name of AST node. Class name, Function name, or a module variable.
 
     Returns:
-        hashes(list(str): hashes of AST nodes visited
-        imported_packages(set(str)): names of external packages used by nodes visited
-        vis_data(list[dict]): Data collected during traversal of the ast syntax tree. Each dict
-            represents an AST node. Contains names of node and its parent, modules names of node and
-            parent and node type. This info can be used to plot the dependency graph.
+        tuple: Triple of list of hashes, set of strings representing the imported packages, and a
+        list of dicts holding the visualization data collected during traversal of
+        the ast syntax tree. Each dict represents an AST node. Contains names of node and its
+        parent, modules names of node and parent and node type. This info can be used to plot
+        the dependency graph.
     """
     visualization_data = []
 

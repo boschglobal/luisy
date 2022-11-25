@@ -125,8 +125,7 @@ We can now load the output of the pipeline above by running the following lines 
 
    df = ParsedExport().read()
 
-The tree built in this pipeline can be plotted as well. To use this feature, make sure to have
-installed the `graphviz library <https://graphviz.org/download/>`_:
+The tree built in this pipeline can be plotted as well:
 
 .. code-block:: python
 
