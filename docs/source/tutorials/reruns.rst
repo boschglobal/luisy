@@ -52,21 +52,6 @@ and we invoke
 
    luisy --module example_project FinalFile
 
-
-Then the tasks marked red are executed:
-
-.. graphviz::
-
-   digraph foo {
-      "FinalFile" -> "InterimFile";
-      "FinalFile" -> "RawFileB";
-      "InterimFile" -> "RawFileA";
-      "InterimFile" -> "RawFileB";
-      "InterimFile" [color=red];
-      "FinalFile" [color=red];
-   }
-
-
 and afterwards, the following files exist:
 
 * :code:`/projects/example_project/raw/RawFileA.csv`
