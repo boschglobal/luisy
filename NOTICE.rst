@@ -38,3 +38,4 @@ Robert Bosch GmbH
 * Andreas Fritz <external.andreas.fritz@de.bosch.com>
 * Andreas Zeller <external.andreas.zeller4@de.bosch.com>
 * Matthias Burkhardt <external.matthias.burkhardt@de.bosch.com>
+* Martin Roth <martin.roth2@de.bosch.com>
