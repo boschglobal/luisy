@@ -14,7 +14,7 @@ has ownership over code that is written for this project.
 If Individual's organization is copyright holder of her contributions
 add the organization's name, optionally also the contributor's name:
 
-.. code-block:: bash
+.. code-block::
 
     Individual's name <submission email address>
     

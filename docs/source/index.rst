@@ -13,7 +13,6 @@ science pipelines. It makes LUIgy more eaSY.
    Authors <about/authors>
    Changelog <about/changelog>
    Contributions <contributions>
-   License <about/license>
 
 
 .. toctree::
@@ -47,4 +46,9 @@ science pipelines. It makes LUIgy more eaSY.
 
    Full reference <api/modules>
 
+.. toctree::
+   :caption: Legal
+   :maxdepth: 4
 
+   License <legal/license>
+   Corporate information <legal/corporate_information>
