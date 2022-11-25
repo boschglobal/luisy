@@ -40,7 +40,6 @@ extensions = [
     'sphinx.ext.doctest',
     'sphinx.ext.ifconfig',
     'sphinx.ext.mathjax',
-    'sphinx.ext.graphviz',
     'sphinx.ext.napoleon',
     'sphinx.ext.inheritance_diagram'
 ]
