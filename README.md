@@ -5,6 +5,7 @@
 Package](https://github.com/boschglobal/luisy/actions/workflows/test_package.yml/badge.svg)](https://github.com/boschglobal/luisy/actions/workflows/test_package.yml)
 [![Test
 docs](https://github.com/boschglobal/luisy/actions/workflows/test_docs.yml/badge.svg)](https://github.com/boschglobal/luisy/actions/workflows/test_docs.yml)
+[![PyPI](https://img.shields.io/pypi/v/luisy)](https://pypi.org/project/luisy/)
 
 This tool is an extension for the Python Framework
 [luigi](https://luigi.readthedocs.io/en/stable/) which helps to build
@@ -25,10 +26,10 @@ reproducable and complex data pipelines for batch jobs. Visit our
 
 Minimum python version: 3.8
 
-Install all requirements with
+Install luisy with
 
 ```bash
-python setup.py install
+pip install luisy
 ```
 
 ## <a name="testing">How to test?</a>
