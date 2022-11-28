@@ -23,36 +23,36 @@ reproducable and complex data pipelines for batch jobs. Visit our
 
 ## <a name="usage">How to use?</a>
 
-This is how an end-to-end `luisy` pipeline may looks like:
+This is how an end-to-end `luisy` pipeline may look like:
 
 ```python
-   import luisy
-   import pandas as pd
-   
-   @luisy.raw
-   @luisy.csv_output(delimiter=',')
-   class InputFile(luisy.ExternalTask):
-      label = luisy.Parameter()
-
-   	def get_file_name(self): 
-         return f"file_{self.label}"
-   
-   @luisy.interim
-   @luisy.requires(InputFile)
-   class ProcessedFile(luisy.Task):
-      def run(self):
-         df = self.input().read()
-         # Some more preprocessings
-         # ...
-         # Write to disk
-         self.write(df)
-   
-   @luisy.final
-   class MergedFile(luisy.ConcatenationTask):
-      def requires(self):
-         for label in ['a', 'b', 'c', 'd']:
-            yield ProcessedFile(label=label)
-```
+    import luisy
+    import pandas as pd
+    
+    @luisy.raw
+    @luisy.csv_output(delimiter=',')
+    class InputFile(luisy.ExternalTask):
+        label = luisy.Parameter()
+    
+    	def get_file_name(self): 
+          return f"file_{self.label}"
+    
+    @luisy.interim
+    @luisy.requires(InputFile)
+    class ProcessedFile(luisy.Task):
+        def run(self):
+            df = self.input().read()
+            # Some more preprocessings
+            # ...
+            # Write to disk
+            self.write(df)
+    
+    @luisy.final
+    class MergedFile(luisy.ConcatenationTask):
+        def requires(self):
+            for label in ['a', 'b', 'c', 'd']:
+                yield ProcessedFile(label=label)
+    ```
 
 ## <a name="installing">How to install?</a>
 
