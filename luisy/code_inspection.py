@@ -29,7 +29,7 @@ def create_hashes(task_list, requirements_path=None):
         requirements_path(str): location if requirements.txt, if None, try to get it automatically
 
     Returns:
-        hashes_list(list[str]): The hash values for the tasks in hexadecimal.
+        list[str]: The hash values for the tasks in hexadecimal.
     """
     hashes_list = list()
     if requirements_path is None:
@@ -328,8 +328,8 @@ def get_requirements_dict(path):
 
 def create_deps_map(requirements_dict):
     """
-        Map each requirement to its dependencies.
-        Both keys and values are in unified format. That means to apply: .lower().replace("-","_")
+    Map each requirement to its dependencies.
+    Both keys and values are in unified format. That means to apply: .lower().replace("-","_")
     """
     deps_map = {}
     for req in requirements_dict:  # here we need the Pypi name
@@ -341,11 +341,12 @@ def create_deps_map(requirements_dict):
 def get_all_deps(package):
     """
     Get names of all dependencies of 'package' using 'pipdeptree'.
+
     Args:
         package(str): package for which we want deps.
 
     Returns:
-        dict: mapping each package to a list of deps.
+        set: Set holding the required packages of `package`.
     """
     reqs = subprocess.check_output(
         [
@@ -372,8 +373,8 @@ def map_imports_to_requirements(imported_packages, requirements_dict, deps_map):
         deps_map(dict): dict returned by
 
     Returns:
-        dict: Dictionary listing for each package, one or several lines of the
-            requirements file that concern it.
+        pandas.DataFrame: Dictionary listing for each package, one or several lines of the
+        requirements file that concern it.
     """
     package_name_to_pypi = make_pypi_mapper()
     imported_packages = [package_name_to_pypi(p) for p in imported_packages]
@@ -419,7 +420,6 @@ def is_standard(package_name):
     """
     Determines whether a package is in the python standard lib.
     """
-    # TODO: this is not perfect yet. Add cases when problems occur.
     if package_name in ["sys"]:  # did not work like for the others
         return True
     try:
