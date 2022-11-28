@@ -34,8 +34,8 @@ This is how an end-to-end `luisy` pipeline may look like:
     class InputFile(luisy.ExternalTask):
         label = luisy.Parameter()
     
-    	def get_file_name(self): 
-          return f"file_{self.label}"
+        def get_file_name(self): 
+            return f"file_{self.label}"
     
     @luisy.interim
     @luisy.requires(InputFile)
