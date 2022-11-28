@@ -1,0 +1,33 @@
+name: Test version bump
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  check-version-bump:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Check out
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Verify file change
+      uses: tj-actions/changed-files@v34 
+      id: changed-file
+      with:
+        files: |
+          VERSION
+    
+    - name: List all changed files
+      run: |
+        for file in ${{ steps.changed-file.outputs.all_changed_files }}; do
+          echo "$file was changed"
+        done
+
+    - name: Check if VERSION has been changed
+      if: steps.changed-file.outputs.any_changed == 'false'
+      run: exit 1
