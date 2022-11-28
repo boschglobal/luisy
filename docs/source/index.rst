@@ -3,41 +3,42 @@ luisy
 
 `luisy` is a Python framework that extends luigi and further
 simplifies building data science pipelines by reducing development
-complexity. Thus, it makes **LUI**gy more ea**SY**.
+complexity. Thus, it makes **LUI**gi more ea**SY**.
 
 
 An example pipeline
 -------------------
 
-This is how an end-to-end luisy pipeline may looks like:
+This is how an end-to-end luisy pipeline may look like:
 
 .. code-block:: python
 
-   import luisy
-   import pandas as pd
-   
-   @luisy.raw
-   @luisy.csv_output(delimiter=',')
-   class InputFile(luisy.ExternalTask):
-   	label = luisy.Parameter()
-   	def get_file_name(self): 
-         return f"file_{self.label}"
-   
-   @luisy.interim
-   @luisy.requires(InputFile)
-   class ProcessedFile(luisy.Task):
-   	def run(self):
-   		df = self.input().read()
-   		# Some more preprocessings
-   		# ...
-   		# Write to disk
-   		self.write(df)
-   
-   @luisy.final
-   class MergedFile(luisy.ConcatenationTask):
-   	def requires(self):
-   		for label in ['a', 'b', 'c', 'd']:
-   			yield ProcessedFile(label=label)
+    import luisy
+    import pandas as pd
+    
+    @luisy.raw
+    @luisy.csv_output(delimiter=',')
+    class InputFile(luisy.ExternalTask):
+        label = luisy.Parameter()
+    
+        def get_file_name(self): 
+            return f"file_{self.label}"
+    
+    @luisy.interim
+    @luisy.requires(InputFile)
+    class ProcessedFile(luisy.Task):
+        def run(self):
+            df = self.input().read()
+            # Some more preprocessings
+            # ...
+            # Write to disk
+            self.write(df)
+    
+    @luisy.final
+    class MergedFile(luisy.ConcatenationTask):
+        def requires(self):
+            for label in ['a', 'b', 'c', 'd']:
+                yield ProcessedFile(label=label)
 
 
 Learn more about luisy in our
