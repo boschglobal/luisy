@@ -31,10 +31,16 @@ add the organization's name, optionally also the contributor's name:
 Robert Bosch GmbH
 -----------------
 
-* Tobias Windisch <tobias.windisch@de.bosch.com>
+* Tobias Windisch <tobias.windisch@de.bosch.com> (till 30.11.2022)
 * Benno Geisselmann <benno.geisselmann@de.bosch.com>
 * Tsvetelina Yordanova <tsvetelina.yordanova@de.bosch.com>
 * Niclas Hertzer <niclas.hertzer@de.bosch.com>
 * Andreas Fritz <external.andreas.fritz@de.bosch.com>
 * Andreas Zeller <external.andreas.zeller4@de.bosch.com>
 * Matthias Burkhardt <external.matthias.burkhardt@de.bosch.com>
+
+
+University of Applied Sciences Kempten
+--------------------------------------
+
+* Tobias Windisch <tobias.windisch@hs-kempten.de> (from 01.12.20222

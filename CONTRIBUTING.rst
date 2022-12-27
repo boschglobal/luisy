@@ -89,7 +89,7 @@ Unintuitive parameters:
    i = 3
 
    # Beautiful
-   number_of_
+   number_of_elements = 3
 
 
 Commit your changes
