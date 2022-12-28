@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import ast
+import json
 import hashlib
 import inspect
 import importlib
@@ -17,6 +18,12 @@ import numpy as np
 import pandas as pd
 import requirements
 
+logger = logging.getLogger(__name__)
+
+
+class RequirementFileNotFound(Exception):
+    pass
+
 
 def create_hashes(task_list, requirements_path=None):
     """
@@ -26,16 +33,30 @@ def create_hashes(task_list, requirements_path=None):
 
     Args:
         task_list (list[luisy.Task]): List of task classes
-        requirements_path(str): location if requirements.txt, if None, try to get it automatically
+        requirements_path (str): location if requirements.txt, if None, try to get it automatically
 
     Returns:
         list[str]: The hash values for the tasks in hexadecimal.
     """
     hashes_list = list()
+
     if requirements_path is None:
         #  This should work with any task from the list
-        requirements_path = get_requirements_path(task_list[0])
-    requirements_dict = get_requirements_dict(requirements_path)
+        task_class = task_list[0]
+        try:
+            requirements_path = get_requirements_path(task_class)
+            requirements_dict = get_requirements_dict(requirements_path)
+        except RequirementFileNotFound:
+            logger.warning(
+                'No requirements.txt found.'
+                'Will try to infer from installed version'
+            )
+            requirements_dict = get_all_deps_with_versions(
+                task_class.__module__.split('.')[0],
+            )
+    else:
+        requirements_dict = get_requirements_dict(requirements_path)
+
     deps_map = create_deps_map(requirements_dict)  # req -> dep, one line per dep
 
     for task_class in task_list:
@@ -305,7 +326,9 @@ def get_requirements_path(task_class):
     while True:
         groups = path_.split(os.sep)
         if len(groups) == 1:
-            raise Exception("Requirements file not could not be found automatically!")
+            raise RequirementFileNotFound(
+                "Requirements file not could not be found automatically!"
+            )
         path_ = os.sep.join(groups[:-1])
         req_path = os.path.join(path_, "requirements.txt")
         if os.path.exists(req_path):
@@ -326,6 +349,10 @@ def get_requirements_dict(path):
     return reqs_dict
 
 
+def _harmonize_package_name(package_name):
+    return package_name.replace("-", "_")
+
+
 def create_deps_map(requirements_dict):
     """
     Map each requirement to its dependencies.
@@ -333,34 +360,55 @@ def create_deps_map(requirements_dict):
     """
     deps_map = {}
     for req in requirements_dict:  # here we need the Pypi name
-        deps = [d.lower().replace("-", "_") for d in get_all_deps(req)]
-        deps_map[req.lower().replace("-", "_")] = deps
+        deps = [_harmonize_package_name(d.lower()) for d in get_all_deps(req)]
+        deps_map[_harmonize_package_name(req.lower())] = deps
     return deps_map
 
 
-def get_all_deps(package):
+def get_all_deps_with_versions(package):
     """
-    Get names of all dependencies of 'package' using 'pipdeptree'.
+    Get names of all dependencies of 'package' using 'pipdeptree' including their required version.
 
     Args:
         package(str): package for which we want deps.
 
     Returns:
-        set: Set holding the required packages of `package`.
+        dict: Dict where the keys are the package names and the values are the version constraints
+        of all dependencies.
     """
+
+    # Underlines in package names become hyphens due to a strange behavior of setuptools
+    package = package.replace('_', '-')
     reqs = subprocess.check_output(
         [
             sys.executable,
             "-m", "pipdeptree", "--package",
             package,
-            "-w", "silence"
+            "-w", "silence", "--json-tree"
         ],
         stderr=subprocess.DEVNULL,
-    ).decode().splitlines()
+    )
+    reqs_list = json.loads(reqs)
 
-    reqs = [req.split("[")[0].strip("- ") for req in reqs]
-    reqs = [req.replace("-", "_") for req in reqs]
-    return set(reqs[1:])
+    if len(reqs_list) == 0:
+        return {}
+
+    reqs_list = reqs_list[0].get('dependencies', [])
+
+    reqs_dict = {
+        _harmonize_package_name(req['package_name']): "".join(
+            [
+                _harmonize_package_name(req['package_name']),
+                req['required_version'].replace('Any', ''),
+            ]) for req in reqs_list
+    }
+
+    return reqs_dict
+
+
+def get_all_deps(package):
+    reqs_dict = get_all_deps_with_versions(package)
+    return set(reqs_dict.keys())
 
 
 def map_imports_to_requirements(imported_packages, requirements_dict, deps_map):

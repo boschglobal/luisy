@@ -35,6 +35,7 @@ from luisy.code_inspection import (
     is_builtin,
     is_standard,
     get_all_deps,
+    get_all_deps_with_versions,
     get_irregular_pypi_names,
     make_pypi_mapper,
     create_deps_map,
@@ -399,6 +400,11 @@ class TestExternalDependenciesManagement(unittest.TestCase):
 
         deps_set = get_all_deps("pandas")
         self.assertIn("numpy", deps_set)
+
+    def test_get_all_deps_with_versions(self):
+        reqs_dict = get_all_deps_with_versions("pandas")
+        self.assertIsInstance(reqs_dict, dict)
+        self.assertIn("numpy", reqs_dict)
 
     def test_requirements_path(self):
         with patch("luisy.code_inspection.inspect.getfile") as mock_getfile:

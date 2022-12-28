@@ -52,7 +52,8 @@ Now we can check which of these three cases applies:
 
 For the last two cases, we can just apply the same step recursively and add the sourcecode to a list.
 Whenever we hit external dependencies, we collect their version info from the :code:`requirements.txt`
-and add it to a list.
+and add it to a list. If we cannot find a `requirements.txt`, we use
+:py:mod:`pipdeptree` to infer the version of the dependency from the installation.
 When the recursive algorithm has stopped, we generate a hash of all the source code and version
 info that we have collected.
 
