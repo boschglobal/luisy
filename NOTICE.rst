@@ -43,4 +43,4 @@ Robert Bosch GmbH
 University of Applied Sciences Kempten
 --------------------------------------
 
-* Tobias Windisch <tobias.windisch@hs-kempten.de> (from 01.12.20222
+* Tobias Windisch <tobias.windisch@hs-kempten.de> (from 01.12.2022)
