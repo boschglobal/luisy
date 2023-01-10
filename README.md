@@ -52,7 +52,7 @@ This is how an end-to-end `luisy` pipeline may look like:
         def requires(self):
             for label in ['a', 'b', 'c', 'd']:
                 yield ProcessedFile(label=label)
-    ```
+```
 
 ## <a name="installing">How to install?</a>
 
