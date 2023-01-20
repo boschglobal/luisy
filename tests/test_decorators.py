@@ -10,7 +10,7 @@ import luigi
 import luisy
 
 from luisy import Task
-from luisy.testing import luisyTestCase
+from luisy.testing import LuisyTestCase
 from luisy.decorators import (
     _make_output_decorator_factory,
     auto_filename
@@ -52,7 +52,7 @@ class TestTargetDecorators(unittest.TestCase):
         )
 
 
-class TestDecoratorOutputs(luisyTestCase):
+class TestDecoratorOutputs(LuisyTestCase):
     def test_json_decorator(self):
         dct = self.run_pipeline(MyJSONTask())
         self.assertDictEqual(
@@ -101,7 +101,7 @@ class TestAutoFilename(unittest.TestCase):
         )
 
 
-class TestDecoratorParenthesis(luisyTestCase):
+class TestDecoratorParenthesis(LuisyTestCase):
 
     def test_output_decorator_factory_parenthesis(self):
         @luisy.decorators.csv_output()

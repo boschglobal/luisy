@@ -7,7 +7,7 @@ import pandas as pd
 import luigi
 
 from luisy.testing import (
-    luisyTestCase,
+    LuisyTestCase,
     get_all_dependencies,
 )
 import luisy
@@ -51,7 +51,7 @@ class DictTask(luisy.Task):
         dct['there'][0] = 10
 
 
-class TestTesting(luisyTestCase):
+class TestTesting(LuisyTestCase):
 
     def test_run(self):
         existing_outputs = [

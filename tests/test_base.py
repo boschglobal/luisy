@@ -38,7 +38,7 @@ from luisy.code_inspection import (
 )
 from luisy.testing import (
     create_testing_config,
-    luisyTestCase,
+    LuisyTestCase,
     debug_run,
 )
 
@@ -323,7 +323,7 @@ class TestTask(BaseTaskTestCase):
         )
 
 
-class TestExternalTask(luisyTestCase):
+class TestExternalTask(LuisyTestCase):
 
     def setUp(self):
         self.tmpdir = tempfile.TemporaryDirectory()
