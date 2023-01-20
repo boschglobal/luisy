@@ -2,6 +2,10 @@
 Changelog
 =========
 
+Version 1.2.0
+=============
+- Change :py:class:`luisy.testing.luisyTestCase` to :py:class:`luisy.testing.LuisyTestCase`
+
 Version 1.1.0
 =============
 - Soften the dependence on how the required packages are specified by

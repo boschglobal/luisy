@@ -81,7 +81,7 @@ def create_file(file, val):
         pickle.dump(val, f)
 
 
-class luisyTestCase(unittest.TestCase):
+class LuisyTestCase(unittest.TestCase):
 
     def get_execution_summary(self, task, existing_outputs=None):
         result, _ = self._run_pipeline(task=task, existing_outputs=existing_outputs)

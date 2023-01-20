@@ -11,7 +11,7 @@ import pickle
 
 from luisy.testing import (
     create_testing_config,
-    luisyTestCase,
+    LuisyTestCase,
 )
 from luisy import Config
 from luisy.cli import build
@@ -79,7 +79,7 @@ class SomeInterimTask2(luisy.Task):
         self.write(['some_other_output'])
 
 
-class TestHashUpdate(luisyTestCase):
+class TestHashUpdate(LuisyTestCase):
 
     def setUp(self):
         self.tmpdir = tempfile.TemporaryDirectory()

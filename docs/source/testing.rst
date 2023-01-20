@@ -12,7 +12,7 @@ This is how a test case may look like this:
 
 .. code-block:: python
 
-   from luisy.testing import luisyTestCase
+   from luisy.testing import LuisyTestCase
 
    from my_project.tasks import (
        MyFinalTask,
@@ -21,7 +21,7 @@ This is how a test case may look like this:
    )
 
 
-   class TestMyPipeline(luisyTestCase):
+   class TestMyPipeline(LuisyTestCase):
 
       def test_success(self):
           self.assertSuccess(
@@ -62,7 +62,7 @@ This is how a test case may look like this:
            # Performe some asserts on task_output 
 
 
-Using :py:func:`luisy.testing.luisyTestCase.run_pipeline`, the user
+Using :py:func:`luisy.testing.LuisyTestCase.run_pipeline`, the user
 can specify a task she would like to run and can provide outputs of
 some tasks that may be needed during execution. Here, the user can
 provide the output objects of the tasks as python objects using
@@ -75,12 +75,12 @@ Test the execution summary
 
 The most prominent test examples involve incorrect runs. For those, we
 would like to know which tasks fail. For this the helper
-:py:func:`luisy.testing.luisyTestCase.get_execution_summary` can be
+:py:func:`luisy.testing.LuisyTestCase.get_execution_summary` can be
 used to get the summary of the run:
 
 .. code-block:: python
 
-   class TestMyPipeline(luisyTestCase):
+   class TestMyPipeline(LuisyTestCase):
 
       def test_summary(self):
           summary = self.get_execution_summary(
@@ -144,7 +144,7 @@ like this:
 
 .. code-block:: python
 
-   class TestFinalTask(luisyTestCase):
+   class TestFinalTask(LuisyTestCase):
    
        def test_run(self):
 
@@ -166,7 +166,7 @@ user only has to give a valid output for the :code:`RawTask`:
 
 .. code-block:: python
 
-   class TestFinalTask(luisyTestCase):
+   class TestFinalTask(LuisyTestCase):
 
       def test_run(self):
           df_test = pd.DataFrame(data={'A': [1, 2], 'B': [3, 4]})

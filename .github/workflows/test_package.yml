@@ -1,11 +1,5 @@
 name: Run tests of python package
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
 jobs:
   run-tests:
 
