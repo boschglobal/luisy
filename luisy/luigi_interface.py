@@ -27,7 +27,6 @@ from luisy.config import Config
 from luisy.hashes import (
     HashSynchronizer,
     get_upstream_tasks,
-
 )
 
 

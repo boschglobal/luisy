@@ -3,7 +3,7 @@ luisy
 
 `luisy` is a Python framework that extends luigi and further
 simplifies building data science pipelines by reducing development
-complexity. Thus, it makes **LUI**gi more ea**SY**.
+complexity. Thus, it makes **LUIgi more eaSY**.
 
 
 An example pipeline
@@ -41,7 +41,7 @@ This is how an end-to-end luisy pipeline may look like:
                 yield ProcessedFile(label=label)
 
 
-Learn more about luisy in our
+Learn more about luisy in our :doc:`Tutorials <./tutorials/getting_started>`.
 
 
 .. toctree::

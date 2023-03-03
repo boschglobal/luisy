@@ -13,11 +13,12 @@ This guide helps you to contributing code changes to luisy.
 Add your changes
 ================
 
-Once your planned update is aligned with the maintainers and a Jira
-story for your change exists, you need to create a git branch through
-Jira. No development should take place on the :code:`main` branch
-directly! All changes have to take place on aligned feature branches
-that are connected to Jira stories.
+Once your planned update is aligned with the maintainers,
+you should create a fork on which you implement your changes.
+Creating and pushing to feature branches in the luisy repository is not possible.
+After development you create a pull request from your fork. For more details see
+`Creating a pull request from a fork
+<https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork>`.
 
 Please add code that is absolutely necessary for your changes only and
 try to keep the requirements of luisy as slim as possible.
@@ -405,7 +406,7 @@ Each contributor is responsible for identifying themselves in the
 Please add the respective information corresponding to the
 Signed-off-by tag as part of your first pull request.
 
-If you are a developer who is authorized to contribute to pyLife on
+If you are a developer who is authorized to contribute to luisy on
 behalf of your employer, then add your company / organization to the
 list of copyright holders in the `NOTICE.rst` file. As author of a
 corporate contribution you can also add your name and corporate email
@@ -430,13 +431,13 @@ In case you
 your changes are ready to be reviewed. Now, to have your changes merged as fast
 as possible, please do the following:
 
-* open a pull request from your feature branch to the
+* open a pull request from your fork to the
   `main` branch of luisy.
 * add at least one of the maintainers as reviewer.
 * add a small description to your pull request in case your changes
-  differ from those in the corresponding Jira story or if you want to
+  differ from those in the corresponding issue or if you want to
   point the reviewers to certain aspects of your implementation.
-* resolve any merge conflicts manually by merging the develop branch locally
+* resolve any merge conflicts manually by merging the main branch locally
   into your branch.
 * make sure that the triggered GitHub actions pass and
   resolve problems if not.
@@ -460,8 +461,6 @@ dependencies. In the case of a conflict, this has to be resolved first.
 Note: Only dependency conflicts are spotted via :code:`pip-compile`
 (which is called by :code:`make (update-)requirements`) - you need to
 test for errors resulting from upgraded dependencies yourself.
-To update the default virtual environment to the currently pinned
-libraries you can use again :code:`make sync-venv`.
 
 
 How to cite luisy?

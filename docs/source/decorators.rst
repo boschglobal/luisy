@@ -13,9 +13,9 @@ Decorators are used for:
 
 Outputs
 -------
-Here are a list of decorators for the outfile of a task:
+Here is a list of decorators for the outfile of a task:
 
-Generally, tasks with does decorators can persist their output with
+Generally, tasks with those decorators can persist their output with
 :py:func:`self.write()` and tasks requiring these tasks can read their
 output with `self.input().read()`
 

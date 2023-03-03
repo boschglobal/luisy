@@ -506,7 +506,7 @@ class HashMapping(object):
 
     def exists(self, filepath):
         """
-        Tests whether the output behind filepath exists, either locally or the cloud.
+        Tests whether the output behind filepath exists, either locally or in the cloud.
         """
 
         if self.local:

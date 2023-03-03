@@ -2,13 +2,13 @@ Testing
 =======
 
 The module :py:mod:`luisy.testing` provides helpers to test pipelines
-end-to-end for test szenarious.
+end-to-end for test scenarios.
 
 
 Run a pipeline 
 --------------
 
-This is how a test case may look like this:
+This is how a test case may look like:
 
 .. code-block:: python
 
@@ -66,8 +66,7 @@ Using :py:func:`luisy.testing.LuisyTestCase.run_pipeline`, the user
 can specify a task she would like to run and can provide outputs of
 some tasks that may be needed during execution. Here, the user can
 provide the output objects of the tasks as python objects using
-:code:`existing_outputs`, which is a list of tuples the task and output
-objects tuples
+:code:`existing_outputs`, which is a list of tuples containing the task and the regarding output.
 
 
 Test the execution summary
