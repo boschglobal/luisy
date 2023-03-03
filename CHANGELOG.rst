@@ -6,7 +6,7 @@ Version 1.2.1
 =============
 - Update contribution guide
 - Docu fixes
-- Update cryptpgraphy version
+- Update cryptography version
 
 Version 1.2.0
 =============
