@@ -18,14 +18,14 @@ hashes without executing the pipeline.
     your `.luisy.hash` file
 
 To run luisy in **Hash Update Mode** use the normal command to execute your pipeline and attack
-the flag `--update-hash-mode`:
+the flag `--hash-update-mode`:
 
 .. code-block:: bash
 
      luisy \
          --module [project_name].[module] MyTask 
          (--working_dir=/path/to/my/data/dir) \
-         --update-hash-mode
+         --hash-update-mode
 
 You can also combine the Hash Update Mode with the upload functionality of luisy, which also
 updates all the hashes in the cloud, if desired. Just add :code:`--upload` to your call.

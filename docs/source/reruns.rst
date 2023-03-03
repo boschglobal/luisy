@@ -7,9 +7,9 @@ Overview
 --------
 
 Depending on how many people are working on the same pipeline, manual
-deletions can get annoying quite fast. Therefore implemented in each
-:py:class:`luisy.tasks.base.Task` a feature to detect whether it need
-to be rerun based on code changes.
+deletions can get annoying quite fast.  Therefore a feature is implemented
+in :py:class:`luisy.tasks.base.Task` to detect whether the task needs to be rerun based on code
+changes.
 
 More specific, whenever a :py:mod:`luisy` pipeline has been successfully
 executed, a hash of the code of all executed tasks is computed and
@@ -18,8 +18,8 @@ and whenever a :py:mod:`luisy` pipeline is executed, the hashes of the
 tasks computed at runtime are compared with the persisted hashes.
 If code of a task changes then its hash changes, the task is executed
 again, and its outfile is overwritten. Moreover, all the downstream
-dependencies of this task are re-run as well as their input may
-changes.
+dependencies of this task are re-run as well as their input may have
+changed.
 
 Long story short: **You will never have to manually delete files anymore**
 
@@ -27,7 +27,7 @@ Long story short: **You will never have to manually delete files anymore**
 Mechanics of the hash computation
 ---------------------------------
 The first idea is to create a hash value out of the sourcecode of every task.
-However it is not enough to only capture the code of the task itself, we also need to to capture:
+However it is not enough to only capture the code of the task itself, we also need to capture:
 
 * the sourcecode of functions, classes and constants used in the source code of the task
 
@@ -64,19 +64,6 @@ First, find all the external packages that our task uses.
 If a package (package A) is not listed in `requirements.txt` directly, we look for  another
 package (package B) that requires package A and is itself listed in `requirements.txt`. Then we
 can include the version info of package B in the hash.
-
-Usage
-~~~~~
-If we want to create a hash of our luisy task and plot the dependency graph of AST nodes, we
-simply use:
-
-.. code-block:: python
-
-   from luisy.code_inspection import create_hash
-   task = MyTaskClass()
-   hash = create_hash(task, "plot_path")
-
-where :code:`plot_path` is the path of the output jpeg plot of the dependency graph.
 
 Guidelines when creating the code of your task
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

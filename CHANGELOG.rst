@@ -2,6 +2,12 @@
 Changelog
 =========
 
+Version 1.2.1
+=============
+- Update contribution guide
+- Docu fixes
+- Update cryptography version
+
 Version 1.2.0
 =============
 - Change :py:class:`luisy.testing.luisyTestCase` to :py:class:`luisy.testing.LuisyTestCase`
