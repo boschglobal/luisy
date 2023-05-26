@@ -4,6 +4,8 @@
 #
 #    pip-compile --allow-unsafe --annotation-style=line --no-emit-index-url requirements_dev.in
 #
+--trusted-host icdata.bosch.com
+
 attrs==22.1.0             # via pytest
 azure-core==1.26.1        # via azure-storage-blob, msrest
 azure-storage-blob==12.14.1  # via -r requirements.txt
@@ -60,7 +62,7 @@ six==1.16.0               # via azure-core, isodate, python-dateutil
 tables==3.7.0             # via -r requirements.txt
 tenacity==8.1.0           # via luigi
 tomli==2.0.1              # via build, coverage, pep517, pytest
-tornado==6.2              # via luigi
+tornado==6.3.2            # via luigi
 types-setuptools==65.6.0.1  # via requirements-parser
 typing-extensions==4.4.0  # via azure-core
 urllib3==1.26.13          # via requests
