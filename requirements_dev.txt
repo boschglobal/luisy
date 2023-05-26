@@ -4,7 +4,6 @@
 #
 #    pip-compile --allow-unsafe --annotation-style=line --no-emit-index-url requirements_dev.in
 #
---trusted-host icdata.bosch.com
 
 attrs==22.1.0             # via pytest
 azure-core==1.26.1        # via azure-storage-blob
