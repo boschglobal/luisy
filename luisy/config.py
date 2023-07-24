@@ -13,11 +13,14 @@ into the leafs of our DAG.
 
 import os
 import logging
+from databricks.connect import DatabricksSession
 from luisy.file_system import AzureContainer
 from luisy.default_params import (
     default_params,
     env_keys
 )
+
+from pyspark.errors.exceptions.connect import SparkConnectGrpcException
 
 logger = logging.getLogger('luigi-interface').getChild('luisy-interface')
 
@@ -48,12 +51,41 @@ class Config(metaclass=Singleton):
         for param, env_key in env_keys.items():
             self.set_param(param, self._get_env_var(env_key))
 
+        self.init()
+
+    def _init_spark(self):
+
+        cond = [
+            self.get_param('databricks_token') is not None,
+            self.get_param('databricks_host') is not None,
+            self.get_param('databricks_cluster_id') is not None,
+        ]
+
+        if all(cond):
+            try:
+                self.spark = DatabricksSession.builder.remote(
+                    host=self.get_param('databricks_host'),
+                    token=self.get_param('databricks_token'),
+                    cluster_id=self.get_param('databricks_cluster_id'),
+                ).getOrCreate()
+            except SparkConnectGrpcException:
+                # TODO
+                pass
+
+    def _init_azure(self):
         if self.get_param('azure_storage_key') is not None:
             self.fs = AzureContainer(
                 account_name=self.get_param('azure_account_name'),
                 container_name=self.get_param('azure_container_name'),
                 key=self.get_param('azure_storage_key')
             )
+
+    def init(self):
+        if not hasattr(self, 'fs'):
+            self._init_azure()
+
+        if not hasattr(self, 'spark'):
+            self._init_spark()
 
     def update(self, params):
         """
@@ -62,7 +94,8 @@ class Config(metaclass=Singleton):
         Args:
             params (dict): new params that should be set
         """
-        self._config.update(params)
+        for name, val in params.items():
+            self.set_param(name, val)
 
     def set_param(self, name, val):
         """
@@ -73,6 +106,7 @@ class Config(metaclass=Singleton):
             val (object): Value of parameter
         """
         self._config[name] = val
+        self.init()
 
     def get_param(self, param):
         """

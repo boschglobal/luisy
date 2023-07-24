@@ -10,7 +10,7 @@ import pandas as pd
 import os
 import logging
 import re
-
+from pyspark.errors.exceptions.connect import AnalysisException
 from luisy.config import (
     Config,
     change_working_dir,
@@ -20,7 +20,7 @@ from luisy.helpers import get_df_from_parquet_dir
 logger = logging.getLogger(__name__)
 
 
-class LocalTarget(luigi.LocalTarget):
+class LuisyTarget(luigi.LocalTarget):
     """
 
     Args:
@@ -29,6 +29,33 @@ class LocalTarget(luigi.LocalTarget):
         download (bool): Whether the file should be downloaded from the cloud if not available
             locally
     """
+
+    @property
+    def fs(self):
+        return Config().fs
+
+    def exists(self):
+        raise NotImplementedError()
+
+    def write(self):
+        raise NotImplementedError()
+
+    def read(self):
+        raise NotImplementedError()
+
+    def remove(self):
+        raise NotImplementedError()
+
+    # TODO: Should this be a public method?
+    def _try_to_upload(self, overwrite=False):
+        raise NotImplementedError()
+
+    # TODO: Should this be a public method?
+    def _try_to_download(self):
+        raise NotImplementedError()
+
+
+class LocalTarget(LuisyTarget):
 
     file_ending = None
 
@@ -40,10 +67,6 @@ class LocalTarget(luigi.LocalTarget):
             is_tmp=False
         )
         self.kwargs = kwargs
-
-    @property
-    def fs(self):
-        return Config().fs
 
     def is_folder(self):
         """
@@ -135,6 +158,78 @@ class LocalTarget(luigi.LocalTarget):
             dest=path,
             overwrite=overwrite,
         )
+
+
+class CloudTarget(LuisyTarget):
+
+    def __init__(self, path, **kwargs):
+        luigi.LocalTarget.__init__(
+            self,
+            path=path,
+            format=None,
+            is_tmp=False
+        )
+        self.kwargs = kwargs
+
+
+class DeltaTableTarget(CloudTarget):
+
+    # TODO: Get rid of fileending
+    file_ending = 'DeltaTable'
+
+    def __init__(
+        self,
+        outdir=None,
+        schema="schema",
+        catalog="catalog",
+        table_name=None
+    ):
+        self.outdir = outdir
+        self.table_name = table_name
+        self.schema = schema
+        self.catalog = catalog
+
+    @property
+    def spark(self):
+        return Config().spark
+
+    def make_dir(self, path):
+        # TODO: Nothing to do here, adapt interface?
+        pass
+
+    def remove(self):
+        self.spark.sql(f"DROP TABLE IF EXISTS {self.table_uri}")
+
+    @property
+    def table_uri(self):
+        return f"{self.catalog}.{self.schema}.{self.table_name}"
+
+    @property
+    def path(self):
+        # TODO: Path here is more an identifier
+        return os.path.join(
+            self.outdir,
+            f"{self.table_uri}.{self.file_ending}",
+        )
+
+    def exists(self):
+        #return self.spark.catalog.tableExists(self.table_uri)
+        # TODO
+
+        try:
+            self.spark.sql(f"SELECT 1 from {self.table_uri}")
+            return True
+        except AnalysisException:
+            return False
+
+    def write(self, df):
+        logger.info(f"Drop table {self.table_uri}")
+        self.spark.sql(f"DROP TABLE IF EXISTS {self.table_uri}")
+        logger.info(f"Write to {self.table_uri}")
+        df.write.saveAsTable(self.table_uri)
+
+    def read(self):
+        return self.spark.table(self.table_uri)
 
 
 class PickleTarget(LocalTarget):
