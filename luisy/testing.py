@@ -202,6 +202,8 @@ def create_testing_config(
     storage_key='',
     container_name='',
     account_name='',
+    databricks_cluster_id='',
+    databricks_host='',
     mock_spark=True,
     **kwargs
 ):
@@ -218,13 +220,18 @@ def create_testing_config(
             tests.
         **kwargs: params like `download` or `upload`
     """
+    # Add spark mock before setting parameters, as this may would create a real spark object
+    if mock_spark:
+        Config().spark = SparkMock()
+
     params = get_default_params(raw=False)
     params['working_dir'] = working_dir
     params['azure_storage_key'] = storage_key
     params['azure_container_name'] = container_name
     params['azure_account_name'] = account_name
+    params["databricks_host"] = databricks_host
+    params['databricks_cluster_id'] = databricks_cluster_id
+
     for key, val in kwargs.items():
         params[key] = val
     Config().update(params)
-    if mock_spark:
-        Config().spark = SparkMock()
