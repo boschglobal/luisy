@@ -3,6 +3,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+import pandas as pd
 import unittest
 import luigi
 import pickle
@@ -170,6 +171,9 @@ class DFMock(Mock):
             Config().spark.data[table_name] = data
 
         self.write.saveAsTable = saveAsTable
+
+    def toPandas(self):
+        return pd.DataFrame(data=self.data)
 
 
 class SparkMock(Mock):

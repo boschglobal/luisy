@@ -10,6 +10,7 @@ import pandas as pd
 import os
 import logging
 import re
+from pyspark.sql import DataFrame as SparkDataFrame
 from pyspark.errors.exceptions.connect import AnalysisException
 from luisy.config import (
     Config,
@@ -163,7 +164,7 @@ class LocalTarget(LuisyTarget):
 class CloudTarget(LuisyTarget):
 
     def __init__(self, path, **kwargs):
-        luigi.LocalTarget.__init__(
+        LuisyTarget.__init__(
             self,
             path=path,
             format=None,
@@ -206,7 +207,7 @@ class DeltaTableTarget(CloudTarget):
 
     @property
     def path(self):
-        # TODO: Path here is more an identifier
+        # TODO: Path here is more an identifier that shows up in `.luisy.hashes`
         return os.path.join(
             self.outdir,
             f"{self.table_uri}.{self.file_ending}",
@@ -226,7 +227,12 @@ class DeltaTableTarget(CloudTarget):
         except AnalysisException:
             return False
 
-    def write(self, df):
+    def write(self, df: SparkDataFrame):
+        """
+
+        Args:
+            df (pyspark.sql.DataFrame): Dataframe that should be written to delta table
+        """
         logger.info(f"Drop table {self.table_uri}")
         self.spark.sql(f"DROP TABLE IF EXISTS {self.table_uri}")
         logger.info(f"Write to {self.table_uri}")
