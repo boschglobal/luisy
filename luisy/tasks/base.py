@@ -243,7 +243,7 @@ class WrapperTask(Task, luigi.WrapperTask):
 
 
 class DatabricksTask(Task):
-    # TODO: Should only work in combination with a cloud target?
+    # TODO: Should only work in combination with a cloud target as input or output?
 
     @property
     def spark(self):

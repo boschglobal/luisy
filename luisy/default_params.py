@@ -24,7 +24,7 @@ env_keys = {
     'azure_storage_key': 'LUISY_AZURE_STORAGE_KEY',
     'azure_account_name': 'LUISY_AZURE_ACCOUNT_NAME',
     'azure_container_name': 'LUISY_AZURE_CONTAINER_NAME',
-    'databricks_host': 'DATABRICKS_HOST',
-    'databricks_cluster_id': 'DATABRICKS_CLUSTER_ID',
-    'databricks_token': 'DATABRICKS_TOKEN',
+    'databricks_host': 'LUISY_DATABRICKS_HOST',
+    'databricks_cluster_id': 'LUISY_DATABRICKS_CLUSTER_ID',
+    'databricks_token': 'LUISY_DATABRICKS_TOKEN',
 }

@@ -40,6 +40,5 @@ class TestSparkTask(LuisyTestCase):
         compute_hashes.return_value = {
             "/catalog.schema.abc.ABC": "123"
         }
-
         task = ToySparkTask()
         coordinator = build(task=task, download=False)

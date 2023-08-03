@@ -174,7 +174,7 @@ class CloudTarget(LuisyTarget):
 
 class DeltaTableTarget(CloudTarget):
 
-    # TODO: Get rid of fileending
+    # TODO: Can we get rid of fileending
     file_ending = 'DeltaTable'
 
     def __init__(
@@ -213,9 +213,13 @@ class DeltaTableTarget(CloudTarget):
         )
 
     def exists(self):
-        #return self.spark.catalog.tableExists(self.table_uri)
-        # TODO
+        """
+        Checks whether the Deltatable exists.
 
+        Note:
+            Ideally, we would call `self.spark.catalog.tableExists(self.table_uri)` to check whether
+            the table exists, but this always returns `False`.
+        """
         try:
             self.spark.sql(f"SELECT 1 from {self.table_uri}")
             return True

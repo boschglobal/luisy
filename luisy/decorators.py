@@ -239,7 +239,6 @@ def deltatable_input(catalog=None, schema=None, table_name=None):
     def decorator(cls):
         def _input(self_):
             return DeltaTableTarget(
-                # TODO outdir???
                 table_name=table_name,
                 schema=schema,
                 catalog=catalog,
@@ -251,8 +250,6 @@ def deltatable_input(catalog=None, schema=None, table_name=None):
 
 
 def deltatable_output(catalog=None, schema=None, table_name=None):
-    # TODO Schema, catalog
-
     def output_decorator(cls):
         cls.target_cls = DeltaTableTarget
         cls.target_kwargs = {
