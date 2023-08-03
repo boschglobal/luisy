@@ -44,8 +44,6 @@ class TestSparkTask(unittest.TestCase):
         self.df_test = pd.DataFrame(data={'a': [1], 'b': [2]})
         Config().spark.data['A.B.raw'] = self.df_test
 
-        print(self.tmpdir)
-
         self.hashes = {
             "/A.B.interim.DeltaTable": "2",
             "/tests/interim/LocalTask.pkl": "3"
