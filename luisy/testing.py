@@ -164,6 +164,7 @@ class DFMock(Mock):
 
         self.table_uri = table_uri
         self.write = Mock()
+        self.data = data
 
         def saveAsTable(table_name):
             Config().spark.data[table_name] = data
@@ -193,7 +194,7 @@ class SparkMock(Mock):
             for table in self.tables:
                 if table in qry:
                     return True
-            raise AnalysisException("test message")
+            raise AnalysisException("Table does not exist")
 
 
 def create_testing_config(
