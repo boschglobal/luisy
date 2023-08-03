@@ -167,7 +167,6 @@ class Task(luigi.Task):
         if isinstance(self, luigi.ExternalTask):
             raise ValueError('External tasks cannot be deleted that way')
         self.logger.info(f"Cleaning {self}")
-        # TODO: Shall cloud targets be removed?
         self.output().remove()
 
     def visualize(self, ax=None, unique_children=True, parameters_to_exclude=()):

@@ -15,6 +15,7 @@ from luisy.config import get_default_params
 
 from luigi.execution_summary import LuigiStatusCode
 
+from pyspark.errors.exceptions.connect import AnalysisException
 
 from unittest.mock import (
     patch,
@@ -156,8 +157,53 @@ class LuisyTestCase(unittest.TestCase):
         self.assertEqual(result.status, LuigiStatusCode.MISSING_EXT)
 
 
-def create_testing_config(working_dir, storage_key='', container_name='', account_name='',
-                          **kwargs):
+class DFMock(Mock):
+
+    def __init__(self, table_uri, data):
+        Mock.__init__(self)
+
+        self.table_uri = table_uri
+        self.write = Mock()
+
+        def saveAsTable(table_name):
+            Config().spark.data[table_name] = data
+
+        self.write.saveAsTable = saveAsTable
+
+
+class SparkMock(Mock):
+
+    data = {}
+
+    @property
+    def tables(self):
+        return list(self.data.keys())
+
+    def table(self, table_uri):
+
+        df = DFMock(
+            table_uri=table_uri,
+            data=self.data[table_uri],
+        )
+        return df
+
+    def sql(self, qry):
+
+        if qry.startswith('SELECT 1 from'):
+            for table in self.tables:
+                if table in qry:
+                    return True
+            raise AnalysisException("test message")
+
+
+def create_testing_config(
+    working_dir,
+    storage_key='',
+    container_name='',
+    account_name='',
+    mock_spark=True,
+    **kwargs
+):
     """
     Creates a Config Object for testing purpose. Should be used when working with temporary
     directories.
@@ -179,3 +225,5 @@ def create_testing_config(working_dir, storage_key='', container_name='', accoun
     for key, val in kwargs.items():
         params[key] = val
     Config().update(params)
+    if mock_spark:
+        Config().spark = SparkMock()

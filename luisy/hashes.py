@@ -117,8 +117,9 @@ class HashSynchronizer(object):
 
     def check_params(self):
         assert self.root_task in self.tasks.values()
-        task_filesnames = [remove_working_dir(task.output().path) for task in self.tasks.values()]
-        assert all([filename in task_filesnames for filename in self.hashmapping_new.hashes.keys()])
+        task_filenames = [remove_working_dir(task.output().path) for task in self.tasks.values()]
+
+        assert all([filename in task_filenames for filename in self.hashmapping_new.hashes.keys()])
 
     def initialize(self):
         """

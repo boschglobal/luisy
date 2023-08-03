@@ -73,15 +73,30 @@ class Config(metaclass=Singleton):
                 pass
 
     def _init_azure(self):
-        if self.get_param('azure_storage_key') is not None:
+
+        cond = [
+            self.get_param('azure_account_name') is not None,
+            self.get_param('azure_storage_key') is not None,
+            self.get_param('azure_container_name') is not None,
+        ]
+
+        if all(cond):
             self.fs = AzureContainer(
                 account_name=self.get_param('azure_account_name'),
                 container_name=self.get_param('azure_container_name'),
                 key=self.get_param('azure_storage_key')
             )
+        else:
+            raise ValueError(
+                "Environment variables for Azure-connection not properly set"
+                "Make sure that you have correctly set the following variables"
+                "   'LUISY_AZURE_STORAGE_KEY'"
+                "   'LUISY_AZURE_ACCOUNT_NAME'"
+                "   'LUISY_AZURE_CONTAINER_NAME'"
+            )
 
     def init(self):
-        if not hasattr(self, 'fs'):
+        if not hasattr(self, 'fs') and self.download:
             self._init_azure()
 
         if not hasattr(self, 'spark'):

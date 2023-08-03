@@ -114,7 +114,7 @@ class TestCli(unittest.TestCase):
                   '--local-scheduler', '--download', '--no-ask']
         )
 
-        self.assertIn("Parameter 'azure_storage_key' not set", err)
+        self.assertIn("Environment variables for Azure-connection not properly set", err)
 
     @mock.patch.dict(os.environ, {"WORKING_DIR": "/data", 'LUISY_AZURE_STORAGE_KEY': "-"})
     def test_arg_parsing(self):
