@@ -15,6 +15,7 @@ from luisy.targets import (
     ParquetDirTarget,
     JSONTarget,
     DirectoryTarget,
+    DeltaTableTarget,
 )
 from luigi.util import inherits
 from luigi import ExternalTask
@@ -224,3 +225,37 @@ def auto_filename(cls_py=None, excl_params=None, excl_none=False):
 interim = _make_dir_layer('interim')
 final = _make_dir_layer('final')
 raw = _make_dir_layer('raw')
+
+
+def deltatable_input(catalog=None, schema=None, table_name=None):
+    """
+    Sets the project_name of the task to `project_name` to overwrite the default behavior of
+    :py:class:`luisy.Task`
+
+    Args:
+        project_name (str): Name of the project
+    """
+
+    def decorator(cls):
+        def _input(self_):
+            return DeltaTableTarget(
+                table_name=table_name,
+                schema=schema,
+                catalog=catalog,
+            )
+        cls.input = _input
+        return cls
+
+    return decorator
+
+
+def deltatable_output(catalog=None, schema=None, table_name=None):
+    def output_decorator(cls):
+        cls.target_cls = DeltaTableTarget
+        cls.target_kwargs = {
+            'table_name': table_name,
+            'schema': schema,
+            'catalog': catalog,
+        }
+        return cls
+    return output_decorator

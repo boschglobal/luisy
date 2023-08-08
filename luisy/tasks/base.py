@@ -16,6 +16,7 @@ from luisy.decorators import (
 )
 from luisy.config import Config
 from luisy.visualize import visualize_task
+from luisy.targets import CloudTarget
 
 from luisy.helpers import RegexTaskPattern
 
@@ -116,6 +117,7 @@ class Task(luigi.Task):
         Downloads the output of the task from the cloud.
         """
         self.logger.info(f'Start downloading of {self}')
+        # TODO: Here: distinguish cloud and local target?
         self.output()._try_to_download()
 
     def upload(self, overwrite=False):
@@ -127,6 +129,7 @@ class Task(luigi.Task):
                 to :code:`False`.
         """
         self.logger.info(f'Start uploading of {self}')
+        # TODO: Here: distinguish cloud and local target?
         self.output()._try_to_upload(overwrite=overwrite)
 
     def read(self):
@@ -143,7 +146,6 @@ class Task(luigi.Task):
         return self.output().read()
 
     def write(self, obj):
-        self.logger.info('Write to outfile')
         target = self.output()
         target.make_dir(self.get_outdir())
         target.write(obj)
@@ -151,9 +153,15 @@ class Task(luigi.Task):
     def output(self):
         """
         """
-        return self.target_cls(
-            path=self.get_outfile(),
-            **self.target_kwargs)
+        if issubclass(self.target_cls, CloudTarget):
+            return self.target_cls(
+                outdir=self.get_outdir(),
+                **self.target_kwargs
+            )
+        else:
+            return self.target_cls(
+                path=self.get_outfile(),
+                **self.target_kwargs)
 
     def clean(self):
         if isinstance(self, luigi.ExternalTask):
@@ -231,3 +239,11 @@ class WrapperTask(Task, luigi.WrapperTask):
             return [task.read() for task in input_tasks]
 
         raise ValueError('Type of requires not understood')
+
+
+class DatabricksTask(Task):
+    # TODO: Should only work in combination with a cloud target as input or output?
+
+    @property
+    def spark(self):
+        return Config().spark
