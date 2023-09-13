@@ -46,7 +46,6 @@ class TestSparkTask(unittest.TestCase):
 
         self.hashes = {
             "/A.B.interim.DeltaTable": "2",
-            "/tests/interim/LocalTask.pkl": "3"
         }
 
     def tearDown(self):
@@ -54,6 +53,7 @@ class TestSparkTask(unittest.TestCase):
 
     @patch("luisy.hashes.compute_hashes")
     def test_local_task(self, compute_hashes):
+        self.hashes.update({"/tests/interim/LocalTask.pkl": "3"})
 
         # Detour hash_computation
         compute_hashes.return_value = self.hashes
