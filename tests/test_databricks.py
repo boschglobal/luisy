@@ -30,10 +30,7 @@ class LocalTask(DatabricksTask):
 
     def run(self):
         df = self.input().read()
-
-        df_pandas = df.toPandas()
-
-        self.write(df_pandas)
+        self.write(df)
 
 
 class TestSparkTask(unittest.TestCase):
