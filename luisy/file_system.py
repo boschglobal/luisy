@@ -41,13 +41,13 @@ class AzureContainer(object):
 
     def exists(self, path):
         """
-        Checks if dir exists.
+        Checks if dir or file exists.
 
         Args:
             path (string): Path within the container, like :code:`/path/to/folder`
 
         Returns:
-            bool: True, if folder exists. False otherwise.
+            bool: True, if file / folder exists. False otherwise.
         """
         path = self._adapt_remote_path(path)
 

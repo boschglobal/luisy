@@ -2,7 +2,7 @@
 # the repository https://github.com/boschglobal/luisy
 #
 # SPDX-License-Identifier: Apache-2.0
-
+import io
 import pickle
 import json
 import luigi
@@ -57,7 +57,6 @@ class LuisyTarget(luigi.LocalTarget):
 
 
 class LocalTarget(LuisyTarget):
-
     file_ending = None
 
     def __init__(self, path, **kwargs):
@@ -174,16 +173,15 @@ class CloudTarget(LuisyTarget):
 
 
 class DeltaTableTarget(CloudTarget):
-
     # TODO: Can we get rid of fileending
     file_ending = 'DeltaTable'
 
     def __init__(
-        self,
-        outdir=None,
-        schema="schema",
-        catalog="catalog",
-        table_name=None
+            self,
+            outdir=None,
+            schema="schema",
+            catalog="catalog",
+            table_name=None
     ):
         self.outdir = outdir
         self.table_name = table_name
@@ -353,3 +351,66 @@ class DirectoryTarget(LocalTarget):
     def read_file(self, file):
         raise NotImplementedError('Needs to be passed by user. See '
                                   'decorators.make_directory_output')
+
+
+class AzureBlobStorageTarget(CloudTarget):
+
+    def __init__(
+            self,
+            blob=None,
+    ):
+        self.blob = blob
+
+    @property
+    def blob_client(self):
+        return self.fs.get_blob_client(
+            blob=self.path,
+        )
+
+    def make_dir(self, path):
+        pass
+
+    def remove(self):
+        if self.exists():
+            self.blob_client.delete_blob()
+
+    @property
+    def path(self):
+        # is this valid for hashing?
+        return self.blob
+
+    def exists(self):
+        """
+        Checks whether the Azure Blob exists.
+
+        """
+
+        return self.fs.exists(self.blob)
+
+    def write(self, df):
+        """
+        Write dataframe to Azure Blob
+        Args:
+            df (pandas.DataFrame): Dataframe that should be written the blob output
+        """
+        with io.BytesIO() as in_memory:
+            pickle.dump(df, in_memory)
+            self.blob_client.upload_blob(
+                in_memory,
+                overwrite=True,
+            )
+
+    def read(self):
+        """
+        Read dataframe from Azure Blob
+        """
+
+        # is it a problem, that we use two different blob clients for exists and download?
+        if not self.exists():
+            raise ValueError(
+                f"Blob '{self.blob}' does not exist.")
+
+        stream = io.BytesIO()
+        self.blob_client.download_blob().readinto(stream)
+        stream.seek(0)
+        return pickle.load(stream)

@@ -16,6 +16,7 @@ from luisy.targets import (
     JSONTarget,
     DirectoryTarget,
     DeltaTableTarget,
+    AzureBlobStorageTarget,
 )
 from luigi.util import inherits
 from luigi import ExternalTask
@@ -62,7 +63,9 @@ def _make_output_decorator_factory(target_cls):
             cls.target_cls = target_cls
             cls.target_kwargs = kwargs
             return cls
+
         return output_decorator(cls_py) if callable(cls_py) else output_decorator
+
     return output_decorator_factory
 
 
@@ -178,7 +181,9 @@ def _make_dir_layer(layer_name):
 
             cls.get_outdir = get_outdir
             return cls
+
         return decorator(cls_py) if callable(cls_py) else decorator
+
     return dir_layer
 
 
@@ -243,6 +248,7 @@ def deltatable_input(catalog=None, schema=None, table_name=None):
                 schema=schema,
                 catalog=catalog,
             )
+
         cls.input = _input
         return cls
 
@@ -258,4 +264,29 @@ def deltatable_output(catalog=None, schema=None, table_name=None):
             'catalog': catalog,
         }
         return cls
+
     return output_decorator
+
+
+def azure_blob_storage_output(blob=None):
+    def decorator(cls):
+        cls.target_cls = AzureBlobStorageTarget
+        cls.target_kwargs = {
+            'blob': blob,
+        }
+        return cls
+
+    return decorator
+
+
+def azure_blob_storage_input(blob=None):
+    def decorator(cls):
+        def _input(self_):
+            return AzureBlobStorageTarget(
+                blob=blob,
+            )
+
+        cls.input = _input
+        return cls
+
+    return decorator
