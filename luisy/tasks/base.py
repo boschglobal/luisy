@@ -42,7 +42,7 @@ class Task(luigi.Task):
 
         if self.project_name == 'luisy':
             raise ValueError(
-                'Something went wrong when setting the project name.'
+                'Something went wrong when setting the project name. '
                 'Are you using the task correctly?'
             )
 

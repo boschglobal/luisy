@@ -190,7 +190,13 @@ class DeltaTableTarget(CloudTarget):
 
     @property
     def spark(self):
-        return Config().spark
+        try:
+            return Config().spark
+        except AttributeError:
+            raise AttributeError(
+                "spark session was not found in config. Make sure to have all the databricks "
+                "parameters set in order to start the spark session!"
+            )
 
     def make_dir(self, path):
         # TODO: Nothing to do here, adapt interface?

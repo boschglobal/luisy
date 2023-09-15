@@ -334,7 +334,7 @@ class HashSynchronizer(object):
         This function updates all online/cloud hashes to the hashes from the current run. Failed
         tasks can be given as an argument to prevent luisy from setting hashes that have not been
         uploaded. In addition, if `upload_tasks` is True, this method uploads all the tasks that
-        have outdated hash entries aswell.
+        have outdated hash entries as well.
 
         Args:
             failed_tasks (list): Failed tasks in luigi run
