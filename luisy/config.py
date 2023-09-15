@@ -14,6 +14,8 @@ into the leafs of our DAG.
 import os
 import logging
 from databricks.connect import DatabricksSession
+from pyspark import SparkContext
+from pyspark.sql import SparkSession
 from luisy.file_system import AzureContainer
 from luisy.default_params import (
     default_params,
@@ -53,12 +55,23 @@ class Config(metaclass=Singleton):
 
         self.init()
 
+    def _check_for_existing_spark(self):
+        if SparkContext._active_spark_context:
+            spark = SparkSession.builder.getOrCreate()
+            self.lives_in_databricks = True
+            return spark
+        return None
+
+
     def _init_spark(self):
+
+        self.spark = self._check_for_existing_spark()
 
         cond = [
             self.get_param('databricks_token') is not None,
             self.get_param('databricks_host') is not None,
             self.get_param('databricks_cluster_id') is not None,
+            self.spark is None,
         ]
 
         if all(cond):
