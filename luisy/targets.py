@@ -2,7 +2,6 @@
 # the repository https://github.com/boschglobal/luisy
 #
 # SPDX-License-Identifier: Apache-2.0
-import io
 import pickle
 import json
 import luigi
@@ -38,7 +37,7 @@ class LuisyTarget(luigi.LocalTarget):
     def exists(self):
         raise NotImplementedError()
 
-    def write(self):
+    def write(self, obj):
         raise NotImplementedError()
 
     def read(self):
@@ -246,6 +245,75 @@ class DeltaTableTarget(CloudTarget):
         return self.spark.table(self.table_uri)
 
 
+class AzureBlobStorageTarget(CloudTarget):
+    file_ending = "pkl"
+
+    def __init__(
+            self,
+            outdir=None,
+            blob_name=None,
+    ):
+        self.outdir = outdir
+        self.blob_name = blob_name
+
+    @property
+    def blob_client(self):
+        return self.fs.get_blob_client(
+            blob=self.path,
+        )
+
+    def make_dir(self, path):
+        pass
+
+    def remove(self):
+        if self.exists():
+            self.blob_client.delete_blob()
+
+    @property
+    def path(self):
+        # TODO: Path here is more an identifier that shows up in `.luisy.hashes`
+        return os.path.join(
+            self.outdir,
+            f"{self.fs.container_name}.{self.blob_name}.{self.file_ending}"
+        )
+
+    def exists(self):
+        """
+        Checks whether the Azure Blob exists.
+
+        """
+
+        return self.fs.exists(self.blob_name)
+
+    def write(self, obj):
+        """
+        Write object to Azure Blob Storage
+        Args:
+            obj (object): object that can be serialized using `pickle` and is to be written to
+                the blob output
+        """
+
+        try:
+            serialized_obj = pickle.dumps(obj)
+        except:
+            return TypeError("Object could not be serialized. Currently, only objects that can be "
+                             "pickled can be stored in Azure Blob Storage.")
+        self.blob_client.upload_blob(serialized_obj, overwrite=True)
+
+    def read(self):
+        """
+        Read object from Azure Blob
+        """
+
+        # is it a problem, that we use two different blob clients for exists and download?
+        if not self.exists():
+            raise ValueError(
+                f"Blob '{self.blob_name}' does not exist.")
+
+        blob_data = self.blob_client.download_blob()
+        return pickle.loads(blob_data.readall())
+
+
 class PickleTarget(LocalTarget):
     file_ending = 'pkl'
 
@@ -357,66 +425,3 @@ class DirectoryTarget(LocalTarget):
     def read_file(self, file):
         raise NotImplementedError('Needs to be passed by user. See '
                                   'decorators.make_directory_output')
-
-
-class AzureBlobStorageTarget(CloudTarget):
-
-    def __init__(
-            self,
-            blob=None,
-    ):
-        self.blob = blob
-
-    @property
-    def blob_client(self):
-        return self.fs.get_blob_client(
-            blob=self.path,
-        )
-
-    def make_dir(self, path):
-        pass
-
-    def remove(self):
-        if self.exists():
-            self.blob_client.delete_blob()
-
-    @property
-    def path(self):
-        # is this valid for hashing?
-        return self.blob
-
-    def exists(self):
-        """
-        Checks whether the Azure Blob exists.
-
-        """
-
-        return self.fs.exists(self.blob)
-
-    def write(self, df):
-        """
-        Write dataframe to Azure Blob
-        Args:
-            df (pandas.DataFrame): Dataframe that should be written the blob output
-        """
-        with io.BytesIO() as in_memory:
-            pickle.dump(df, in_memory)
-            self.blob_client.upload_blob(
-                in_memory,
-                overwrite=True,
-            )
-
-    def read(self):
-        """
-        Read dataframe from Azure Blob
-        """
-
-        # is it a problem, that we use two different blob clients for exists and download?
-        if not self.exists():
-            raise ValueError(
-                f"Blob '{self.blob}' does not exist.")
-
-        stream = io.BytesIO()
-        self.blob_client.download_blob().readinto(stream)
-        stream.seek(0)
-        return pickle.load(stream)
