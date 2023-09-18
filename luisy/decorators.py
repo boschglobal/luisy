@@ -233,14 +233,6 @@ raw = _make_dir_layer('raw')
 
 
 def deltatable_input(catalog=None, schema=None, table_name=None):
-    """
-    Sets the project_name of the task to `project_name` to overwrite the default behavior of
-    :py:class:`luisy.Task`
-
-    Args:
-        project_name (str): Name of the project
-    """
-
     def decorator(cls):
         def _input(self_):
             return DeltaTableTarget(
@@ -283,7 +275,7 @@ def azure_blob_storage_input(blob=None):
     def decorator(cls):
         def _input(self_):
             return AzureBlobStorageTarget(
-                blob=blob,
+                blob_name=blob,
             )
 
         cls.input = _input
