@@ -171,7 +171,22 @@ class CloudTarget(LuisyTarget):
         self.kwargs = kwargs
 
 
-class DeltaTableTarget(CloudTarget):
+class SparkTarget(CloudTarget):
+    """
+    this abstract class is for targets working with spark instances.
+    """
+    @property
+    def spark(self):
+        try:
+            return Config().spark
+        except AttributeError:
+            raise AttributeError(
+                "spark session was not found in config. Make sure to have all the databricks "
+                "parameters set in order to start the spark session!"
+            )
+
+
+class DeltaTableTarget(SparkTarget):
     # TODO: Can we get rid of fileending
     file_ending = 'DeltaTable'
 
@@ -186,16 +201,6 @@ class DeltaTableTarget(CloudTarget):
         self.table_name = table_name
         self.schema = schema
         self.catalog = catalog
-
-    @property
-    def spark(self):
-        try:
-            return Config().spark
-        except AttributeError:
-            raise AttributeError(
-                "spark session was not found in config. Make sure to have all the databricks "
-                "parameters set in order to start the spark session!"
-            )
 
     def make_dir(self, path):
         # TODO: Nothing to do here, adapt interface?
@@ -245,73 +250,62 @@ class DeltaTableTarget(CloudTarget):
         return self.spark.table(self.table_uri)
 
 
-class AzureBlobStorageTarget(CloudTarget):
-    file_ending = "pkl"
+class AzureBlobStorageTarget(SparkTarget):
+    file_ending = "parquet"
 
     def __init__(
             self,
-            outdir=None,
-            blob_name=None,
+            container=None,
+            account=None,
+            abfss_path=None,
+            inferschema=False,
     ):
-        self.outdir = outdir
-        self.blob_name = blob_name
-
-    @property
-    def blob_client(self):
-        return self.fs.get_blob_client(
-            blob=self.path,
-        )
+        self.container = container
+        self.account = account
+        self.abfss_path = abfss_path
+        self.inferschema = inferschema
 
     def make_dir(self, path):
         pass
 
     def remove(self):
-        if self.exists():
-            self.blob_client.delete_blob()
+        from py4j.java_gateway import java_import
+        # todo: yet to be tested with azure blob storage
+        java_import(self.spark._jvm, 'org.apache.hadoop.fs.Path')
+        fs = self.spark._jvm.Path(self.path).getFileSystem(self.spark._jsc.hadoopConfiguration())
+        fs.delete(self.spark._jvm.Path(self.path), False)
 
     @property
     def path(self):
-        # TODO: Path here is more an identifier that shows up in `.luisy.hashes`
-        return os.path.join(
-            self.outdir,
-            f"{self.fs.container_name}.{self.blob_name}.{self.file_ending}"
-        )
+        return (f"abfss://{self.container}@{self.account}.dfs.core.windows.net/"
+                f"{self.abfss_path}.{self.file_ending}")
 
     def exists(self):
         """
-        Checks whether the Azure Blob exists.
+        Checks whether the file exists in Azure Blob Storage
 
         """
-
-        return self.fs.exists(self.blob_name)
-
-    def write(self, obj):
-        """
-        Write object to Azure Blob Storage
-        Args:
-            obj (object): object that can be serialized using `pickle` and is to be written to
-                the blob output
-        """
-
         try:
-            serialized_obj = pickle.dumps(obj)
-        except:
-            return TypeError("Object could not be serialized. Currently, only objects that can be "
-                             "pickled can be stored in Azure Blob Storage.")
-        self.blob_client.upload_blob(serialized_obj, overwrite=True)
+            self.spark.read.format(self.file_ending).load(self.path).limit(1).count()
+            return True
+        except Exception:
+            return False
+
+    def write(self, df):
+        """
+        Write Pyspark DataFrame to Azure Blob Storage
+        Args:
+            df (pyspark.DataFrame): DataFrame that is to be stored in Azure Blob Storage
+        """
+        df.write.format(self.file_ending).save(self.path)
 
     def read(self):
         """
         Read object from Azure Blob
         """
 
-        # is it a problem, that we use two different blob clients for exists and download?
-        if not self.exists():
-            raise ValueError(
-                f"Blob '{self.blob_name}' does not exist.")
-
-        blob_data = self.blob_client.download_blob()
-        return pickle.loads(blob_data.readall())
+        return \
+            self.spark.read.format(self.file_ending).load(self.path, inferschema=self.inferschema)
 
 
 class PickleTarget(LocalTarget):
