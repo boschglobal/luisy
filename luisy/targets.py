@@ -269,11 +269,7 @@ class AzureBlobStorageTarget(SparkTarget):
         pass
 
     def remove(self):
-        from py4j.java_gateway import java_import
-        # todo: yet to be tested with azure blob storage
-        java_import(self.spark._jvm, 'org.apache.hadoop.fs.Path')
-        fs = self.spark._jvm.Path(self.path).getFileSystem(self.spark._jsc.hadoopConfiguration())
-        fs.delete(self.spark._jvm.Path(self.path), False)
+        pass
 
     @property
     def path(self):
