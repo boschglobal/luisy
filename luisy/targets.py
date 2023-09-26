@@ -293,7 +293,7 @@ class AzureBlobStorageTarget(SparkTarget):
         Args:
             df (pyspark.DataFrame): DataFrame that is to be stored in Azure Blob Storage
         """
-        df.write.format(self.file_ending).save(self.path)
+        df.write.format(self.file_ending).mode("overwrite").save(self.path)
 
     def read(self):
         """
