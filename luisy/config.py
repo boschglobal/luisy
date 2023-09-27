@@ -62,7 +62,6 @@ class Config(metaclass=Singleton):
             return spark
         return None
 
-
     def _init_spark(self):
 
         self.spark = self._check_for_existing_spark()
