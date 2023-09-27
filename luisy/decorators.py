@@ -260,22 +260,29 @@ def deltatable_output(catalog=None, schema=None, table_name=None):
     return output_decorator
 
 
-def azure_blob_storage_output(blob=None):
+def azure_blob_storage_output(container, account, path, inferschema=False):
     def decorator(cls):
         cls.target_cls = AzureBlobStorageTarget
         cls.target_kwargs = {
-            'blob': blob,
+            'container': container,
+            'account': account,
+            'abfss_path': path,
+            'inferschema': inferschema,
         }
         return cls
 
     return decorator
 
 
-def azure_blob_storage_input(blob=None):
+def azure_blob_storage_input(container, account, path, inferschema=False):
     def decorator(cls):
         def _input(self_):
             return AzureBlobStorageTarget(
-                blob_name=blob,
+                container=container,
+                account=account,
+                abfss_path=path,
+                inferschema=inferschema,
+
             )
 
         cls.input = _input
