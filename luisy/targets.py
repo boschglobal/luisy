@@ -251,7 +251,6 @@ class DeltaTableTarget(SparkTarget):
 
 
 class AzureBlobStorageTarget(SparkTarget):
-    file_ending = "parquet"
 
     def __init__(
             self,
@@ -259,22 +258,27 @@ class AzureBlobStorageTarget(SparkTarget):
             account=None,
             abfss_path=None,
             inferschema=False,
+            file_format="parquet",
     ):
         self.container = container
         self.account = account
         self.abfss_path = abfss_path
         self.inferschema = inferschema
+        self.file_format = file_format
 
     def make_dir(self, path):
         pass
 
     def remove(self):
+        """
+        we do not remove files from azure blob storage, but we always overwrite.
+        """
         pass
 
     @property
     def path(self):
         return (f"abfss://{self.container}@{self.account}.dfs.core.windows.net/"
-                f"{self.abfss_path}.{self.file_ending}")
+                f"{self.abfss_path}.{self.file_format}")
 
     def exists(self):
         """
@@ -282,7 +286,7 @@ class AzureBlobStorageTarget(SparkTarget):
 
         """
         try:
-            self.spark.read.format(self.file_ending).load(self.path).limit(1).count()
+            self.spark.read.format(self.file_format).load(self.path).limit(1).count()
             return True
         except Exception:
             return False
@@ -293,7 +297,7 @@ class AzureBlobStorageTarget(SparkTarget):
         Args:
             df (pyspark.DataFrame): DataFrame that is to be stored in Azure Blob Storage
         """
-        df.write.format(self.file_ending).mode("overwrite").save(self.path)
+        df.write.format(self.file_format).mode("overwrite").save(self.path)
 
     def read(self):
         """
@@ -301,7 +305,7 @@ class AzureBlobStorageTarget(SparkTarget):
         """
 
         return \
-            self.spark.read.format(self.file_ending).load(self.path, inferschema=self.inferschema)
+            self.spark.read.format(self.file_format).load(self.path, inferschema=self.inferschema)
 
 
 class PickleTarget(LocalTarget):
