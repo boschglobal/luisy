@@ -278,7 +278,7 @@ class AzureBlobStorageTarget(SparkTarget):
     @property
     def path(self):
         return (f"abfss://{self.container}@{self.account}.dfs.core.windows.net/"
-                f"{self.abfss_path}.{self.file_format}")
+                f"{self.abfss_path}")
 
     def exists(self):
         """
