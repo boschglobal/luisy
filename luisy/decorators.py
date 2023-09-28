@@ -261,14 +261,12 @@ def deltatable_output(catalog=None, schema=None, table_name=None):
 
 
 def azure_blob_storage_output(
-        container, account, path, protocol="abfss", file_format="parquet", inferschema=False):
+        endpoint, directory, file_format="parquet", inferschema=False):
     def decorator(cls):
         cls.target_cls = AzureBlobStorageTarget
         cls.target_kwargs = {
-            'protocol': protocol,
-            'container': container,
-            'account': account,
-            'abfss_path': path,
+            'endpoint': endpoint,
+            'directory': directory,
             'file_format': file_format,
             'inferschema': inferschema,
         }
@@ -278,14 +276,12 @@ def azure_blob_storage_output(
 
 
 def azure_blob_storage_input(
-        container, account, path, protocol="abfss", file_format="parquet", inferschema=False):
+        endpoint, directory, file_format="parquet", inferschema=False):
     def decorator(cls):
         def _input(self_):
             return AzureBlobStorageTarget(
-                protocol=protocol,
-                container=container,
-                account=account,
-                abfss_path=path,
+                endpoint=endpoint,
+                directory=directory,
                 file_format=file_format,
                 inferschema=inferschema,
             )
