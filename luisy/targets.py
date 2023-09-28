@@ -254,12 +254,14 @@ class AzureBlobStorageTarget(SparkTarget):
 
     def __init__(
             self,
+            protocol="abfss",
             container=None,
             account=None,
             abfss_path=None,
             inferschema=False,
             file_format="parquet",
     ):
+        self.protocol = protocol
         self.container = container
         self.account = account
         self.abfss_path = abfss_path
@@ -277,7 +279,7 @@ class AzureBlobStorageTarget(SparkTarget):
 
     @property
     def path(self):
-        return (f"abfss://{self.container}@{self.account}.dfs.core.windows.net/"
+        return (f"{self.protocol}://{self.container}@{self.account}.dfs.core.windows.net/"
                 f"{self.abfss_path}")
 
     def exists(self):

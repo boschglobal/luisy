@@ -58,7 +58,6 @@ class Config(metaclass=Singleton):
     def _check_for_existing_spark(self):
         if SparkContext._active_spark_context:
             spark = SparkSession.builder.getOrCreate()
-            self.lives_in_databricks = True
             return spark
         return None
 
