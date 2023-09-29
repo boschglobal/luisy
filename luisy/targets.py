@@ -251,14 +251,17 @@ class DeltaTableTarget(SparkTarget):
 
 
 class AzureBlobStorageTarget(SparkTarget):
+    file_ending = ""
 
     def __init__(
             self,
+            outdir=None,
             endpoint=None,
             directory=None,
             inferschema=False,
             file_format="parquet",
     ):
+        self.outdir = outdir
         self.endpoint = endpoint
         self.directory = directory
         self.inferschema = inferschema
@@ -274,8 +277,17 @@ class AzureBlobStorageTarget(SparkTarget):
         pass
 
     @property
-    def path(self):
+    def blob_uri(self):
         return os.path.join(self.endpoint, self.directory)
+
+    @property
+    def path(self):
+        # TODO: Path here is more an identifier that shows up in `.luisy.hashes`
+        return os.path.join(
+            self.outdir,
+            self.endpoint,
+            self.directory,
+        )
 
     def exists(self):
         """
@@ -283,7 +295,7 @@ class AzureBlobStorageTarget(SparkTarget):
 
         """
         try:
-            self.spark.read.format(self.file_format).load(self.path).limit(1).count()
+            self.spark.read.format(self.file_format).load(self.blob_uri).limit(1).count()
             return True
         except Exception:
             return False
@@ -294,7 +306,7 @@ class AzureBlobStorageTarget(SparkTarget):
         Args:
             df (pyspark.DataFrame): DataFrame that is to be stored in Azure Blob Storage
         """
-        df.write.format(self.file_format).mode("overwrite").save(self.path)
+        df.write.format(self.file_format).mode("overwrite").save(self.blob_uri)
 
     def read(self):
         """
@@ -302,7 +314,7 @@ class AzureBlobStorageTarget(SparkTarget):
         """
 
         return \
-            self.spark.read.format(self.file_format).load(self.path, inferschema=self.inferschema)
+            self.spark.read.format(self.file_format).load(self.blob_uri, inferschema=self.inferschema)
 
 
 class PickleTarget(LocalTarget):
