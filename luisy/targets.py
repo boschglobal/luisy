@@ -313,8 +313,10 @@ class AzureBlobStorageTarget(SparkTarget):
         Read object from Azure Blob
         """
 
-        return \
-            self.spark.read.format(self.file_format).load(self.blob_uri, inferschema=self.inferschema)
+        return self.spark.read.format(self.file_format).load(
+            self.blob_uri,
+            inferschema=self.inferschema,
+        )
 
 
 class PickleTarget(LocalTarget):
