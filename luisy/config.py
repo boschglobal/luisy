@@ -110,8 +110,7 @@ class Config(metaclass=Singleton):
         if not hasattr(self, 'fs') and self.download:
             self._init_azure()
 
-        # todo: I think we should introduce another cli parameter for creating a spark session
-        if not hasattr(self, 'spark'):
+        if not hasattr(self, 'spark') and self.get_param('cloud_mode'):
             self._init_spark()
 
     def update(self, params):

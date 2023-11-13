@@ -17,6 +17,7 @@ default_params = {
     'no_ask': False,
     'requirements_path': None,
     'hash_update_mode': False,
+    'cloud_mode': False,
 }
 env_keys = {
     'working_dir': 'WORKING_DIR',
