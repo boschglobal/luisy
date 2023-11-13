@@ -119,7 +119,7 @@ class TestCli(unittest.TestCase):
     @mock.patch.dict(os.environ, {"WORKING_DIR": "/data", 'LUISY_AZURE_STORAGE_KEY': "-"})
     def test_arg_parsing(self):
         args = ['luisy', '--module', 'test_cli', 'SomeTask', '--download', '--hash-update-mode',
-                '--upload', '--no-ask']
+                '--upload', '--no-ask', '--cloud_mode']
         self.assertDictEqual(
             parse_args(args)[0],
             {
@@ -128,12 +128,14 @@ class TestCli(unittest.TestCase):
                 'dry_run': False,
                 'hash_update_mode': True,
                 'no_ask': True,
+                'cloud_mode': False,
             }
         )
 
     @mock.patch.dict(os.environ, {"WORKING_DIR": "/data", 'LUISY_AZURE_STORAGE_KEY': "-"})
     def test_arg_parsing_no_ask(self):
-        args = ['luisy', '--module', 'test_cli', 'SomeTask', '--no-ask', '--download', '--upload']
+        args = ['luisy', '--module', 'test_cli', 'SomeTask', '--no-ask', '--download', '--upload',
+                '--cloud_mode']
         self.assertDictEqual(
             parse_args(args)[0],
             {
@@ -142,6 +144,7 @@ class TestCli(unittest.TestCase):
                 'dry_run': False,
                 'no_ask': True,
                 'hash_update_mode': False,
+                'cloud_mode': False,
             }
         )
 
