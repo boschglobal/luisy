@@ -13,7 +13,6 @@ into the leafs of our DAG.
 
 import os
 import logging
-from databricks.connect import DatabricksSession
 from pyspark import SparkContext
 from pyspark.sql import SparkSession
 from luisy.file_system import AzureContainer
@@ -22,7 +21,6 @@ from luisy.default_params import (
     env_keys
 )
 
-from pyspark.errors.exceptions.connect import SparkConnectGrpcException
 
 logger = logging.getLogger('luigi-interface').getChild('luisy-interface')
 
@@ -55,33 +53,11 @@ class Config(metaclass=Singleton):
 
         self.init()
 
-    def _check_for_existing_spark(self):
+    def _check_for_spark(self):
         if SparkContext._active_spark_context:
-            spark = SparkSession.builder.getOrCreate()
-            return spark
-        return None
-
-    def _init_spark(self):
-
-        self.spark = self._check_for_existing_spark()
-
-        cond = [
-            self.get_param('databricks_token') is not None,
-            self.get_param('databricks_host') is not None,
-            self.get_param('databricks_cluster_id') is not None,
-            self.spark is None,
-        ]
-
-        if all(cond):
-            try:
-                self.spark = DatabricksSession.builder.remote(
-                    host=self.get_param('databricks_host'),
-                    token=self.get_param('databricks_token'),
-                    cluster_id=self.get_param('databricks_cluster_id'),
-                ).getOrCreate()
-            except SparkConnectGrpcException:
-                # TODO
-                pass
+            return SparkSession.builder.getOrCreate()
+        else:
+            return self.get_param('spark')
 
     def _init_azure(self):
 
@@ -110,8 +86,7 @@ class Config(metaclass=Singleton):
         if not hasattr(self, 'fs') and self.download:
             self._init_azure()
 
-        if not hasattr(self, 'spark') and self.get_param('cloud_mode'):
-            self._init_spark()
+        self.spark = self._check_for_spark()
 
     def update(self, params):
         """
@@ -191,7 +166,6 @@ class Config(metaclass=Singleton):
         Resets the config singleton to the initial state with default parameters and environment
         variable values.
         """
-        self._config = None
         self.__init__()
 
     def check_params(self):
@@ -211,7 +185,7 @@ class Config(metaclass=Singleton):
 
             if (self._config[azure_param] is None) and needs_azure:
                 raise ValueError(
-                    f"Parameter '{azure_param}' not set. You cant use download "
+                    f"Parameter '{azure_param}' not set. You can't use download "
                     "or upload functionality without setting your Azure storage key. More "
                     "information: docs/cloud.rst"
                 )

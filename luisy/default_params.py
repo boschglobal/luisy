@@ -11,13 +11,10 @@ default_params = {
     'azure_storage_key': None,
     'azure_account_name': None,
     'azure_container_name': None,
-    'databricks_host': None,
-    'databricks_cluster_id': None,
-    'databricks_token': None,
     'no_ask': False,
     'requirements_path': None,
     'hash_update_mode': False,
-    'cloud_mode': False,
+    'spark': None,
 }
 env_keys = {
     'working_dir': 'WORKING_DIR',
@@ -25,7 +22,4 @@ env_keys = {
     'azure_storage_key': 'LUISY_AZURE_STORAGE_KEY',
     'azure_account_name': 'LUISY_AZURE_ACCOUNT_NAME',
     'azure_container_name': 'LUISY_AZURE_CONTAINER_NAME',
-    'databricks_host': 'LUISY_DATABRICKS_HOST',
-    'databricks_cluster_id': 'LUISY_DATABRICKS_CLUSTER_ID',
-    'databricks_token': 'LUISY_DATABRICKS_TOKEN',
 }

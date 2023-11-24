@@ -7,7 +7,7 @@ import os
 import luisy
 from luisy import Config
 from luisy.cli import build
-from luisy.tasks.base import DatabricksTask
+from luisy.tasks.base import SparkTask
 from luisy.decorators import deltatable_input
 from luisy.decorators import deltatable_output
 from luisy.testing import create_testing_config
@@ -15,7 +15,7 @@ from luisy.testing import create_testing_config
 
 @deltatable_input(catalog='A', schema='B', table_name='raw')
 @deltatable_output(catalog='A', schema='B', table_name='interim')
-class ToySparkTask(DatabricksTask):
+class ToySparkTask(SparkTask):
 
     def run(self):
 
@@ -26,7 +26,7 @@ class ToySparkTask(DatabricksTask):
 @luisy.requires(ToySparkTask)
 @luisy.auto_filename
 @luisy.interim
-class LocalTask(DatabricksTask):
+class LocalTask(SparkTask):
 
     def run(self):
         df = self.input().read()

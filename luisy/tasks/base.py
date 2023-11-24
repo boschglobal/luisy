@@ -244,9 +244,7 @@ class WrapperTask(Task, luigi.WrapperTask):
         raise ValueError('Type of requires not understood')
 
 
-class DatabricksTask(Task):
-    # TODO: Should only work in combination with a cloud target as input or output?
-
+class SparkTask(Task):
     @property
     def spark(self):
         return Config().spark
