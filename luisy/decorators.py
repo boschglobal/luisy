@@ -63,9 +63,7 @@ def _make_output_decorator_factory(target_cls):
             cls.target_cls = target_cls
             cls.target_kwargs = kwargs
             return cls
-
         return output_decorator(cls_py) if callable(cls_py) else output_decorator
-
     return output_decorator_factory
 
 
@@ -181,9 +179,7 @@ def _make_dir_layer(layer_name):
 
             cls.get_outdir = get_outdir
             return cls
-
         return decorator(cls_py) if callable(cls_py) else decorator
-
     return dir_layer
 
 
