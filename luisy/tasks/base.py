@@ -16,10 +16,7 @@ from luisy.decorators import (
 )
 from luisy.config import Config
 from luisy.visualize import visualize_task
-from luisy.targets import (
-    CloudTarget,
-    LocalTarget
-)
+from luisy.targets import CloudTarget
 
 from luisy.helpers import RegexTaskPattern
 
@@ -132,6 +129,10 @@ class Task(luigi.Task):
         """
         self.logger.info(f'Start uploading of {self}')
         self.output()._try_to_upload(overwrite=overwrite)
+
+    def read_input(self):
+        """Helper to read atomic inputs"""
+        return self.input().read()
 
     def read(self):
         """
@@ -249,6 +250,12 @@ class SparkTask(Task):
 
     def write(self, df):
         target = self.output()
-        if isinstance(target, LocalTarget) and not isinstance(df, pd.DataFrame):
+        if target.requires_pandas and not isinstance(df, pd.DataFrame):
             df = df.toPandas()
         super().write(df)
+
+    def read_input(self):
+        df = self.input().read()
+        if isinstance(df, pd.DataFrame):
+            df = self.spark.createDataFrame(df)
+        return df

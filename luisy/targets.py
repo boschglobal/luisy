@@ -30,6 +30,8 @@ class LuisyTarget(luigi.LocalTarget):
             locally
     """
 
+    requires_pandas = False
+
     @property
     def fs(self):
         return Config().fs
@@ -57,6 +59,7 @@ class LuisyTarget(luigi.LocalTarget):
 
 class LocalTarget(LuisyTarget):
     file_ending = None
+    requires_pandas = True
 
     def __init__(self, path, **kwargs):
         luigi.LocalTarget.__init__(
@@ -371,9 +374,10 @@ class CSVTarget(LocalTarget):
 
 class ParquetDirTarget(LocalTarget):
     file_ending = ''
+    requires_pandas = False
 
     def write(self, df):
-        raise NotImplementedError("Coming soon...")
+        df.write.parquet(self.path)
 
     def read(self):
         return get_df_from_parquet_dir(self.path)
@@ -381,6 +385,7 @@ class ParquetDirTarget(LocalTarget):
 
 class JSONTarget(LocalTarget):
     file_ending = 'json'
+    requires_pandas = False
 
     def write(self, dct):
         assert isinstance(dct, dict)

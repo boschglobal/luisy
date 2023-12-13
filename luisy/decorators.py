@@ -74,16 +74,16 @@ csv_output = _make_output_decorator_factory(CSVTarget)
 json_output = _make_output_decorator_factory(JSONTarget)
 
 
-def parquetdir_output(cls_py=None):
+def parquetdir_output(cls_py=None, outdir=None):
     def decorator(cls):
         """
         """
         cls.target_cls = ParquetDirTarget
 
-        if not issubclass(cls, ExternalTask):
-            raise ValueError(
-                "This decorator only works on ExternalTasks"
-            )
+        if outdir is not None:
+            def get_folder_name(self_):
+                return outdir
+            cls.get_folder_name = get_folder_name
 
         if not hasattr(cls, 'get_folder_name'):
             raise ValueError(

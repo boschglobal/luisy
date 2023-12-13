@@ -3,7 +3,9 @@ import unittest
 from unittest.mock import patch
 
 import pandas as pd
+import numpy as np
 import os
+import pyspark
 import luisy
 from luisy import Config
 from luisy.cli import build
@@ -30,6 +32,25 @@ class LocalTask(SparkTask):
 
     def run(self):
         df = self.input().read()
+        self.write(df)
+
+
+@luisy.csv_output
+@luisy.raw
+class LocalFile(luisy.ExternalTask):
+
+    def run(self):
+        df = pd.DataFrame(data=np.random.randint(10, size=(100, 10)))
+        self.write(df)
+
+
+@luisy.requires(LocalFile)
+@luisy.interim
+@luisy.parquetdir_output(outdir='some_dir')
+class LocalPyTask(SparkTask):
+
+    def run(self):
+        df = self.read_input()
         self.write(df)
 
 
@@ -77,3 +98,24 @@ class TestSparkTask(unittest.TestCase):
 
         # Make sure that table is written
         self.assertIn('A.B.interim', Config().spark.tables)
+
+
+class TestWithLocalPyspark(unittest.TestCase):
+
+    def setUp(self):
+        self.tmpdir = tempfile.TemporaryDirectory()
+        create_testing_config(working_dir=self.tmpdir.name)
+        self.df_test = pd.DataFrame(data={'a': [1], 'b': [2]})
+        Config().spark = pyspark.SparkContext()
+
+        self.hashes = {
+        }
+
+    @patch("luisy.hashes.compute_hashes")
+    def test_downloading(self, compute_hashes):
+
+        # Detour hash_computation
+        compute_hashes.return_value = self.hashes
+        task = LocalPyTask()
+        build(task=task, download=False)
+        print('abc')

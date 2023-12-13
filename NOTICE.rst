@@ -38,6 +38,7 @@ Robert Bosch GmbH
 * Andreas Fritz <external.andreas.fritz@de.bosch.com>
 * Andreas Zeller <external.andreas.zeller4@de.bosch.com>
 * Matthias Burkhardt <external.matthias.burkhardt@de.bosch.com>
+* Edgar Wolf <external.edgar.wolf@de.bosch.com>
 
 
 University of Applied Sciences Kempten
