@@ -252,10 +252,8 @@ class DeltaTableTarget(SparkTarget):
         Args:
             df (pyspark.sql.DataFrame): Dataframe that should be written to delta table
         """
-        logger.info(f"Drop table {self.table_uri}")
-        self.spark.sql(f"DROP TABLE IF EXISTS {self.table_uri}")
         logger.info(f"Write to {self.table_uri}")
-        df.write.saveAsTable(self.table_uri)
+        df.write.mode("overwrite").saveAsTable(self.table_uri)
 
     def read(self):
         return self.spark.table(self.table_uri)
