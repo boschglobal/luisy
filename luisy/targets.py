@@ -170,6 +170,14 @@ class CloudTarget(LuisyTarget):
         )
         self.kwargs = kwargs
 
+    def _try_to_upload(self, overwrite=False):
+        """No need to upload cloud targets."""
+        pass
+
+    def _try_to_download(self):
+        """No need to download cloud targets."""
+        pass
+
 
 class SparkTarget(CloudTarget):
     """

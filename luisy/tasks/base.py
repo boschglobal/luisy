@@ -120,7 +120,6 @@ class Task(luigi.Task):
         Downloads the output of the task from the cloud.
         """
         self.logger.info(f'Start downloading of {self}')
-        # TODO: Here: distinguish cloud and local target?
         self.output()._try_to_download()
 
     def upload(self, overwrite=False):
@@ -132,7 +131,6 @@ class Task(luigi.Task):
                 to :code:`False`.
         """
         self.logger.info(f'Start uploading of {self}')
-        # TODO: Here: distinguish cloud and local target?
         self.output()._try_to_upload(overwrite=overwrite)
 
     def read(self):
