@@ -1,5 +1,6 @@
 import tempfile
 import unittest
+import glob
 from unittest.mock import patch
 
 import pandas as pd
@@ -108,14 +109,15 @@ class TestWithLocalPyspark(unittest.TestCase):
         self.df_test = pd.DataFrame(data={'a': [1], 'b': [2]})
         Config().spark = pyspark.SparkContext()
 
-        self.hashes = {
-        }
-
     @patch("luisy.hashes.compute_hashes")
     def test_downloading(self, compute_hashes):
 
         # Detour hash_computation
-        compute_hashes.return_value = self.hashes
+        compute_hashes.return_value = {}
         task = LocalPyTask()
         build(task=task, download=False)
-        print('abc')
+        outdir = task.output().path
+        self.assertTrue(os.path.exists(outdir))
+
+        outfiles = glob.glob(os.path.join(outdir, '*.parquet'))
+        self.assertTrue(len(outfiles), 8)

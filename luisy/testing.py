@@ -164,13 +164,17 @@ class DFMock(Mock):
         Mock.__init__(self)
 
         self.table_uri = table_uri
-        self.write = Mock()
         self.data = data
 
-        def saveAsTable(table_name):
-            Config().spark.data[table_name] = data
+    @property
+    def write(self):
+        return self
 
-        self.write.saveAsTable = saveAsTable
+    def mode(self, *args):
+        return self
+
+    def saveAsTable(self, table_name):
+        Config().spark.data[table_name] = self.data
 
     def toPandas(self):
         return pd.DataFrame(data=self.data)
