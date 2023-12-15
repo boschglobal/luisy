@@ -7,3 +7,4 @@ from luisy.tasks.base import Task # noqa
 from luisy.tasks.base import ExternalTask # noqa
 from luisy.tasks.base import ConcatenationTask # noqa
 from luisy.tasks.base import WrapperTask # noqa
+from luisy.tasks.base import SparkTask # noqa

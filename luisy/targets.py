@@ -9,6 +9,7 @@ import pandas as pd
 import os
 import logging
 import re
+from pyspark import SparkContext
 from pyspark.sql import DataFrame as SparkDataFrame
 from pyspark.errors.exceptions.connect import AnalysisException
 from luisy.config import (
@@ -374,7 +375,15 @@ class ParquetDirTarget(LocalTarget):
     file_ending = ''
     requires_pandas = False
 
+    def _make_spark_df(self, df):
+        if Config().spark is None:
+            Config().set_param('spark', SparkContext())
+
+        return Config().spark.createDataFrame(df)
+
     def write(self, df):
+        if isinstance(df, pd.DataFrame):
+            df = self._make_spark_df(df)
         df.write.parquet(self.path)
 
     def read(self):
