@@ -11,8 +11,8 @@ Decorators are used for:
 * Sorting tasks into `raw/interim/final` directory structure
 
 
-Outputs
--------
+Local targets
+-------------
 Here is a list of decorators for the outfile of a task:
 
 Generally, tasks with those decorators can persist their output with
@@ -28,8 +28,7 @@ output with `self.input().read()`
 * :py:func:`~luisy.decorators.pickle_output`: For tasks whose output
   is a pickle. May be used to (de)serialize any python object.
 * :py:func:`~luisy.decorators.parquetdir_output`: For tasks whose output
-  is a directory holding parquet files, like the result of an Apache
-  Spark computation.
+  is a directory holding parquet files, like the result of a Spark computation.
 * :py:func:`~luisy.decorators.make_directory_output`: Factory to create
   your own directory output decorator. This method wants you to pass a
   function, which tells luisy how to handle the files in your directory.
@@ -39,56 +38,96 @@ output with `self.input().read()`
 Parquet dir output
 ~~~~~~~~~~~~~~~~~~
 
-In many cases, a pyspark job writes a folder holding multiple
-parquet-files into a Blob-storage. Using the
-:py:func:`~luisy.decorators.parquetdir_output` together with the
-cloud-synchronisation, those files can be automatically downloaded:
-
+When persisting results of a spark computation, the prefered output
+format are parquet files. This may look as follows: 
 
 .. code-block:: python
 
    import luisy
 
    @luisy.raw
-   @luisy.parquetdir_output
-   class SomePySparkResult(luisy.ExternalTask):
+   @luisy.requires(SomeTask)
+   @luisy.parquet_output('some_dir/spark_result')
+   class SomePySparkResult(luisy.SparkTask):
+      
+      def run(self):
+         df = self.read_input()
+         #  do something
+         self.write(df)
 
-       partition = luigi.Parameter()
-
-       def get_folder_name(self):
-           return f"pyspark_result/Partition=self.partition"
-
-
-This task points to the folder
-:code:`[project_name]/raw/pyspark_result/` in the Blob storage holding
-multiple parquet-files. The output can be used in a subsequent task as
-follows:
-
+If the resulting path needs to be parametrized, the method
+:code:`get_folder_name` needs to be implemented:
 
 .. code-block:: python
 
-   @luisy.interim
-   @luisy.requires(SomePySparkResult)
-   class ProcessedResult(luisy.Task):
+   import luisy
 
-       partition = luigi.Parameter()
+   @luisy.raw
+   @luisy.requires(SomeTask)
+   @luisy.parquet_output
+   class SomePySparkResult(luisy.SparkTask):
+      
+      partition = luigi.Parameter()
 
-       def run(self):
+      def run(self):
+         df = self.read_input()
+         #  do something
+         self.write(df)
 
-           df = self.input().read()
-           # do something
-           self.write(df)
-
-Invoking
-
-.. code-block:: bash
-
-   luisy --module [project_name].[module] ProcessedResult --partition=my_partition --download
+      def get_folder_name(self):
+         return f"some_dir/spark_result/Partition=self.partition"
 
 
-will first download the parquet-files locally and then run the
-subsequent task.
+In some cases, only the result of a spark pipeline triggered
+externally need to be further processed. Here, these files are external inputs to
+the pipeline and 
+:py:func:`~luisy.decorators.parquetdir_output` together with the
+cloud-synchronisation can be used download these files automatically
+and process them locally:
 
+.. code-block:: python
+
+   import luisy
+
+   @luisy.raw
+   @luisy.parquetdir_output('some_dir/some_pyspark_output')
+   class SomePySparkResult(luisy.ExternalTask):
+      pass
+
+
+This task points to the folder
+:code:`[project_name]/raw/some_dir/some_py/` in the Blob storage holding
+multiple parquet-files. 
+
+
+Cloud targets
+-------------
+
+The following targets can be used in combination with a
+`luisy.task.SparkTask`:
+
+* :py:func:`~luisy.decorators.deltatable_output`: For spark tasks whose
+  output should be saved in a deltatable
+* :py:func:`~luisy.decorators.azure_blob_storage_output`: For spark tasks whose
+  output should be saved in a azure blob storage.
+
+See :ref:`databricks` for more details on how to use these targets.
+
+Cloud inputs
+------------
+
+To ease the development of cloud pipelines using
+`luisy.task.SparkTask` that should access data already persisted in
+cloud storages, we provide input decorators that render the usage of
+:py:class:`~luisy.tasks.base.ExternalTask` unnecessary:
+
+* :py:func:`~luisy.decorators.deltatable_input`: For spark tasks that should acess
+  data saved in a deltatable
+* :py:func:`~luisy.decorators.azure_blob_storage_input`: For spark tasks whose
+  output should be saved in a azure blob storage.
+
+See :ref:`databricks` for more details on how to implement pipelines
+using these inputs.
 
 Directory structure
 -------------------

@@ -37,6 +37,10 @@ from luisy.decorators import xlsx_output # noqa
 from luisy.decorators import hdf_output # noqa
 from luisy.decorators import pickle_output # noqa
 from luisy.decorators import parquetdir_output # noqa
+from luisy.decorators import deltatable_output # noqa
+from luisy.decorators import deltatable_input # noqa
+from luisy.decorators import azure_blob_storage_output # noqa
+from luisy.decorators import azure_blob_storage_input # noqa
 
 from luigi import Parameter # noqa
 from luigi import IntParameter # noqa
