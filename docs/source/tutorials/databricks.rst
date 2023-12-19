@@ -61,7 +61,7 @@ This is how a cloud pipeline may looks like:
 
 Here, :code:`TaskA` and :code:`TaskB` read and write their data from
 and to delta tables and process them with spark. :code:`TaskC`,
-however, persits its output into a pickle file stored in dbfs.
+however, persists its output into a pickle file stored in dbfs.
 
 Running a pipeline
 ------------------
