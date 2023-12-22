@@ -11,7 +11,7 @@ import logging
 import re
 from pyspark import SparkContext
 from pyspark.sql import DataFrame as SparkDataFrame
-from pyspark.errors.exceptions.connect import AnalysisException
+from pyspark.errors.exceptions.base import AnalysisException
 from luisy.config import (
     Config,
     change_working_dir,
