@@ -111,7 +111,7 @@ The following targets can be used in combination with a
 * :py:func:`~luisy.decorators.azure_blob_storage_output`: For spark tasks whose
   output should be saved in a azure blob storage.
 
-See :ref:`databricks` for more details on how to use these targets.
+See :ref:`pyspark` for more details on how to use these targets.
 
 Cloud inputs
 ------------
@@ -126,7 +126,7 @@ cloud storages, we provide input decorators that render the usage of
 * :py:func:`~luisy.decorators.azure_blob_storage_input`: For spark tasks whose
   output should be saved in a azure blob storage.
 
-See :ref:`databricks` for more details on how to implement pipelines
+See :ref:`pyspark` for more details on how to implement pipelines
 using these inputs.
 
 Directory structure
