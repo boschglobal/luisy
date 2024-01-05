@@ -129,6 +129,12 @@ cloud storages, we provide input decorators that render the usage of
 See :ref:`pyspark` for more details on how to implement pipelines
 using these inputs.
 
+
+.. note::
+
+   Make sure that the `delta-spark` extension is installed into your
+   spark cluster. See more `here <https://docs.delta.io>`_.
+
 Directory structure
 -------------------
 The following decorators denote the directory in the project directory

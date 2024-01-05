@@ -72,6 +72,11 @@ however, persists its output into a pickle file, which requires
 :py:mod:`luisy` to serialize all the data to a
 :py:mod:`pandas.DataFrame` beforehand.
 
+.. note::
+
+   Make sure that the `delta-spark` extension is installed into your
+   spark cluster. See more `here <https://docs.delta.io>`_.
+
 Running a pipeline
 ------------------
 
