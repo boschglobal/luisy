@@ -139,7 +139,7 @@ Initial configuration
 Using :py:mod:`luisy` within a databricks cluster, the databricks file
 system (:code:`dbfs`) can be used as local file system allowing to run
 the pipeline completely in
-the cloud, even non-:py:class:`~luisy.tasks.base.SparkTask`.
+the cloud, even for non-:py:class:`~luisy.tasks.base.SparkTask`.
 
 .. code-block:: python
 
