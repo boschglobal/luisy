@@ -18,7 +18,7 @@ Spark-cluster. The key difference of a :py:class:`~luisy.tasks.base.Task` and a
 not :py:class:`pandas.DataFrame` but :py:class:`pyspark.sql.DataFrame`
 objects.
 
-Generelly, a :py:class:`~luisy.tasks.base.SparkTask` creates from the
+Generally, a :py:class:`~luisy.tasks.base.SparkTask` creates from the
 output files of its input a :py:class:`pyspark.sql.DataFrame` and
 when saving to a :py:class:`luisy.targets.CloudTarget`, the respective
 spark method is used. Here, the user has to make sure that the spark
