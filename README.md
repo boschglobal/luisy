@@ -96,6 +96,7 @@ Please have a look at our [contribution guide](https://boschglobal.github.io/lui
 | [pipdeptree](https://github.com/tox-dev/pipdeptree)|[MIT License](https://github.com/tox-dev/pipdeptree/blob/main/LICENSE) | Dependency |
 | [requirements-parser](https://github.com/madpah/requirements-parser)|[Apache License 2.0](https://github.com/madpah/requirements-parser/blob/master/LICENSE)| Dependency |
 | [pyarrow](https://github.com/apache/arrow)|[Apache License 2.0](https://github.com/apache/arrow/blob/master/LICENSE.txt)| Dependency |
+| [spark](https://github.com/apache/spark)|[Apache License 2.0](https://github.com/apache/spark/blob/master/LICENSE)| Dependency |
 
 ## Development dependency
 

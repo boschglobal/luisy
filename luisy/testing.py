@@ -3,6 +3,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+import pandas as pd
 import unittest
 import luigi
 import pickle
@@ -15,6 +16,7 @@ from luisy.config import get_default_params
 
 from luigi.execution_summary import LuigiStatusCode
 
+from pyspark.errors.exceptions.connect import AnalysisException
 
 from unittest.mock import (
     patch,
@@ -156,8 +158,61 @@ class LuisyTestCase(unittest.TestCase):
         self.assertEqual(result.status, LuigiStatusCode.MISSING_EXT)
 
 
-def create_testing_config(working_dir, storage_key='', container_name='', account_name='',
-                          **kwargs):
+class DFMock(Mock):
+
+    def __init__(self, table_uri, data):
+        Mock.__init__(self)
+
+        self.table_uri = table_uri
+        self.data = data
+
+    @property
+    def write(self):
+        return self
+
+    def mode(self, *args):
+        return self
+
+    def saveAsTable(self, table_name):
+        Config().spark.data[table_name] = self.data
+
+    def toPandas(self):
+        return pd.DataFrame(data=self.data)
+
+
+class SparkMock(Mock):
+
+    data = {}
+
+    @property
+    def tables(self):
+        return list(self.data.keys())
+
+    def table(self, table_uri):
+
+        df = DFMock(
+            table_uri=table_uri,
+            data=self.data[table_uri],
+        )
+        return df
+
+    def sql(self, qry):
+
+        if qry.startswith('SELECT 1 from'):
+            for table in self.tables:
+                if table in qry:
+                    return True
+            raise AnalysisException("Table does not exist")
+
+
+def create_testing_config(
+    working_dir,
+    storage_key='',
+    container_name='',
+    account_name='',
+    mock_spark=True,
+    **kwargs
+):
     """
     Creates a Config Object for testing purpose. Should be used when working with temporary
     directories.
@@ -171,11 +226,14 @@ def create_testing_config(working_dir, storage_key='', container_name='', accoun
             tests.
         **kwargs: params like `download` or `upload`
     """
+
     params = get_default_params(raw=False)
     params['working_dir'] = working_dir
     params['azure_storage_key'] = storage_key
     params['azure_container_name'] = container_name
     params['azure_account_name'] = account_name
+    params['spark'] = SparkMock() if mock_spark else None
+
     for key, val in kwargs.items():
         params[key] = val
     Config().update(params)

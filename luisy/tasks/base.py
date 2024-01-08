@@ -16,6 +16,7 @@ from luisy.decorators import (
 )
 from luisy.config import Config
 from luisy.visualize import visualize_task
+from luisy.targets import CloudTarget
 
 from luisy.helpers import RegexTaskPattern
 
@@ -38,7 +39,7 @@ class Task(luigi.Task):
 
         if self.project_name == 'luisy':
             raise ValueError(
-                'Something went wrong when setting the project name.'
+                'Something went wrong when setting the project name. '
                 'Are you using the task correctly?'
             )
 
@@ -129,6 +130,10 @@ class Task(luigi.Task):
         self.logger.info(f'Start uploading of {self}')
         self.output()._try_to_upload(overwrite=overwrite)
 
+    def read_input(self):
+        """Helper to read atomic inputs"""
+        return self.input().read()
+
     def read(self):
         """
         Reads the output of the task and return is. If cloud synchronisation is activated, a file
@@ -143,7 +148,6 @@ class Task(luigi.Task):
         return self.output().read()
 
     def write(self, obj):
-        self.logger.info('Write to outfile')
         target = self.output()
         target.make_dir(self.get_outdir())
         target.write(obj)
@@ -151,9 +155,15 @@ class Task(luigi.Task):
     def output(self):
         """
         """
-        return self.target_cls(
-            path=self.get_outfile(),
-            **self.target_kwargs)
+        if issubclass(self.target_cls, CloudTarget):
+            return self.target_cls(
+                outdir=self.get_outdir(),
+                **self.target_kwargs
+            )
+        else:
+            return self.target_cls(
+                path=self.get_outfile(),
+                **self.target_kwargs)
 
     def clean(self):
         if isinstance(self, luigi.ExternalTask):
@@ -231,3 +241,21 @@ class WrapperTask(Task, luigi.WrapperTask):
             return [task.read() for task in input_tasks]
 
         raise ValueError('Type of requires not understood')
+
+
+class SparkTask(Task):
+    @property
+    def spark(self):
+        return Config().spark
+
+    def write(self, df):
+        target = self.output()
+        if target.requires_pandas and not isinstance(df, pd.DataFrame):
+            df = df.toPandas()
+        super().write(df)
+
+    def read_input(self):
+        df = self.input().read()
+        if isinstance(df, pd.DataFrame):
+            df = self.spark.createDataFrame(df)
+        return df

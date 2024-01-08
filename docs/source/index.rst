@@ -63,6 +63,7 @@ Learn more about luisy in our :doc:`Tutorials <./tutorials/getting_started>`.
    Directory Output <tutorials/multi_file>
    Up- and Downloading Files <tutorials/cloud>
    Trigger reruns by changing code <tutorials/reruns>
+   Interaction with PySpark <tutorials/spark>
 
 
 .. toctree::

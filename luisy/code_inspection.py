@@ -80,7 +80,7 @@ def create_hashes(task_list, requirements_path=None):
 def walk_nodes(variable_name, module_name, parent="", parent_module=""):
     """
     Function that recursively visits AST nodes.
-    Theses nodes are either ClassDefs, FunctionDefs or simply Name nodes.
+    These nodes are either ClassDefs, FunctionDefs or simply Name nodes.
     For each node
 
     * the sourcecode within the node body is hashed and added to a return list
@@ -305,7 +305,7 @@ class VariablesReturner(ast.NodeVisitor):
 
 def get_node(node_name, module_tree):
     """
-    Find an node with given name in the upper level of a module.
+    Find a node with given name in the upper level of a module.
     """
     for node in module_tree.body:
         if type(node).__name__ == "Assign":

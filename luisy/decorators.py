@@ -15,6 +15,8 @@ from luisy.targets import (
     ParquetDirTarget,
     JSONTarget,
     DirectoryTarget,
+    DeltaTableTarget,
+    AzureBlobStorageTarget,
 )
 from luigi.util import inherits
 from luigi import ExternalTask
@@ -72,16 +74,16 @@ csv_output = _make_output_decorator_factory(CSVTarget)
 json_output = _make_output_decorator_factory(JSONTarget)
 
 
-def parquetdir_output(cls_py=None):
+def parquetdir_output(cls_py=None, outdir=None):
     def decorator(cls):
         """
         """
         cls.target_cls = ParquetDirTarget
 
-        if not issubclass(cls, ExternalTask):
-            raise ValueError(
-                "This decorator only works on ExternalTasks"
-            )
+        if outdir is not None:
+            def get_folder_name(self_):
+                return outdir
+            cls.get_folder_name = get_folder_name
 
         if not hasattr(cls, 'get_folder_name'):
             raise ValueError(
@@ -224,3 +226,63 @@ def auto_filename(cls_py=None, excl_params=None, excl_none=False):
 interim = _make_dir_layer('interim')
 final = _make_dir_layer('final')
 raw = _make_dir_layer('raw')
+
+
+def deltatable_input(catalog=None, schema=None, table_name=None):
+    def decorator(cls):
+        def _input(self_):
+            return DeltaTableTarget(
+                table_name=table_name,
+                schema=schema,
+                catalog=catalog,
+            )
+
+        cls.input = _input
+        return cls
+
+    return decorator
+
+
+def deltatable_output(catalog=None, schema=None, table_name=None):
+    def output_decorator(cls):
+        cls.target_cls = DeltaTableTarget
+        cls.target_kwargs = {
+            'table_name': table_name,
+            'schema': schema,
+            'catalog': catalog,
+        }
+        return cls
+
+    return output_decorator
+
+
+def azure_blob_storage_output(
+        endpoint, directory, file_format="parquet", inferschema=False):
+    def decorator(cls):
+        cls.target_cls = AzureBlobStorageTarget
+        cls.target_kwargs = {
+            'endpoint': endpoint,
+            'directory': directory,
+            'file_format': file_format,
+            'inferschema': inferschema,
+        }
+        return cls
+
+    return decorator
+
+
+def azure_blob_storage_input(
+        endpoint, directory, file_format="parquet", inferschema=False):
+    def decorator(cls):
+        def _input(self_):
+            return AzureBlobStorageTarget(
+                endpoint=endpoint,
+                directory=directory,
+                file_format=file_format,
+                inferschema=inferschema,
+            )
+
+        cls.input = _input
+        return cls
+
+    return decorator

@@ -18,7 +18,7 @@ you should create a fork on which you implement your changes.
 Creating and pushing to feature branches in the luisy repository is not possible.
 After development you create a pull request from your fork. For more details see
 `Creating a pull request from a fork
-<https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork>`.
+<https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork>`_.
 
 Please add code that is absolutely necessary for your changes only and
 try to keep the requirements of luisy as slim as possible.

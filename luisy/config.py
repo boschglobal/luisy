@@ -13,11 +13,14 @@ into the leafs of our DAG.
 
 import os
 import logging
+from pyspark import SparkContext
+from pyspark.sql import SparkSession
 from luisy.file_system import AzureContainer
 from luisy.default_params import (
     default_params,
     env_keys
 )
+
 
 logger = logging.getLogger('luigi-interface').getChild('luisy-interface')
 
@@ -48,12 +51,42 @@ class Config(metaclass=Singleton):
         for param, env_key in env_keys.items():
             self.set_param(param, self._get_env_var(env_key))
 
-        if self.get_param('azure_storage_key') is not None:
+        self.init()
+
+    def _check_for_spark(self):
+        if SparkContext._active_spark_context:
+            return SparkSession.builder.getOrCreate()
+        else:
+            return self.get_param('spark')
+
+    def _init_azure(self):
+
+        cond = [
+            self.get_param('azure_account_name') is not None,
+            self.get_param('azure_storage_key') is not None,
+            self.get_param('azure_container_name') is not None,
+        ]
+
+        if all(cond):
             self.fs = AzureContainer(
                 account_name=self.get_param('azure_account_name'),
                 container_name=self.get_param('azure_container_name'),
                 key=self.get_param('azure_storage_key')
             )
+        else:
+            raise ValueError(
+                "Environment variables for Azure-connection not properly set"
+                "Make sure that you have correctly set the following variables"
+                "   'LUISY_AZURE_STORAGE_KEY'"
+                "   'LUISY_AZURE_ACCOUNT_NAME'"
+                "   'LUISY_AZURE_CONTAINER_NAME'"
+            )
+
+    def init(self):
+        if not hasattr(self, 'fs') and self.download:
+            self._init_azure()
+
+        self.spark = self._check_for_spark()
 
     def update(self, params):
         """
@@ -62,7 +95,8 @@ class Config(metaclass=Singleton):
         Args:
             params (dict): new params that should be set
         """
-        self._config.update(params)
+        for name, val in params.items():
+            self.set_param(name, val)
 
     def set_param(self, name, val):
         """
@@ -73,6 +107,7 @@ class Config(metaclass=Singleton):
             val (object): Value of parameter
         """
         self._config[name] = val
+        self.init()
 
     def get_param(self, param):
         """
@@ -131,7 +166,6 @@ class Config(metaclass=Singleton):
         Resets the config singleton to the initial state with default parameters and environment
         variable values.
         """
-        self._config = None
         self.__init__()
 
     def check_params(self):
@@ -151,7 +185,7 @@ class Config(metaclass=Singleton):
 
             if (self._config[azure_param] is None) and needs_azure:
                 raise ValueError(
-                    f"Parameter '{azure_param}' not set. You cant use download "
+                    f"Parameter '{azure_param}' not set. You can't use download "
                     "or upload functionality without setting your Azure storage key. More "
                     "information: docs/cloud.rst"
                 )

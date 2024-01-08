@@ -37,11 +37,11 @@ class TaskHashEntry:
     in `.luisy.hash` file online or locally.
 
     Args:
-          hash_new (str): hash of current luisy run
-          hash_local (str or None): hash of local 'luisy.hash' file (if available)
-          hash_cloud (str or None): hash of cloud 'luisy.hash' file (if available)
-          task (luisy.Task): instance of task which all the hashes belong to
-          filename (str): output filename of task (key inside `luisy.hash` file)
+        hash_new (str): hash of current luisy run
+        hash_local (str or None): hash of local 'luisy.hash' file (if available)
+        hash_cloud (str or None): hash of cloud 'luisy.hash' file (if available)
+        task (luisy.Task): instance of task which all the hashes belong to
+        filename (str): output filename of task (key inside `luisy.hash` file)
 
     Note:
         Can this be moved inside a Task instance?
@@ -117,8 +117,9 @@ class HashSynchronizer(object):
 
     def check_params(self):
         assert self.root_task in self.tasks.values()
-        task_filesnames = [remove_working_dir(task.output().path) for task in self.tasks.values()]
-        assert all([filename in task_filesnames for filename in self.hashmapping_new.hashes.keys()])
+        task_filenames = [remove_working_dir(task.output().path) for task in self.tasks.values()]
+
+        assert all([filename in task_filenames for filename in self.hashmapping_new.hashes.keys()])
 
     def initialize(self):
         """
@@ -203,7 +204,6 @@ class HashSynchronizer(object):
             list: hash entries of tasks that are outdated (no external tasks included)
 
         """
-
         return [
             hash_entry for hash_entry in self.hash_entries if
             hash_entry.has_outdated_local_hash() and not hash_entry.is_external_task()
@@ -334,7 +334,7 @@ class HashSynchronizer(object):
         This function updates all online/cloud hashes to the hashes from the current run. Failed
         tasks can be given as an argument to prevent luisy from setting hashes that have not been
         uploaded. In addition, if `upload_tasks` is True, this method uploads all the tasks that
-        have outdated hash entries aswell.
+        have outdated hash entries as well.
 
         Args:
             failed_tasks (list): Failed tasks in luigi run
@@ -523,6 +523,9 @@ class HashMapping(object):
 
         filepaths = list(self.hashes.keys())
         for filepath in filepaths:
+            # TODO Better integration?
+            if filepath.endswith('DeltaTable'):
+                continue
             if not self.exists(filepath):
                 logger.info(f"{filepath} not existing any more, clean up")
                 self.hashes.pop(filepath)
