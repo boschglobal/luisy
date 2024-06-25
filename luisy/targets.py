@@ -49,11 +49,9 @@ class LuisyTarget(luigi.LocalTarget):
     def remove(self):
         raise NotImplementedError()
 
-    # TODO: Should this be a public method?
     def _try_to_upload(self, overwrite=False):
         raise NotImplementedError()
 
-    # TODO: Should this be a public method?
     def _try_to_download(self):
         raise NotImplementedError()
 
@@ -339,6 +337,16 @@ class PickleTarget(LocalTarget):
     def read(self):
         with open(self.path, 'rb') as f:
             return pickle.load(f)
+
+
+class FeatherTarget(LocalTarget):
+    file_ending = 'feather'
+
+    def write(self, df):
+        df.to_feather(self.path)
+
+    def read(self):
+        return pd.read_feather(self.path)
 
 
 class HDFTarget(LocalTarget):

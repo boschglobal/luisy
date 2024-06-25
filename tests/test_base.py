@@ -25,6 +25,7 @@ from luisy.decorators import (
     pickle_output,
     hdf_output,
     csv_output,
+    feather_output,
     make_directory_output,
 )
 from luisy.hashes import (
@@ -85,6 +86,17 @@ class SubsequentTask(Task):
     def run(self):
         df = self.input().read()
         df = df * 5
+        self.write(df)
+
+
+@final
+@feather_output
+@requires(SubsequentTask)
+class ToyFeatherTask(Task):
+
+    def run(self):
+        df = self.input().read()
+        df = df / 5
         self.write(df)
 
 
@@ -195,6 +207,24 @@ class TestTask(BaseTaskTestCase):
                     'tests',
                     'final',
                     'SubsequentTask_a=1.pkl'
+                )
+            )
+        )
+
+    def test_feather_output(self):
+        task = ToyFeatherTask(a=1)
+        luigi.build([task], local_scheduler=True)
+
+        df = task.read()
+
+        self.assertIsInstance(df, pd.DataFrame)
+        self.assertTrue(
+            os.path.exists(
+                os.path.join(
+                    self.tmpdir.name,
+                    'tests',
+                    'final',
+                    'ToyFeatherTask_a=1.feather'
                 )
             )
         )
