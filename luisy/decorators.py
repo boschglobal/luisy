@@ -10,6 +10,7 @@ from luisy.config import Config
 from luisy.targets import (
     HDFTarget,
     PickleTarget,
+    FeatherTarget,
     XLSXTarget,
     CSVTarget,
     ParquetDirTarget,
@@ -72,6 +73,7 @@ pickle_output = _make_output_decorator_factory(PickleTarget)
 xlsx_output = _make_output_decorator_factory(XLSXTarget)
 csv_output = _make_output_decorator_factory(CSVTarget)
 json_output = _make_output_decorator_factory(JSONTarget)
+feather_output = _make_output_decorator_factory(FeatherTarget)
 
 
 def parquetdir_output(cls_py=None, outdir=None):

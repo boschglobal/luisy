@@ -2,6 +2,11 @@
 Changelog
 =========
 
+Version 1.4.0
+=============
+- Added :py:class:`luisy.targets.FeatherTarget` to read and write data
+  to feather files
+
 Version 1.3.0
 =============
 - Added :py:class:`luisy.tasks.base.SparkTask` to run tasks on a given spark object.
