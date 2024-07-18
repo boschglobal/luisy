@@ -2,6 +2,10 @@
 Changelog
 =========
 
+Version 1.4.1
+=============
+- Update requirements
+
 Version 1.4.0
 =============
 - Added :py:class:`luisy.targets.FeatherTarget` to read and write data
