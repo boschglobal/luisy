@@ -30,7 +30,7 @@ luigi==3.1.1              # via -r requirements.txt
 matplotlib==3.6.2         # via -r requirements.txt
 mccabe==0.6.1             # via flake8
 networkx==2.8.8           # via -r requirements.txt
-numexpr==2.8.4            # via tables
+numexpr==2.8.6            # via tables
 numpy==1.23.5             # via -r requirements.txt, contourpy, matplotlib, numexpr, pandas, pyarrow, tables
 packaging==21.3           # via build, matplotlib, pytest, tables
 pandas==1.5.2             # via -r requirements.txt
