@@ -26,7 +26,7 @@ iniconfig==1.1.1          # via pytest
 isodate==0.6.1            # via azure-storage-blob
 kiwisolver==1.4.4         # via matplotlib
 lockfile==0.12.2          # via python-daemon
-luigi==3.1.1              # via -r requirements.txt
+luigi==3.6.0              # via -r requirements.txt
 matplotlib==3.6.2         # via -r requirements.txt
 mccabe==0.6.1             # via flake8
 networkx==2.8.8           # via -r requirements.txt
@@ -59,7 +59,7 @@ six==1.16.0               # via azure-core, isodate, python-dateutil
 tables==3.7.0             # via -r requirements.txt
 tenacity==8.1.0           # via luigi
 tomli==2.0.1              # via build, coverage, pep517, pytest
-tornado==6.4.1            # via luigi
+tornado==6.4.2            # via luigi
 types-setuptools==65.6.0.1  # via requirements-parser
 typing-extensions==4.4.0  # via azure-core, azure-storage-blob
 urllib3==2.2.2            # via requests
