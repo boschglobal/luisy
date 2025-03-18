@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>luisy.visualize &mdash; luisy  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            luisy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/about.html">Why?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributions.html">Contributions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/parameters.html">WrapperTasks and ConcatenationTasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/multi_file.html">Directory Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/cloud.html">Up- and Downloading Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/reruns.html">Trigger reruns by changing code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/spark.html">Interaction with PySpark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../task.html">Task structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../decorators.html">Decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reruns.html">Reruns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualize.html">Visualize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cloud.html">Cloud sync</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../helpers.html">Helper funcs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hash_update_mode.html">Hash Update Mode</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">Full reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/corporate_information.html">Corporate information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">luisy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">luisy.visualize</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for luisy.visualize</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2022 - for information on the respective copyright owner see the NOTICE.rst file or</span>
+<span class="c1"># the repository https://github.com/boschglobal/luisy</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luigi.task</span><span class="w"> </span><span class="kn">import</span> <span class="n">flatten</span>
+
+
+<div class="viewcode-block" id="simple_task_string"><a class="viewcode-back" href="../../api/luisy.html#luisy.visualize.simple_task_string">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">simple_task_string</span><span class="p">(</span><span class="n">task</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create simple string label out of task.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">groups</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">task_id</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">groups</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">groups</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span></div>
+
+
+<div class="viewcode-block" id="create_label"><a class="viewcode-back" href="../../api/luisy.html#luisy.visualize.create_label">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">create_label</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">excl_list</span><span class="o">=</span><span class="p">(),</span> <span class="n">with_id</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Make a string label out of a luigi task. Make sure the string is unique !</span>
+<span class="sd">    Args:</span>
+<span class="sd">        task (luisy.tasks.base.Task): The task the label should be created for</span>
+<span class="sd">        excl_list (list): List of parameter kwargs that are not included in the label</span>
+<span class="sd">        with_id (bool): If False, do not include the hash of the task.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Label to be used for the node</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">groups</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">task_id</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">groups</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">with_id</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">groups</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">task</span><span class="o">.</span><span class="n">param_kwargs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">excl_list</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">task</span><span class="o">.</span><span class="n">param_kwargs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="n">name</span></div>
+
+
+<div class="viewcode-block" id="add_children"><a class="viewcode-back" href="../../api/luisy.html#luisy.visualize.add_children">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">add_children</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">namefunc</span><span class="o">=</span><span class="n">create_label</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">depth_limit</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                 <span class="n">unique_children</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Recursive Function that adds the children of task to a graph object. Make sure that &#39;namefunc&#39;</span>
+<span class="sd">    returns unique strings for all tasks that will be included in the tree</span>
+<span class="sd">    Args:</span>
+<span class="sd">        task (luisy.tasks.base.Task): The task</span>
+<span class="sd">        graph (networkx.DiGraph): The directed ayclic graph</span>
+<span class="sd">        namefunc (callable): Function that creates a string out a task.</span>
+<span class="sd">        depth (int): Depth of current node</span>
+<span class="sd">        depth_limit (int): Max allowed depth of tree</span>
+<span class="sd">        unique_children (bool): If true, add only subset of unique types of children for each task</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">depth</span> <span class="o">&lt;=</span> <span class="n">depth_limit</span><span class="p">:</span>
+        <span class="n">children</span> <span class="o">=</span> <span class="n">flatten</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">requires</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">unique_children</span><span class="p">:</span>
+            <span class="n">children</span> <span class="o">=</span> <span class="n">unique_types</span><span class="p">(</span><span class="n">children</span><span class="p">)</span>
+        <span class="n">current_depth</span> <span class="o">=</span> <span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">children</span><span class="p">:</span>  <span class="c1"># depth first search</span>
+            <span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">namefunc</span><span class="p">(</span><span class="n">task</span><span class="p">),</span> <span class="n">namefunc</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+            <span class="n">add_children</span><span class="p">(</span>
+                <span class="n">task</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
+                <span class="n">graph</span><span class="o">=</span><span class="n">graph</span><span class="p">,</span>
+                <span class="n">namefunc</span><span class="o">=</span><span class="n">namefunc</span><span class="p">,</span>
+                <span class="n">depth</span><span class="o">=</span><span class="n">current_depth</span><span class="p">,</span>
+                <span class="n">unique_children</span><span class="o">=</span><span class="n">unique_children</span><span class="p">,</span>
+                <span class="n">depth_limit</span><span class="o">=</span><span class="n">depth_limit</span><span class="p">,</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="make_dependency_graph"><a class="viewcode-back" href="../../api/luisy.html#luisy.visualize.make_dependency_graph">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">make_dependency_graph</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">excl_list</span><span class="o">=</span><span class="p">(),</span> <span class="n">namefunc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">unique_children</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">depth_limit</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create pydot graph out of a tasks dependencies.</span>
+<span class="sd">     Args:</span>
+<span class="sd">        task (luisy.tasks.base.Task): task</span>
+<span class="sd">        excl_list (list): Parameter forwarded to &#39;create_label&#39; if namefunc is none</span>
+<span class="sd">        namefunc (callable): Function that creates a string out a task.</span>
+<span class="sd">        depth_limit (int): Max allowed depth of tree</span>
+<span class="sd">        unique_children (bool): If true, add only subset of unique types of children</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dag</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">namefunc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">namefunc</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">create_label</span><span class="p">,</span> <span class="n">excl_list</span><span class="o">=</span><span class="n">excl_list</span><span class="p">)</span>
+    <span class="n">dag</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">namefunc</span><span class="p">(</span><span class="n">task</span><span class="p">))</span>  <span class="c1"># if task has no children the root node has to be created</span>
+    <span class="n">add_children</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">dag</span><span class="p">,</span> <span class="n">namefunc</span><span class="p">,</span> <span class="n">unique_children</span><span class="o">=</span><span class="n">unique_children</span><span class="p">,</span> <span class="n">depth_limit</span><span class="o">=</span><span class="n">depth_limit</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dag</span></div>
+
+
+<div class="viewcode-block" id="unique_types"><a class="viewcode-back" href="../../api/luisy.html#luisy.visualize.unique_types">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">unique_types</span><span class="p">(</span><span class="n">tasks</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given a list of objects, return a subset that has each type only once.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">types</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">res_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+            <span class="n">types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">res_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res_list</span></div>
+
+
+<div class="viewcode-block" id="visualize_task"><a class="viewcode-back" href="../../api/luisy.html#luisy.visualize.visualize_task">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">visualize_task</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">unique_children</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parameters_to_exclude</span><span class="o">=</span><span class="p">()):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Visualizes the dependencies of a :py:class:`luisy.Task`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        task (luisy.tasks.base.Task): The task whose dependencies should be visualized.</span>
+<span class="sd">        ax (matplotlib.axis.Axis): A matplotlib axis to draw in</span>
+<span class="sd">        unique_children (bool): If true, add only subset of unique types of children</span>
+<span class="sd">        parameters_to_exclude (list): List of names of py:mod:`luigi`-parameters to exclude in</span>
+<span class="sd">            visualization.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">dag</span> <span class="o">=</span> <span class="n">make_dependency_graph</span><span class="p">(</span>
+        <span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span>
+        <span class="n">unique_children</span><span class="o">=</span><span class="n">unique_children</span><span class="p">,</span>
+        <span class="n">depth_limit</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+        <span class="n">excl_list</span><span class="o">=</span><span class="n">parameters_to_exclude</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">shell_layout</span><span class="p">(</span><span class="n">dag</span><span class="p">)</span>
+
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">dag</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">)</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">dag</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2022, Robert Bosch GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

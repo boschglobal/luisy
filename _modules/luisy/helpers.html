@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>luisy.helpers &mdash; luisy  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            luisy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/about.html">Why?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributions.html">Contributions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/parameters.html">WrapperTasks and ConcatenationTasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/multi_file.html">Directory Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/cloud.html">Up- and Downloading Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/reruns.html">Trigger reruns by changing code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/spark.html">Interaction with PySpark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../task.html">Task structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../decorators.html">Decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reruns.html">Reruns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualize.html">Visualize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cloud.html">Cloud sync</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../helpers.html">Helper funcs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hash_update_mode.html">Hash Update Mode</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">Full reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/corporate_information.html">Corporate information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">luisy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">luisy.helpers</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for luisy.helpers</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2022 - for information on the respective copyright owner see the NOTICE.rst file or</span>
+<span class="c1"># the repository https://github.com/boschglobal/luisy</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">reduce</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luigi.date_interval</span><span class="w"> </span><span class="kn">import</span> <span class="n">Week</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luigi.tools.deps</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_task_requires</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">contextlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">contextmanager</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="get_string_repr"><a class="viewcode-back" href="../../api/luisy.html#luisy.helpers.get_string_repr">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">get_string_repr</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes a string representation of the given object.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        obj (object): An arbitrary python object</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: A string representation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;_&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">get_string_repr</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">obj</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_start_date"><a class="viewcode-back" href="../../api/luisy.html#luisy.helpers.get_start_date">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">get_start_date</span><span class="p">(</span><span class="n">week</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extracts the first day of the week.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        week (luigi.date_interval.Week or string): Week that is compatible with luigi or string of</span>
+<span class="sd">            the form :code:`2021-W12`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        datetime.date: The first day of the week</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;passed in week is </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">week</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">week</span><span class="p">,</span> <span class="n">Week</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;returning date is </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">week</span><span class="o">.</span><span class="n">date_a</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">week</span><span class="o">.</span><span class="n">date_a</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;returning date is </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Week</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">week</span><span class="p">)</span><span class="o">.</span><span class="n">date_a</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">Week</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">week</span><span class="p">)</span><span class="o">.</span><span class="n">date_a</span></div>
+
+
+<div class="viewcode-block" id="get_stop_date"><a class="viewcode-back" href="../../api/luisy.html#luisy.helpers.get_stop_date">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">get_stop_date</span><span class="p">(</span><span class="n">week</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extracts the last day of the week.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        week (luigi.date_interval.Week or string): Week that is compatible with luigi or string of</span>
+<span class="sd">            the form :code:`2021-W12`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        datetime.date: The last day of the week</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;passed in week is </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">week</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">week</span><span class="p">,</span> <span class="n">Week</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;returning date is </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">week</span><span class="o">.</span><span class="n">date_b</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">week</span><span class="o">.</span><span class="n">date_b</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;returning date is </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Week</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">week</span><span class="p">)</span><span class="o">.</span><span class="n">date_b</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">Week</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">week</span><span class="p">)</span><span class="o">.</span><span class="n">date_b</span></div>
+
+
+<div class="viewcode-block" id="get_all_reqs"><a class="viewcode-back" href="../../api/luisy.html#luisy.helpers.get_all_reqs">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">get_all_reqs</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">visited</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">visited</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="n">task</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="nb">next</span> <span class="ow">in</span> <span class="n">get_task_requires</span><span class="p">(</span><span class="n">task</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">visited</span><span class="p">):</span>
+        <span class="n">visited</span> <span class="o">+=</span> <span class="n">get_all_reqs</span><span class="p">(</span><span class="nb">next</span><span class="p">,</span> <span class="n">visited</span><span class="o">=</span><span class="p">[</span><span class="nb">next</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">visited</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="add_filter_info"><a class="viewcode-back" href="../../api/luisy.html#luisy.helpers.add_filter_info">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">add_filter_info</span><span class="p">(</span><span class="n">filter_func</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    this decorator for class methods adds information about the change of a pd.DataFrame&#39;s shape</span>
+<span class="sd">    before (and after if function returns a pd.DataFrame) filtering the df to the logger.</span>
+<span class="sd">    This provides additional information to the user which function filtered how many rows / cols.</span>
+<span class="sd">    This can be easily applied to every task method like this:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        @add_filter_info</span>
+<span class="sd">        def filter_func(df):</span>
+<span class="sd">            return df.drop([&quot;my_most_disliked_column&quot;], axis=1)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filter_func (cls.method): method that takes pd.DataFrame as first argument and filters it by</span>
+<span class="sd">            some operations</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        wrapper around filter_func, that adds additional information about filtered pd.DataFrame.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;df.shape before &#39;</span><span class="si">{</span><span class="n">filter_func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">filter_func</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">df</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;df.shape after &#39;</span><span class="si">{</span><span class="n">filter_func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">df</span>
+
+    <span class="k">return</span> <span class="n">wrapper</span></div>
+
+
+<div class="viewcode-block" id="wrap_in_brackets"><a class="viewcode-back" href="../../api/luisy.html#luisy.helpers.wrap_in_brackets">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">wrap_in_brackets</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s1">&#39;(&#39;</span> <span class="o">+</span> <span class="n">string</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span></div>
+
+
+<div class="viewcode-block" id="RegexParam"><a class="viewcode-back" href="../../api/luisy.html#luisy.helpers.RegexParam">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">RegexParam</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class to hold information about a Parameter which RegexTaskPattern class uses to create</span>
+<span class="sd">    matching regex queries.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name (str): Parameter name in luisy.Task</span>
+<span class="sd">        default (object): parameters original default value</span>
+<span class="sd">        regex_placeholder (str): regex string which matches all possible parameter values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">default</span><span class="p">,</span> <span class="n">regex_placeholder</span><span class="o">=</span><span class="s1">&#39;[</span><span class="se">\\</span><span class="s1">S]*&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="n">default</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">regex_placeholder</span> <span class="o">=</span> <span class="n">regex_placeholder</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">placeholder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This creates a unique placeholder, which is used for finding the location of the</span>
+<span class="sd">        parameter inside a string. i.e. filepath.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: parameter surrounded with &quot;*&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;*</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">*&#39;</span></div>
+
+
+<div class="viewcode-block" id="RegexTaskPattern"><a class="viewcode-back" href="../../api/luisy.html#luisy.helpers.RegexTaskPattern">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">RegexTaskPattern</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class can be used to find instances of a task on the disk. It uses regex to search for</span>
+<span class="sd">    in the user&#39;s filesystem. Each param is then replaced with a placeholder to build the regex</span>
+<span class="sd">    from it.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        task_cls (Type[luisy.Task]): a class object of type luisy.Task. The given task should use</span>
+<span class="sd">            the :py:func:`luisy.decorator.auto_filename` to work properly.</span>
+<span class="sd">        regex_placeholder (str): This is the regex which is inserted into the filename to create</span>
+<span class="sd">            a matching  regex, which then searches the root directory.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        Only works when using @auto_filename</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_cls</span><span class="p">,</span> <span class="n">regex_placeholder</span><span class="o">=</span><span class="s1">&#39;[</span><span class="se">\\</span><span class="s1">S]*&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">task_cls</span> <span class="o">=</span> <span class="n">task_cls</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">RegexParam</span><span class="p">(</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">param_name</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">task_cls</span><span class="p">,</span> <span class="n">param_name</span><span class="p">)</span><span class="o">.</span><span class="n">_default</span><span class="p">),</span>
+                <span class="n">regex_placeholder</span><span class="o">=</span><span class="n">regex_placeholder</span>
+            <span class="p">)</span> <span class="k">for</span> <span class="n">param_name</span> <span class="ow">in</span> <span class="n">task_cls</span><span class="o">.</span><span class="n">get_param_names</span><span class="p">()</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">regex_placeholder</span> <span class="o">=</span> <span class="n">regex_placeholder</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_filename_pattern</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">regex_pattern</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_regex</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_root_directory</span><span class="p">()</span>
+
+    <span class="nd">@contextmanager</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_overwrite_defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method works as a contextmanager to overwrite a task classes default params. This</span>
+<span class="sd">        is used to extract filename strings, which can be used to build regex queries.</span>
+
+<span class="sd">        Yields:</span>
+<span class="sd">            Overwritten class where the parameter defaults are overwritten with placeholders</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+            <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">task_cls</span><span class="p">,</span> <span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">_default</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">placeholder</span>
+        <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">task_cls</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+            <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">task_cls</span><span class="p">,</span> <span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">_default</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">default</span>
+
+<div class="viewcode-block" id="RegexTaskPattern.set_filename_pattern"><a class="viewcode-back" href="../../api/luisy.html#luisy.helpers.RegexTaskPattern.set_filename_pattern">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">set_filename_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This creates a filename pattern with parameter values filled by</span>
+<span class="sd">        :py:func:`RegexParam.placeholder()`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_overwrite_defaults</span><span class="p">()</span> <span class="k">as</span> <span class="n">task_cls</span><span class="p">:</span>
+            <span class="n">task</span> <span class="o">=</span> <span class="n">task_cls</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">filename_pattern</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">output</span><span class="p">()</span><span class="o">.</span><span class="n">path</span></div>
+
+<div class="viewcode-block" id="RegexTaskPattern.build_root_directory"><a class="viewcode-back" href="../../api/luisy.html#luisy.helpers.RegexTaskPattern.build_root_directory">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">build_root_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Finds &quot;highest&quot; possible path that can be used as a root directory.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Root directory where the regex search is applied on the files inside it.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">path</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename_pattern</span><span class="p">)</span>
+        <span class="n">dirs</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
+        <span class="n">smallest_idx</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">placeholder</span> <span class="ow">in</span> <span class="n">dirs</span><span class="p">:</span>
+                <span class="n">smallest_idx</span> <span class="o">=</span> <span class="n">dirs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">placeholder</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">smallest_idx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirs</span><span class="p">[:</span><span class="n">smallest_idx</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">path</span></div>
+
+<div class="viewcode-block" id="RegexTaskPattern.build_regex"><a class="viewcode-back" href="../../api/luisy.html#luisy.helpers.RegexTaskPattern.build_regex">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">build_regex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Build a regex string from the filepath. This replaces the parameter values of the task</span>
+<span class="sd">        with a regex pattern that matches these values.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Regex pattern that can be used to search for files of that type</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Building Regex&#39;</span><span class="p">)</span>
+        <span class="n">regex_pattern</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename_pattern</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+            <span class="n">regex_pattern</span> <span class="o">=</span> <span class="n">regex_pattern</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">placeholder</span><span class="p">,</span> <span class="n">param</span><span class="o">.</span><span class="n">regex_placeholder</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">regex_pattern</span><span class="p">)</span>
+        <span class="n">file_regex</span> <span class="o">=</span> <span class="n">wrap_in_brackets</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">regex_placeholder</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">wrap_in_brackets</span><span class="p">(</span><span class="n">group</span><span class="p">)</span> <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">regex_placeholder</span><span class="p">)]</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">file_regex</span></div>
+
+<div class="viewcode-block" id="RegexTaskPattern.build_re_splitters"><a class="viewcode-back" href="../../api/luisy.html#luisy.helpers.RegexTaskPattern.build_re_splitters">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">build_re_splitters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The splitters are needed to extract the parameters of a file that matches the regex.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: keys are parameter names, values is a list of splits of the filesname. This</span>
+<span class="sd">                allows us to separate the value from the filename</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">splits</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+            <span class="n">repls</span> <span class="o">=</span> <span class="p">[(</span><span class="n">p</span><span class="o">.</span><span class="n">placeholder</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">regex_placeholder</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span>
+                     <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+            <span class="n">replaced_str</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">kv</span><span class="p">:</span> <span class="n">a</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="o">*</span><span class="n">kv</span><span class="p">),</span> <span class="n">repls</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename_pattern</span><span class="p">)</span>
+            <span class="n">splits</span><span class="p">[</span><span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">replaced_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">placeholder</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">splits</span></div>
+
+<div class="viewcode-block" id="RegexTaskPattern.get_available_files"><a class="viewcode-back" href="../../api/luisy.html#luisy.helpers.RegexTaskPattern.get_available_files">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_available_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Scans all files in the classes&#39; root_directory and then filters on the regex_pattern of</span>
+<span class="sd">        this class.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: List of files which match the regexpattern and are in the root directory</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">file_paths</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Looking for matching regex in </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+                <span class="n">file_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">regex_pattern</span><span class="p">)</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">match</span><span class="p">,</span> <span class="n">file_paths</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Found matching files:&#39;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">files</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">files</span></div>
+
+<div class="viewcode-block" id="RegexTaskPattern.get_available_params"><a class="viewcode-back" href="../../api/luisy.html#luisy.helpers.RegexTaskPattern.get_available_params">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_available_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Searches for Files in the rootdirectory matching to the regex and extracts the parameters</span>
+<span class="sd">        out of the filesnames using the regex_splits.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: keys are file_paths of the files found, values are a dict with param_name as</span>
+<span class="sd">                key and param_value as value.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_available_files</span><span class="p">()</span>
+        <span class="n">re_splitters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_re_splitters</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Extract params from files&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="n">file_params</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+                <span class="n">prefix_splitter</span> <span class="o">=</span> <span class="n">re_splitters</span><span class="p">[</span><span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">suffix_splitter</span> <span class="o">=</span> <span class="n">re_splitters</span><span class="p">[</span><span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">truncated_prefix</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">prefix_splitter</span><span class="p">,</span> <span class="n">file_path</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">file_params</span><span class="p">[</span><span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">suffix_splitter</span><span class="p">,</span> <span class="n">truncated_prefix</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">values</span><span class="p">[</span><span class="n">file_path</span><span class="p">]</span> <span class="o">=</span> <span class="n">file_params</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Params extracted:&#39;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+        <span class="k">return</span> <span class="n">values</span></div></div>
+
+
+<div class="viewcode-block" id="get_related_instances"><a class="viewcode-back" href="../../api/luisy.html#luisy.helpers.get_related_instances">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">get_related_instances</span><span class="p">(</span><span class="n">task_cls</span><span class="p">,</span> <span class="n">regex_placeholder</span><span class="o">=</span><span class="s1">&#39;[</span><span class="se">\\</span><span class="s1">S]*&#39;</span><span class="p">):</span>
+    <span class="n">regex_pattern</span> <span class="o">=</span> <span class="n">RegexTaskPattern</span><span class="p">(</span>
+        <span class="n">task_cls</span><span class="o">=</span><span class="n">task_cls</span><span class="p">,</span>
+        <span class="n">regex_placeholder</span><span class="o">=</span><span class="n">regex_placeholder</span>
+    <span class="p">)</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">regex_pattern</span><span class="o">.</span><span class="n">get_available_params</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">task_cls</span><span class="p">(</span><span class="o">**</span><span class="n">entry</span><span class="p">)</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span></div>
+
+
+<div class="viewcode-block" id="get_df_from_parquet_dir"><a class="viewcode-back" href="../../api/luisy.html#luisy.helpers.get_df_from_parquet_dir">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">get_df_from_parquet_dir</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reads all Parquet files from a given directory and parses them into a pandas dataframe</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        path (str): path where parquet files are stored</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: dataframe with all the data from parquet files</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;*.parquet&#39;</span><span class="p">))</span>
+    <span class="n">dfs</span> <span class="o">=</span> <span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;pyarrow&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span><span class="p">]</span>
+
+    <span class="c1"># Remove all data frames with no lines</span>
+    <span class="n">dfs</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dfs</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">dfs</span><span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find any parquet files in &#39;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+<div class="viewcode-block" id="remove_parent_directories"><a class="viewcode-back" href="../../api/luisy.html#luisy.helpers.remove_parent_directories">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">remove_parent_directories</span><span class="p">(</span><span class="n">lst_with_substring_elements</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Removes elements from list that are substrings from other items in that list. E.g.</span>
+<span class="sd">    [&#39;/mnt/d&#39;, &#39;/mnt/d/a&#39;, &#39;/mnt/d/b&#39;] removes &#39;/mnt/d&#39; from the list.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        lst_with_substring_elements(list): removes substrings from that list</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List: Clean list without substrings of other elements, sorted by character length</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">lst_with_substring_elements</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">clean_lst</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">lst_with_substring_elements</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">([</span><span class="n">element</span> <span class="ow">in</span> <span class="n">file</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">clean_lst</span><span class="p">]):</span>
+            <span class="n">clean_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">clean_lst</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2022, Robert Bosch GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

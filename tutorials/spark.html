@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interaction with PySpark &mdash; luisy  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Basic Task Structure" href="../task.html" />
+    <link rel="prev" title="Rerun changed tasks" href="reruns.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            luisy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/about.html">Why?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions.html">Contributions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameters.html">WrapperTasks and ConcatenationTasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi_file.html">Directory Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud.html">Up- and Downloading Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reruns.html">Trigger reruns by changing code</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Interaction with PySpark</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-pipeline">Example pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-a-pipeline">Running a pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-databricks">Using databricks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#initial-configuration">Initial configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trigger-from-remote">Trigger from remote</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../task.html">Task structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../decorators.html">Decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reruns.html">Reruns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../visualize.html">Visualize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cloud.html">Cloud sync</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../helpers.html">Helper funcs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hash_update_mode.html">Hash Update Mode</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/modules.html">Full reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../legal/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legal/corporate_information.html">Corporate information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">luisy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Interaction with PySpark</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorials/spark.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="interaction-with-pyspark">
+<span id="pyspark"></span><h1>Interaction with PySpark<a class="headerlink" href="#interaction-with-pyspark" title="Permalink to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is an experimental feature. Expect sharp edges and bugs.</p>
+</div>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>In this tutorial, we show how tasks can be executed on a
+Spark-cluster. The key difference of a <a class="reference internal" href="../api/luisy.tasks.html#luisy.tasks.base.Task" title="luisy.tasks.base.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">Task</span></code></a> and a
+<a class="reference internal" href="../api/luisy.tasks.html#luisy.tasks.base.SparkTask" title="luisy.tasks.base.SparkTask"><code class="xref py py-class docutils literal notranslate"><span class="pre">SparkTask</span></code></a> is that the objects handling the data are
+not <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code></a> but <code class="xref py py-class docutils literal notranslate"><span class="pre">pyspark.sql.DataFrame</span></code>
+objects.</p>
+<p>Generally, a <a class="reference internal" href="../api/luisy.tasks.html#luisy.tasks.base.SparkTask" title="luisy.tasks.base.SparkTask"><code class="xref py py-class docutils literal notranslate"><span class="pre">SparkTask</span></code></a> creates from the
+output files of its input a <code class="xref py py-class docutils literal notranslate"><span class="pre">pyspark.sql.DataFrame</span></code> and
+when saving to a <a class="reference internal" href="../api/luisy.html#luisy.targets.CloudTarget" title="luisy.targets.CloudTarget"><code class="xref py py-class docutils literal notranslate"><span class="pre">luisy.targets.CloudTarget</span></code></a>, the respective
+spark method is used. Here, the user has to make sure that the spark
+cluster has the required permissions to read and write from the
+respective locations. Whenever a <a class="reference internal" href="../api/luisy.tasks.html#luisy.tasks.base.SparkTask" title="luisy.tasks.base.SparkTask"><code class="xref py py-class docutils literal notranslate"><span class="pre">SparkTask</span></code></a> writes or reads from a
+<a class="reference internal" href="../api/luisy.html#luisy.targets.LocalTarget" title="luisy.targets.LocalTarget"><code class="xref py py-class docutils literal notranslate"><span class="pre">luisy.targets.LocalTarget</span></code></a>, a serialization into a single
+<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code></a> takes place and the user has to make sure
+that data fits into memory.</p>
+</section>
+<section id="example-pipeline">
+<h2>Example pipeline<a class="headerlink" href="#example-pipeline" title="Permalink to this heading"></a></h2>
+<p>This is how a <code class="xref py py-mod docutils literal notranslate"><span class="pre">spark</span></code>- pipeline may looks like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">luisy</span>
+
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">deltatable_input</span><span class="p">(</span><span class="n">schema</span><span class="o">=</span><span class="s1">&#39;my_schema&#39;</span><span class="p">,</span> <span class="n">catalog</span><span class="o">=</span><span class="s1">&#39;my_catalog&#39;</span><span class="p">,</span> <span class="n">table_name</span><span class="o">=</span><span class="s1">&#39;raw&#39;</span><span class="p">)</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">deltatable_output</span><span class="p">(</span><span class="n">schema</span><span class="o">=</span><span class="s1">&#39;my_schema&#39;</span><span class="p">,</span> <span class="n">catalog</span><span class="o">=</span><span class="s1">&#39;my_catalog&#39;</span><span class="p">,</span> <span class="n">table_name</span><span class="o">=</span><span class="s1">&#39;interim&#39;</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TaskA</span><span class="p">(</span><span class="n">SparkTask</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">()</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="n">TaskA</span><span class="p">)</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">deltatable_output</span><span class="p">(</span><span class="n">schema</span><span class="o">=</span><span class="s1">&#39;my_schema&#39;</span><span class="p">,</span> <span class="n">catalog</span><span class="o">=</span><span class="s1">&#39;my_catalog&#39;</span><span class="p">,</span> <span class="n">table_name</span><span class="o">=</span><span class="s1">&#39;final&#39;</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TaskB</span><span class="p">(</span><span class="n">SparkTask</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">()</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">df</span><span class="o">.</span><span class="n">a</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="n">TaskB</span><span class="p">)</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">final</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">pickle_output</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TaskC</span><span class="p">(</span><span class="n">SparkTask</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">()</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, <code class="code docutils literal notranslate"><span class="pre">TaskA</span></code> and <code class="code docutils literal notranslate"><span class="pre">TaskB</span></code> read and write their data from
+and to delta tables and process them with spark. <code class="code docutils literal notranslate"><span class="pre">TaskC</span></code>,
+however, persists its output into a pickle file, which requires
+<a class="reference internal" href="../api/luisy.html#module-luisy" title="luisy"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luisy</span></code></a> to serialize all the data to a
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> beforehand.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure that the <cite>delta-spark</cite> extension is installed into your
+spark cluster. See more <a class="reference external" href="https://docs.delta.io">here</a>.</p>
+</div>
+</section>
+<section id="running-a-pipeline">
+<h2>Running a pipeline<a class="headerlink" href="#running-a-pipeline" title="Permalink to this heading"></a></h2>
+<p>When the pipeline should be executed within an active python session,
+running the pipeline can be done as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">luisy.cli</span><span class="w"> </span><span class="kn">import</span> <span class="n">build</span>
+
+<span class="n">build</span><span class="p">(</span><span class="n">TaskC</span><span class="p">(),</span> <span class="n">cloud_mode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this case, the <code class="xref py py-class docutils literal notranslate"><span class="pre">pyspark.SparkContext()</span></code> is automatically
+propagated to <a class="reference internal" href="../api/luisy.html#module-luisy" title="luisy"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luisy</span></code></a> from the active session. Alternatively,
+if a special spark context has to be used, the spark context need to
+be attached to the <a class="reference internal" href="../api/luisy.html#luisy.config.Config" title="luisy.config.Config"><code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></a> first as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">set_param</span><span class="p">(</span><span class="s1">&#39;spark&#39;</span><span class="p">,</span> <span class="n">some_predefined_spark_context</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For instance, this could be a spark instance created via spark
+connect:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">remote</span><span class="p">(</span><span class="s2">&quot;sc://my-cluster:15002&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+<span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">set_param</span><span class="p">(</span><span class="s1">&#39;spark&#39;</span><span class="p">,</span> <span class="n">spark</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Be aware that all <a class="reference internal" href="../api/luisy.html#luisy.targets.LocalTarget" title="luisy.targets.LocalTarget"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocalTarget</span></code></a> point to
+locations on the system of the python session where <a class="reference internal" href="../api/luisy.html#module-luisy" title="luisy"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luisy</span></code></a>
+runs in.</p>
+</section>
+<section id="using-databricks">
+<span id="databricks"></span><h2>Using databricks<a class="headerlink" href="#using-databricks" title="Permalink to this heading"></a></h2>
+<p>A convinient way to interact with pyspark clusters is by using the
+databricks abstraction through a databricks notebook. Its
+also possible to connect from a local session using
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">databricks_connect</span></code> (see <a class="reference internal" href="#databricks-connect"><span class="std std-ref">Trigger from remote</span></a>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When using <a class="reference internal" href="../api/luisy.html#module-luisy" title="luisy"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luisy</span></code></a> in a databricks cluster, additional
+charges are generated for the user. The amount of expenses depends
+among others on the cloud provider and the cluster configuration.
+<a class="reference internal" href="../api/luisy.html#module-luisy" title="luisy"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luisy</span></code></a> has no influences on the generated costs and we
+recommend to monitor cloud costs closely.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The tasks itself cannot be implemented within the notebook and need
+to be implemented in a standalone python package or module.  Only
+execution can be done via a databricks notebook.</p>
+</div>
+<section id="initial-configuration">
+<h3>Initial configuration<a class="headerlink" href="#initial-configuration" title="Permalink to this heading"></a></h3>
+<p>Using <a class="reference internal" href="../api/luisy.html#module-luisy" title="luisy"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luisy</span></code></a> within a databricks cluster, the databricks file
+system (<code class="code docutils literal notranslate"><span class="pre">dbfs</span></code>) can be used as local file system allowing to run
+the pipeline completely in
+the cloud, even for non-<a class="reference internal" href="../api/luisy.tasks.html#luisy.tasks.base.SparkTask" title="luisy.tasks.base.SparkTask"><code class="xref py py-class docutils literal notranslate"><span class="pre">SparkTask</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">working_dir</span> <span class="o">=</span> <span class="s2">&quot;/dbfs/FileStore/my_working_dir&quot;</span>
+<span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">set_param</span><span class="p">(</span><span class="s2">&quot;working_dir&quot;</span><span class="p">,</span> <span class="n">working_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A given pipeline can be executed as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">build</span><span class="p">(</span><span class="n">SomeTask</span><span class="p">(),</span> <span class="n">cloud_mode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, all <a class="reference internal" href="../api/luisy.tasks.html#luisy.tasks.base.SparkTask" title="luisy.tasks.base.SparkTask"><code class="xref py py-class docutils literal notranslate"><span class="pre">SparkTask</span></code></a> objects use the
+pyspark cluster of the databricks instance.</p>
+</section>
+<section id="trigger-from-remote">
+<span id="databricks-connect"></span><h3>Trigger from remote<a class="headerlink" href="#trigger-from-remote" title="Permalink to this heading"></a></h3>
+<p>Using <code class="xref py py-mod docutils literal notranslate"><span class="pre">databricks-connect</span></code>, cloud pipelines can be triggered
+from python sessions outside of databricks. There, a local proxy for the remote spark
+session from databricks is created in the local spark. First,
+databricks connect needs to be installed.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>databricks-connect
+</pre></div>
+</div>
+<p>Make sure that the version of databricks-connect is compatible with
+the spark version in the databricks cluster.</p>
+<p>To run the cloud pipelines locally, the following parameters need to
+be set:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span> <span class="o">=</span> <span class="n">DatabricksSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">remote</span><span class="p">(</span>
+    <span class="n">host</span><span class="o">=</span><span class="s2">&quot;https://adb-&lt;...&gt;.azuredatabricks.net&quot;</span><span class="p">,</span>
+    <span class="n">token</span><span class="o">=</span><span class="s2">&quot;&lt;your secret token&gt;&quot;</span><span class="p">,</span>
+    <span class="n">cluster_id</span><span class="o">=</span><span class="s2">&quot;&lt;cluster id&gt;,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+
+<span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">set_param</span><span class="p">(</span><span class="s1">&#39;spark&#39;</span><span class="p">,</span> <span class="n">spark</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The unity catalog needs to be enabled in your databricks instance.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="reruns.html" class="btn btn-neutral float-left" title="Rerun changed tasks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../task.html" class="btn btn-neutral float-right" title="Basic Task Structure" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2022, Robert Bosch GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

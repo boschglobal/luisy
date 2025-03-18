@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>luisy.luigi_interface &mdash; luisy  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            luisy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/about.html">Why?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributions.html">Contributions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/parameters.html">WrapperTasks and ConcatenationTasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/multi_file.html">Directory Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/cloud.html">Up- and Downloading Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/reruns.html">Trigger reruns by changing code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/spark.html">Interaction with PySpark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../task.html">Task structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../decorators.html">Decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reruns.html">Reruns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualize.html">Visualize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cloud.html">Cloud sync</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../helpers.html">Helper funcs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hash_update_mode.html">Hash Update Mode</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">Full reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/corporate_information.html">Corporate information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">luisy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">luisy.luigi_interface</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for luisy.luigi_interface</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2022 - for information on the respective copyright owner see the NOTICE.rst file or</span>
+<span class="c1"># the repository https://github.com/boschglobal/luisy</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module contains all touch points with the package :py:mod`luigi`. We had to adapt the method</span>
+<span class="sd">`run_luigi`, because we need to handle the system exit by ourselves.</span>
+
+<span class="sd">The current logic of luisy looks looks like this:</span>
+
+<span class="sd">- Do some luisy stuff like hashing every Task in the new DAG built up by given root task</span>
+<span class="sd">- Run luigi</span>
+<span class="sd">- Do some luisy stuff, e.g. save hashes.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">luigi</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luigi.cmdline_parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">CmdlineParser</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luigi.setup_logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">InterfaceLogging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luigi.retcodes</span><span class="w"> </span><span class="kn">import</span> <span class="n">retcode</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">luisy.testing</span><span class="w"> </span><span class="kn">import</span> <span class="n">debug_run</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luisy.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">Config</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luisy.hashes</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">HashSynchronizer</span><span class="p">,</span>
+    <span class="n">get_upstream_tasks</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="COLORS"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.COLORS">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">COLORS</span><span class="p">:</span>
+    <span class="n">RED</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[91m&#39;</span>
+    <span class="n">BLUE</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[94m&#39;</span>
+    <span class="n">GREEN</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[92m&#39;</span>
+    <span class="n">END</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[0m&#39;</span></div>
+
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;luigi-interface&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getChild</span><span class="p">(</span><span class="s2">&quot;luisy-interface&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="run_luigi"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.run_luigi">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">run_luigi</span><span class="p">(</span><span class="n">argv</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run luigi with command line parsing. This function is taken from</span>
+<span class="sd">    :py:func:`luigi.retcodes.run_with_retcodes()`.</span>
+<span class="sd">    We need to overwrite this,because luigi calls sys.exit(). luisy should keep on running to do</span>
+<span class="sd">    stuff after luigi completed.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        argv: Should (conceptually) be ``sys.argv[1:]``</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;luigi-interface&#39;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">luigi</span><span class="o">.</span><span class="n">cmdline_parser</span><span class="o">.</span><span class="n">CmdlineParser</span><span class="o">.</span><span class="n">global_instance</span><span class="p">(</span><span class="n">argv</span><span class="p">):</span>
+        <span class="n">retcodes</span> <span class="o">=</span> <span class="n">retcode</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">worker</span> <span class="o">=</span> <span class="n">luigi</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span><span class="o">.</span><span class="n">worker</span>
+    <span class="k">except</span> <span class="n">luigi</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">PidLockAlreadyTakenExit</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">retcodes</span><span class="o">.</span><span class="n">already_running</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="c1"># Some errors occur before logging is set up, we set it up now</span>
+        <span class="n">env_params</span> <span class="o">=</span> <span class="n">luigi</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">core</span><span class="p">()</span>
+        <span class="n">InterfaceLogging</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">env_params</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;Uncaught exception in luigi&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">retcodes</span><span class="o">.</span><span class="n">unhandled_exception</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">luigi</span><span class="o">.</span><span class="n">cmdline_parser</span><span class="o">.</span><span class="n">CmdlineParser</span><span class="o">.</span><span class="n">global_instance</span><span class="p">(</span><span class="n">argv</span><span class="p">):</span>
+        <span class="n">task_sets</span> <span class="o">=</span> <span class="n">luigi</span><span class="o">.</span><span class="n">execution_summary</span><span class="o">.</span><span class="n">_summary_dict</span><span class="p">(</span><span class="n">worker</span><span class="p">)</span>
+        <span class="n">root_task</span> <span class="o">=</span> <span class="n">luigi</span><span class="o">.</span><span class="n">execution_summary</span><span class="o">.</span><span class="n">_root_task</span><span class="p">(</span><span class="n">worker</span><span class="p">)</span>
+        <span class="n">non_empty_categories</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">task_sets</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span><span class="p">}</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">has</span><span class="p">(</span><span class="n">status</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">status</span> <span class="ow">in</span> <span class="n">luigi</span><span class="o">.</span><span class="n">execution_summary</span><span class="o">.</span><span class="n">_ORDERED_STATUSES</span>
+        <span class="k">return</span> <span class="n">status</span> <span class="ow">in</span> <span class="n">non_empty_categories</span>
+
+    <span class="n">codes_and_conds</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="n">retcodes</span><span class="o">.</span><span class="n">missing_data</span><span class="p">,</span> <span class="n">has</span><span class="p">(</span><span class="s1">&#39;still_pending_ext&#39;</span><span class="p">)),</span>
+        <span class="p">(</span><span class="n">retcodes</span><span class="o">.</span><span class="n">task_failed</span><span class="p">,</span> <span class="n">has</span><span class="p">(</span><span class="s1">&#39;failed&#39;</span><span class="p">)),</span>
+        <span class="p">(</span><span class="n">retcodes</span><span class="o">.</span><span class="n">already_running</span><span class="p">,</span> <span class="n">has</span><span class="p">(</span><span class="s1">&#39;run_by_other_worker&#39;</span><span class="p">)),</span>
+        <span class="p">(</span><span class="n">retcodes</span><span class="o">.</span><span class="n">scheduling_error</span><span class="p">,</span> <span class="n">has</span><span class="p">(</span><span class="s1">&#39;scheduling_error&#39;</span><span class="p">)),</span>
+        <span class="p">(</span><span class="n">retcodes</span><span class="o">.</span><span class="n">not_run</span><span class="p">,</span> <span class="n">has</span><span class="p">(</span><span class="s1">&#39;not_run&#39;</span><span class="p">)),</span>
+    <span class="p">)</span>
+    <span class="n">expected_ret_code</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">code</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="n">cond</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">code</span><span class="p">,</span> <span class="n">cond</span> <span class="ow">in</span> <span class="n">codes_and_conds</span><span class="p">)</span>
+
+    <span class="n">failed_ret_code</span> <span class="o">=</span> <span class="n">expected_ret_code</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="n">root_task_not_complete</span> <span class="o">=</span> <span class="n">root_task</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">task_sets</span><span class="p">[</span><span class="s2">&quot;completed&quot;</span><span class="p">]</span>
+    <span class="n">root_task_not_already_done</span> <span class="o">=</span> <span class="n">root_task</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">task_sets</span><span class="p">[</span><span class="s2">&quot;already_done&quot;</span><span class="p">]</span>
+    <span class="n">is_failed</span> <span class="o">=</span> <span class="n">failed_ret_code</span> <span class="ow">and</span> <span class="n">root_task_not_complete</span> <span class="ow">and</span> <span class="n">root_task_not_already_done</span>
+    <span class="k">return</span> <span class="n">is_failed</span><span class="p">,</span> <span class="n">expected_ret_code</span><span class="p">,</span> <span class="n">task_sets</span><span class="p">,</span> <span class="n">root_task</span></div>
+
+
+<div class="viewcode-block" id="CmdPrinter"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.CmdPrinter">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">CmdPrinter</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hash_synchronizer</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hash_synchronizer</span> <span class="o">=</span> <span class="n">hash_synchronizer</span>
+
+<div class="viewcode-block" id="CmdPrinter.print_tasks"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.CmdPrinter.print_tasks">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">hash_entries</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">hash_entries</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">hash_entries</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">hash_entry</span> <span class="ow">in</span> <span class="n">hash_entries</span><span class="p">:</span>
+            <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">hash_entry</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">())</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="n">COLORS</span><span class="o">.</span><span class="n">BLUE</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">hash_entry</span><span class="o">.</span><span class="n">task</span><span class="p">,</span> <span class="n">COLORS</span><span class="o">.</span><span class="n">END</span><span class="p">,</span>
+                <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">30</span> <span class="o">-</span> <span class="n">size</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span>
+                <span class="n">COLORS</span><span class="o">.</span><span class="n">GREEN</span><span class="p">,</span> <span class="n">hash_entry</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">COLORS</span><span class="o">.</span><span class="n">END</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CmdPrinter.print_opening"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.CmdPrinter.print_opening">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_opening</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">COLORS</span><span class="o">.</span><span class="n">RED</span><span class="p">,</span> <span class="s2">&quot;=&gt; Hey you! &lt;=&quot;</span><span class="p">,</span> <span class="n">COLORS</span><span class="o">.</span><span class="n">END</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">message</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">COLORS</span><span class="o">.</span><span class="n">RED</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">COLORS</span><span class="o">.</span><span class="n">END</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CmdPrinter.print_hash_changes"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.CmdPrinter.print_hash_changes">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_hash_changes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_tasks</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;The following hashes are out-dated on your system:&quot;</span><span class="p">,</span>
+            <span class="n">hash_entries</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hash_synchronizer</span><span class="o">.</span><span class="n">get_outdated_local_hash_entries</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="CmdPrinter.print_new_hashes"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.CmdPrinter.print_new_hashes">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_new_hashes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_tasks</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="s1">&#39;The following hashes do not exists on your system:&#39;</span><span class="p">,</span>
+            <span class="n">hash_entries</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hash_synchronizer</span><span class="o">.</span><span class="n">get_new_local_hash_entries</span><span class="p">()</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="CmdPrinter.print_sources"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.CmdPrinter.print_sources">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Not downloadable but new or outdated</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_tasks</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;The following tasks will be executed:&quot;</span><span class="p">,</span>
+            <span class="n">hash_entries</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hash_synchronizer</span><span class="o">.</span><span class="n">get_local_execution_hash_entries</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s1">&#39;download&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_tasks</span><span class="p">(</span>
+                <span class="n">text</span><span class="o">=</span><span class="s2">&quot;The following files can be downloaded from the cloud (only necessary ones &quot;</span>
+                     <span class="s2">&quot;will be):&quot;</span><span class="p">,</span>
+                <span class="n">hash_entries</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hash_synchronizer</span><span class="o">.</span><span class="n">get_download_hash_entries</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="CmdPrinter.print_uploads"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.CmdPrinter.print_uploads">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_uploads</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s1">&#39;upload&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_tasks</span><span class="p">(</span>
+                <span class="n">text</span><span class="o">=</span><span class="s2">&quot;The following files will be uploaded to the cloud and existing files &quot;</span>
+                     <span class="s2">&quot;overwritten&quot;</span><span class="p">,</span>
+                <span class="n">hash_entries</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hash_synchronizer</span><span class="o">.</span><span class="n">get_upload_hash_entries</span><span class="p">()</span>
+            <span class="p">)</span></div>
+
+<div class="viewcode-block" id="CmdPrinter.print_cloud_hash_changes"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.CmdPrinter.print_cloud_hash_changes">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_cloud_hash_changes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_tasks</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;The following hashes are outdated in the cloud and will be overwritten:&quot;</span><span class="p">,</span>
+            <span class="n">hash_entries</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hash_synchronizer</span><span class="o">.</span><span class="n">get_outdated_cloud_hash_entries</span><span class="p">()</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="CmdPrinter.get_user_permission"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.CmdPrinter.get_user_permission">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_user_permission</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Asks the user if the change applied is alright. These checks can be skipped if the</span>
+<span class="sd">        parameter `no_ask` is set.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s1">&#39;no_ask&#39;</span><span class="p">):</span>
+            <span class="n">user_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Type &#39;y&#39; to proceed: &quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">user_input</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;User input &#39;</span><span class="si">{</span><span class="n">user_input</span><span class="si">}</span><span class="s2">&#39; != y -&gt; Bye&quot;</span><span class="p">)</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--no-ask set, wont ask anything&#39;</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Coordinator"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.Coordinator">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">Coordinator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Parent class to handle different luisy modes. The basic coordinator does hash computation of</span>
+<span class="sd">    a given root task and reads hashes that are found on the local filesystem in `.luisy.hash`</span>
+<span class="sd">    file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        args_luisy (dict): Arguments for luisy</span>
+<span class="sd">        root_task (luisy.tasks.base.Task): Root task to be executed</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args_luisy</span><span class="p">,</span> <span class="n">root_task</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args_luisy</span> <span class="o">=</span> <span class="n">args_luisy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root_task</span> <span class="o">=</span> <span class="n">root_task</span>
+
+        <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args_luisy</span><span class="p">)</span>
+        <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">check_params</span><span class="p">()</span>
+
+        <span class="c1"># Get all tasks</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span> <span class="o">=</span> <span class="n">get_upstream_tasks</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_task</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Coordinator.initialize_hash_synchronization"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.Coordinator.initialize_hash_synchronization">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">initialize_hash_synchronization</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hash_synchronizer</span> <span class="o">=</span> <span class="n">HashSynchronizer</span><span class="p">(</span>
+            <span class="n">tasks</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">,</span>
+            <span class="n">root_task</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_task</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hash_synchronizer</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Coordinator.initialize_printer"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.Coordinator.initialize_printer">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">initialize_printer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">printer</span> <span class="o">=</span> <span class="n">CmdPrinter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hash_synchronizer</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Coordinator.run"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.Coordinator.run">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initialize_hash_synchronization</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initialize_printer</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_approvals</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hash_synchronizer</span><span class="o">.</span><span class="n">set_files_to_download</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s1">&#39;dry_run&#39;</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This is just a dry-run. Byebye!&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
+        <span class="n">run_failed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_coordinator</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">run_failed</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="Coordinator.run_coordinator"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.Coordinator.run_coordinator">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">run_coordinator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Coordinator.print_approvals"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.Coordinator.print_approvals">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_approvals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div></div>
+
+
+<div class="viewcode-block" id="HashUpdateMode"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.HashUpdateMode">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">HashUpdateMode</span><span class="p">(</span><span class="n">Coordinator</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The HashUpdateMode is started when the user passes `--hash-update` to luisy. Instead of</span>
+<span class="sd">    rerunning all the tasks, whose hash changed in this run, this mode only updates the hashes (</span>
+<span class="sd">    which already exist) in the `.luisy.hash` file and does not run the tasks again. This feature</span>
+<span class="sd">    can be useful when refactoring your luisy Pipeline. It&#39;s also possible to update the hashes</span>
+<span class="sd">    in the cloud when `--upload` is passed to luisy.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="HashUpdateMode.print_approvals"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.HashUpdateMode.print_approvals">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_approvals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">print_opening</span><span class="p">(</span>
+            <span class="n">message</span><span class="o">=</span><span class="s1">&#39;You are running in Hash-Update-Mode! This means no &#39;</span>
+                    <span class="s1">&#39;tasks will be run, downloaded or uploaded. Only the &#39;</span>
+                    <span class="s1">&#39;hashes in luisy.hash files will be updated locally &#39;</span>
+                    <span class="s1">&#39;and in the cloud if --download flag is set&#39;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">print_hash_changes</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">print_cloud_hash_changes</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">get_user_permission</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="HashUpdateMode.run_coordinator"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.HashUpdateMode.run_coordinator">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">run_coordinator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hash_synchronizer</span><span class="o">.</span><span class="n">synchronize_local_hashes</span><span class="p">(</span><span class="n">failed_tasks</span><span class="o">=</span><span class="p">[])</span>
+        <span class="k">if</span> <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s1">&#39;upload&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hash_synchronizer</span><span class="o">.</span><span class="n">synchronize_cloud_hashes</span><span class="p">(</span><span class="n">failed_tasks</span><span class="o">=</span><span class="p">[],</span> <span class="n">upload_tasks</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="PipelineMode"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.PipelineMode">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">PipelineMode</span><span class="p">(</span><span class="n">Coordinator</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class manages the communication between luisy and luigi functionalities.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        args_luisy (dict): Arguments for luisy</span>
+<span class="sd">        args_luigi (list): Parsed command line arguments for luigi</span>
+<span class="sd">        root_task (luisy.tasks.base.Task): Root task to be executed</span>
+<span class="sd">        run_luigi_cli (bool): If true, luigi is called via command line, otherwise</span>
+<span class="sd">            :py:func:`luisy.testing.debug_run` is called.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args_luisy</span><span class="p">,</span> <span class="n">args_luigi</span><span class="p">,</span> <span class="n">root_task</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">run_luigi_cli</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args_luigi</span> <span class="o">=</span> <span class="n">args_luigi</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run_luigi_cli</span> <span class="o">=</span> <span class="n">run_luigi_cli</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">args_luisy</span><span class="o">=</span><span class="n">args_luisy</span><span class="p">,</span> <span class="n">root_task</span><span class="o">=</span><span class="n">root_task</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PipelineMode.run_luigi"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.PipelineMode.run_luigi">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">run_luigi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_luigi_cli</span><span class="p">:</span>
+            <span class="n">luigi_failed</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks_set</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">run_luigi</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args_luigi</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">luigi_failed</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;RUNNING&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_task</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tasks_set</span> <span class="o">=</span> <span class="n">debug_run</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">root_task</span><span class="p">],</span> <span class="n">return_summary</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tasks_set</span><span class="p">[</span><span class="s1">&#39;failed&#39;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="PipelineMode.finalize_luigi_run"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.PipelineMode.finalize_luigi_run">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">finalize_luigi_run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hash_synchronizer</span><span class="o">.</span><span class="n">synchronize_local_hashes</span><span class="p">(</span><span class="n">failed_tasks</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tasks_set</span><span class="p">[</span><span class="s1">&#39;failed&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s1">&#39;upload&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hash_synchronizer</span><span class="o">.</span><span class="n">synchronize_cloud_hashes</span><span class="p">(</span><span class="n">failed_tasks</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tasks_set</span><span class="p">[</span><span class="s1">&#39;failed&#39;</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="PipelineMode.run_coordinator"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.PipelineMode.run_coordinator">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">run_coordinator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hash_synchronizer</span><span class="o">.</span><span class="n">clear_outdated_tasks</span><span class="p">()</span>
+        <span class="n">luigi_failed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_luigi</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">finalize_luigi_run</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">luigi_failed</span></div>
+
+<div class="viewcode-block" id="PipelineMode.print_approvals"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.PipelineMode.print_approvals">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_approvals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">print_opening</span><span class="p">(</span><span class="s1">&#39;You are in Pipeline Mode!&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">print_hash_changes</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">print_new_hashes</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">print_sources</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">print_uploads</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">get_user_permission</span><span class="p">()</span></div></div>
+
+
+<div class="viewcode-block" id="get_root_task"><a class="viewcode-back" href="../../api/luisy.html#luisy.luigi_interface.get_root_task">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">get_root_task</span><span class="p">(</span><span class="n">args_luigi</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">CmdlineParser</span><span class="o">.</span><span class="n">global_instance</span><span class="p">(</span><span class="n">args_luigi</span><span class="p">)</span> <span class="k">as</span> <span class="n">cp</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">cp</span><span class="o">.</span><span class="n">get_task_obj</span><span class="p">()</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2022, Robert Bosch GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

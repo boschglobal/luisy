@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Decorators &mdash; luisy  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Automatic rerun detection" href="reruns.html" />
+    <link rel="prev" title="Basic Task Structure" href="task.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            luisy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about/about.html">Why?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about/authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributions.html">Contributions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/parameters.html">WrapperTasks and ConcatenationTasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/multi_file.html">Directory Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/cloud.html">Up- and Downloading Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/reruns.html">Trigger reruns by changing code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/spark.html">Interaction with PySpark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="task.html">Task structure</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Decorators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#local-targets">Local targets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#parquet-dir-output">Parquet dir output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cloud-targets">Cloud targets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cloud-inputs">Cloud inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#directory-structure">Directory structure</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reruns.html">Reruns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualize.html">Visualize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud.html">Cloud sync</a></li>
+<li class="toctree-l1"><a class="reference internal" href="helpers.html">Helper funcs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hash_update_mode.html">Hash Update Mode</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/modules.html">Full reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="legal/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal/corporate_information.html">Corporate information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">luisy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Decorators</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/decorators.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="decorators">
+<h1>Decorators<a class="headerlink" href="#decorators" title="Permalink to this heading"></a></h1>
+<p>luisy’s core functionality is the use of decorators. Our idea is to reduce lots of boilerplate
+code by offering the user various decorators to decorate his tasks.
+Decorators are used for:</p>
+<ul class="simple">
+<li><p>Reading / Writing Tasks</p></li>
+<li><p>Filename generation</p></li>
+<li><p>Passing parameters between tasks</p></li>
+<li><p>Sorting tasks into <cite>raw/interim/final</cite> directory structure</p></li>
+</ul>
+<section id="local-targets">
+<h2>Local targets<a class="headerlink" href="#local-targets" title="Permalink to this heading"></a></h2>
+<p>Here is a list of decorators for the outfile of a task:</p>
+<p>Generally, tasks with those decorators can persist their output with
+<code class="xref py py-func docutils literal notranslate"><span class="pre">self.write()</span></code> and tasks requiring these tasks can read their
+output with <cite>self.input().read()</cite></p>
+<ul class="simple">
+<li><p><a class="reference internal" href="api/luisy.html#luisy.decorators.hdf_output" title="luisy.decorators.hdf_output"><code class="xref py py-func docutils literal notranslate"><span class="pre">hdf_output()</span></code></a>: For tasks whose output is a
+two dimensional dataframe</p></li>
+<li><p><a class="reference internal" href="api/luisy.html#luisy.decorators.xlsx_output" title="luisy.decorators.xlsx_output"><code class="xref py py-func docutils literal notranslate"><span class="pre">xlsx_output()</span></code></a>: For tasks whose output is
+an Excel-file.</p></li>
+<li><p><a class="reference internal" href="api/luisy.html#luisy.decorators.csv_output" title="luisy.decorators.csv_output"><code class="xref py py-func docutils literal notranslate"><span class="pre">csv_output()</span></code></a>: For tasks whose output is a
+CSV file</p></li>
+<li><p><a class="reference internal" href="api/luisy.html#luisy.decorators.pickle_output" title="luisy.decorators.pickle_output"><code class="xref py py-func docutils literal notranslate"><span class="pre">pickle_output()</span></code></a>: For tasks whose output
+is a pickle. May be used to (de)serialize any python object.</p></li>
+<li><p><a class="reference internal" href="api/luisy.html#luisy.decorators.parquetdir_output" title="luisy.decorators.parquetdir_output"><code class="xref py py-func docutils literal notranslate"><span class="pre">parquetdir_output()</span></code></a>: For tasks whose output
+is a directory holding parquet files, like the result of a Spark computation.</p></li>
+<li><p><a class="reference internal" href="api/luisy.html#luisy.decorators.make_directory_output" title="luisy.decorators.make_directory_output"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_directory_output()</span></code></a>: Factory to create
+your own directory output decorator. This method wants you to pass a
+function, which tells luisy how to handle the files in your directory.</p></li>
+</ul>
+<section id="parquet-dir-output">
+<h3>Parquet dir output<a class="headerlink" href="#parquet-dir-output" title="Permalink to this heading"></a></h3>
+<p>When persisting results of a spark computation, the prefered output
+format are parquet files. This may look as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">luisy</span>
+
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">raw</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="n">SomeTask</span><span class="p">)</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">parquet_output</span><span class="p">(</span><span class="s1">&#39;some_dir/spark_result&#39;</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SomePySparkResult</span><span class="p">(</span><span class="n">luisy</span><span class="o">.</span><span class="n">SparkTask</span><span class="p">):</span>
+
+   <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_input</span><span class="p">()</span>
+      <span class="c1">#  do something</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If the resulting path needs to be parametrized, the method
+<code class="code docutils literal notranslate"><span class="pre">get_folder_name</span></code> needs to be implemented:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">luisy</span>
+
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">raw</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="n">SomeTask</span><span class="p">)</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">parquet_output</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SomePySparkResult</span><span class="p">(</span><span class="n">luisy</span><span class="o">.</span><span class="n">SparkTask</span><span class="p">):</span>
+
+   <span class="n">partition</span> <span class="o">=</span> <span class="n">luigi</span><span class="o">.</span><span class="n">Parameter</span><span class="p">()</span>
+
+   <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_input</span><span class="p">()</span>
+      <span class="c1">#  do something</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+   <span class="k">def</span><span class="w"> </span><span class="nf">get_folder_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;some_dir/spark_result/Partition=self.partition&quot;</span>
+</pre></div>
+</div>
+<p>In some cases, only the result of a spark pipeline triggered
+externally need to be further processed. Here, these files are external inputs to
+the pipeline and
+<a class="reference internal" href="api/luisy.html#luisy.decorators.parquetdir_output" title="luisy.decorators.parquetdir_output"><code class="xref py py-func docutils literal notranslate"><span class="pre">parquetdir_output()</span></code></a> together with the
+cloud-synchronisation can be used download these files automatically
+and process them locally:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">luisy</span>
+
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">raw</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">parquetdir_output</span><span class="p">(</span><span class="s1">&#39;some_dir/some_pyspark_output&#39;</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SomePySparkResult</span><span class="p">(</span><span class="n">luisy</span><span class="o">.</span><span class="n">ExternalTask</span><span class="p">):</span>
+   <span class="k">pass</span>
+</pre></div>
+</div>
+<p>This task points to the folder
+<code class="code docutils literal notranslate"><span class="pre">[project_name]/raw/some_dir/some_py/</span></code> in the Blob storage holding
+multiple parquet-files.</p>
+</section>
+</section>
+<section id="cloud-targets">
+<h2>Cloud targets<a class="headerlink" href="#cloud-targets" title="Permalink to this heading"></a></h2>
+<p>The following targets can be used in combination with a
+<cite>luisy.task.SparkTask</cite>:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="api/luisy.html#luisy.decorators.deltatable_output" title="luisy.decorators.deltatable_output"><code class="xref py py-func docutils literal notranslate"><span class="pre">deltatable_output()</span></code></a>: For spark tasks whose
+output should be saved in a deltatable</p></li>
+<li><p><a class="reference internal" href="api/luisy.html#luisy.decorators.azure_blob_storage_output" title="luisy.decorators.azure_blob_storage_output"><code class="xref py py-func docutils literal notranslate"><span class="pre">azure_blob_storage_output()</span></code></a>: For spark tasks whose
+output should be saved in a azure blob storage.</p></li>
+</ul>
+<p>See <a class="reference internal" href="tutorials/spark.html#pyspark"><span class="std std-ref">Interaction with PySpark</span></a> for more details on how to use these targets.</p>
+</section>
+<section id="cloud-inputs">
+<h2>Cloud inputs<a class="headerlink" href="#cloud-inputs" title="Permalink to this heading"></a></h2>
+<p>To ease the development of cloud pipelines using
+<cite>luisy.task.SparkTask</cite> that should access data already persisted in
+cloud storages, we provide input decorators that render the usage of
+<a class="reference internal" href="api/luisy.tasks.html#luisy.tasks.base.ExternalTask" title="luisy.tasks.base.ExternalTask"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExternalTask</span></code></a> unnecessary:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="api/luisy.html#luisy.decorators.deltatable_input" title="luisy.decorators.deltatable_input"><code class="xref py py-func docutils literal notranslate"><span class="pre">deltatable_input()</span></code></a>: For spark tasks that should acess
+data saved in a deltatable</p></li>
+<li><p><a class="reference internal" href="api/luisy.html#luisy.decorators.azure_blob_storage_input" title="luisy.decorators.azure_blob_storage_input"><code class="xref py py-func docutils literal notranslate"><span class="pre">azure_blob_storage_input()</span></code></a>: For spark tasks whose
+output should be saved in a azure blob storage.</p></li>
+</ul>
+<p>See <a class="reference internal" href="tutorials/spark.html#pyspark"><span class="std std-ref">Interaction with PySpark</span></a> for more details on how to implement pipelines
+using these inputs.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure that the <cite>delta-spark</cite> extension is installed into your
+spark cluster. See more <a class="reference external" href="https://docs.delta.io">here</a>.</p>
+</div>
+</section>
+<section id="directory-structure">
+<h2>Directory structure<a class="headerlink" href="#directory-structure" title="Permalink to this heading"></a></h2>
+<p>The following decorators denote the directory in the project directory</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="api/luisy.html#luisy.decorators.raw" title="luisy.decorators.raw"><code class="xref py py-func docutils literal notranslate"><span class="pre">raw()</span></code></a>: For tasks whose output is in
+<code class="code docutils literal notranslate"><span class="pre">working_dir/project_name/raw</span></code></p></li>
+<li><p><a class="reference internal" href="api/luisy.html#luisy.decorators.interim" title="luisy.decorators.interim"><code class="xref py py-func docutils literal notranslate"><span class="pre">interim()</span></code></a>: For tasks whose output is in
+<code class="code docutils literal notranslate"><span class="pre">working_dir/project_name/interim</span></code></p></li>
+<li><p><a class="reference internal" href="api/luisy.html#luisy.decorators.final" title="luisy.decorators.final"><code class="xref py py-func docutils literal notranslate"><span class="pre">final()</span></code></a>: For tasks whose output is in
+<code class="code docutils literal notranslate"><span class="pre">working_dir/project_name/final</span></code></p></li>
+</ul>
+<p>The <code class="code docutils literal notranslate"><span class="pre">project_name</span></code> dir-layer can be modified using
+<a class="reference internal" href="api/luisy.html#luisy.decorators.project_name" title="luisy.decorators.project_name"><code class="xref py py-func docutils literal notranslate"><span class="pre">project_name()</span></code></a></p>
+<p>This module holds various decorators to be attached to <a class="reference internal" href="api/luisy.tasks.html#luisy.tasks.base.Task" title="luisy.tasks.base.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">Task</span></code></a> objects.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="task.html" class="btn btn-neutral float-left" title="Basic Task Structure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="reruns.html" class="btn btn-neutral float-right" title="Automatic rerun detection" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2022, Robert Bosch GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

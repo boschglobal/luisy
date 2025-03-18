@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>luisy.targets &mdash; luisy  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            luisy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/about.html">Why?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributions.html">Contributions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/parameters.html">WrapperTasks and ConcatenationTasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/multi_file.html">Directory Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/cloud.html">Up- and Downloading Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/reruns.html">Trigger reruns by changing code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/spark.html">Interaction with PySpark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../task.html">Task structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../decorators.html">Decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reruns.html">Reruns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualize.html">Visualize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cloud.html">Cloud sync</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../helpers.html">Helper funcs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hash_update_mode.html">Hash Update Mode</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">Full reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/corporate_information.html">Corporate information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">luisy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">luisy.targets</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for luisy.targets</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2022 - for information on the respective copyright owner see the NOTICE.rst file or</span>
+<span class="c1"># the repository https://github.com/boschglobal/luisy</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">luigi</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkContext</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataFrame</span> <span class="k">as</span> <span class="n">SparkDataFrame</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.errors.exceptions.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">AnalysisException</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luisy.config</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Config</span><span class="p">,</span>
+    <span class="n">change_working_dir</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luisy.helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_df_from_parquet_dir</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="LuisyTarget"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.LuisyTarget">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">LuisyTarget</span><span class="p">(</span><span class="n">luigi</span><span class="o">.</span><span class="n">LocalTarget</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        path (str): Path to the file</span>
+<span class="sd">        working_dir (str): The working dir</span>
+<span class="sd">        download (bool): Whether the file should be downloaded from the cloud if not available</span>
+<span class="sd">            locally</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">requires_pandas</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">fs</span>
+
+<div class="viewcode-block" id="LuisyTarget.exists"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.LuisyTarget.exists">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">exists</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="LuisyTarget.write"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.LuisyTarget.write">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="LuisyTarget.read"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.LuisyTarget.read">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="LuisyTarget.remove"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.LuisyTarget.remove">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_try_to_upload</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_try_to_download</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="LocalTarget"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.LocalTarget">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">LocalTarget</span><span class="p">(</span><span class="n">LuisyTarget</span><span class="p">):</span>
+    <span class="n">file_ending</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">requires_pandas</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">luigi</span><span class="o">.</span><span class="n">LocalTarget</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
+            <span class="nb">format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">is_tmp</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
+
+<div class="viewcode-block" id="LocalTarget.is_folder"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.LocalTarget.is_folder">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">is_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks if the output is a folder.</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            This may has to be improved in future as we (silently) assume that any file has file</span>
+<span class="sd">            extension.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">file_ending</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">file_ending</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span></div>
+
+<div class="viewcode-block" id="LocalTarget.make_dir"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.LocalTarget.make_dir">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">make_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates the local path `path`.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Create dir </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LocalTarget.remove"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.LocalTarget.remove">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Target </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s1"> not existing, nothing to remove&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LocalTarget.exists"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.LocalTarget.exists">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">exists</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks if the file exists. If :code:`download` is set to :code:`True`, then it is checked</span>
+<span class="sd">        whether the file is available in the cloud if it is not available locally. If it is</span>
+<span class="sd">        available, it is downloaded.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">file_exists_locally</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">file_exists_locally</span> <span class="ow">and</span> <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s1">&#39;download&#39;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="ow">in</span> <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">_files_to_download</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Task not complete locally, check if file is available in cloud&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_try_to_download</span><span class="p">()</span>
+
+            <span class="c1"># Check again if file exists</span>
+            <span class="n">file_exists_locally</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">file_exists_locally</span></div>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_try_to_download</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Tries to download the target file from the cloud</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">change_working_dir</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span>
+            <span class="n">dir_current</span><span class="o">=</span><span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">working_dir</span><span class="p">,</span>
+            <span class="n">dir_new</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;File available. Start download&#39;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_folder</span><span class="p">():</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Download folder&#39;</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">download</span><span class="p">(</span>
+                    <span class="n">source</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
+                    <span class="n">dest</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Download file&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">_download_file</span><span class="p">(</span>
+                    <span class="n">source</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
+                    <span class="n">dest</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span>
+                <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;File not in cloud.&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_try_to_upload</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Tries to upload the target file to the cloud</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">change_working_dir</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span>
+            <span class="n">dir_current</span><span class="o">=</span><span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">working_dir</span><span class="p">,</span>
+            <span class="n">dir_new</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_folder</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Not implemented yet&#39;</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;File not available. Start upload&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">_upload_file</span><span class="p">(</span>
+            <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span>
+            <span class="n">dest</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
+            <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CloudTarget"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.CloudTarget">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">CloudTarget</span><span class="p">(</span><span class="n">LuisyTarget</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">LuisyTarget</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
+            <span class="nb">format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">is_tmp</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_try_to_upload</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;No need to upload cloud targets.&quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_try_to_download</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;No need to download cloud targets.&quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="SparkTarget"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.SparkTarget">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">SparkTarget</span><span class="p">(</span><span class="n">CloudTarget</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    this abstract class is for targets working with spark instances.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">spark</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">spark</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+                <span class="s2">&quot;spark session was not found in config. Make sure to have all the databricks &quot;</span>
+                <span class="s2">&quot;parameters set in order to start the spark session!&quot;</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DeltaTableTarget"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.DeltaTableTarget">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">DeltaTableTarget</span><span class="p">(</span><span class="n">SparkTarget</span><span class="p">):</span>
+    <span class="c1"># TODO: Can we get rid of fileending</span>
+    <span class="n">file_ending</span> <span class="o">=</span> <span class="s1">&#39;DeltaTable&#39;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">outdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">schema</span><span class="o">=</span><span class="s2">&quot;schema&quot;</span><span class="p">,</span>
+            <span class="n">catalog</span><span class="o">=</span><span class="s2">&quot;catalog&quot;</span><span class="p">,</span>
+            <span class="n">table_name</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outdir</span> <span class="o">=</span> <span class="n">outdir</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table_name</span> <span class="o">=</span> <span class="n">table_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">schema</span> <span class="o">=</span> <span class="n">schema</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">catalog</span> <span class="o">=</span> <span class="n">catalog</span>
+
+<div class="viewcode-block" id="DeltaTableTarget.make_dir"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.DeltaTableTarget.make_dir">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">make_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="c1"># TODO: Nothing to do here, adapt interface?</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="DeltaTableTarget.remove"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.DeltaTableTarget.remove">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DROP TABLE IF EXISTS </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table_uri</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">table_uri</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">catalog</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># TODO: Path here is more an identifier that shows up in `.luisy.hashes`</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">outdir</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table_uri</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">file_ending</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="DeltaTableTarget.exists"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.DeltaTableTarget.exists">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">exists</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks whether the Deltatable exists.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            Ideally, we would call `self.spark.catalog.tableExists(self.table_uri)` to check whether</span>
+<span class="sd">            the table exists, but this always returns `False`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SELECT 1 from </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table_uri</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="n">AnalysisException</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="DeltaTableTarget.write"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.DeltaTableTarget.write">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">SparkDataFrame</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df (pyspark.sql.DataFrame): Dataframe that should be written to delta table</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Write to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table_uri</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table_uri</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DeltaTableTarget.read"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.DeltaTableTarget.read">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">spark</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table_uri</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="AzureBlobStorageTarget"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.AzureBlobStorageTarget">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">AzureBlobStorageTarget</span><span class="p">(</span><span class="n">SparkTarget</span><span class="p">):</span>
+    <span class="n">file_ending</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">outdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">endpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">directory</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">inferschema</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">file_format</span><span class="o">=</span><span class="s2">&quot;parquet&quot;</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outdir</span> <span class="o">=</span> <span class="n">outdir</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">=</span> <span class="n">endpoint</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">directory</span> <span class="o">=</span> <span class="n">directory</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inferschema</span> <span class="o">=</span> <span class="n">inferschema</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_format</span> <span class="o">=</span> <span class="n">file_format</span>
+
+<div class="viewcode-block" id="AzureBlobStorageTarget.make_dir"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.AzureBlobStorageTarget.make_dir">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">make_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="AzureBlobStorageTarget.remove"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.AzureBlobStorageTarget.remove">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        we do not remove files from azure blob storage, but we always overwrite.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">blob_uri</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">directory</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># TODO: Path here is more an identifier that shows up in `.luisy.hashes`</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">outdir</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">directory</span><span class="p">,</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="AzureBlobStorageTarget.exists"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.AzureBlobStorageTarget.exists">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">exists</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks whether the file exists in Azure Blob Storage</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_format</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blob_uri</span><span class="p">)</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="AzureBlobStorageTarget.write"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.AzureBlobStorageTarget.write">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Write Pyspark DataFrame to Azure Blob Storage</span>
+<span class="sd">        Args:</span>
+<span class="sd">            df (pyspark.DataFrame): DataFrame that is to be stored in Azure Blob Storage</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_format</span><span class="p">)</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blob_uri</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AzureBlobStorageTarget.read"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.AzureBlobStorageTarget.read">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Read object from Azure Blob</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_format</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">blob_uri</span><span class="p">,</span>
+            <span class="n">inferschema</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inferschema</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="PickleTarget"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.PickleTarget">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">PickleTarget</span><span class="p">(</span><span class="n">LocalTarget</span><span class="p">):</span>
+    <span class="n">file_ending</span> <span class="o">=</span> <span class="s1">&#39;pkl&#39;</span>
+
+<div class="viewcode-block" id="PickleTarget.write"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.PickleTarget.write">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PickleTarget.read"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.PickleTarget.read">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="FeatherTarget"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.FeatherTarget">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">FeatherTarget</span><span class="p">(</span><span class="n">LocalTarget</span><span class="p">):</span>
+    <span class="n">file_ending</span> <span class="o">=</span> <span class="s1">&#39;feather&#39;</span>
+
+<div class="viewcode-block" id="FeatherTarget.write"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.FeatherTarget.write">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">to_feather</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FeatherTarget.read"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.FeatherTarget.read">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_feather</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="HDFTarget"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.HDFTarget">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">HDFTarget</span><span class="p">(</span><span class="n">LocalTarget</span><span class="p">):</span>
+    <span class="n">file_ending</span> <span class="o">=</span> <span class="s1">&#39;hdf&#39;</span>
+
+<div class="viewcode-block" id="HDFTarget.write"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.HDFTarget.write">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">to_hdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="HDFTarget.read"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.HDFTarget.read">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_hdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="XLSXTarget"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.XLSXTarget">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">XLSXTarget</span><span class="p">(</span><span class="n">LocalTarget</span><span class="p">):</span>
+    <span class="n">file_ending</span> <span class="o">=</span> <span class="s1">&#39;xlsx&#39;</span>
+
+<div class="viewcode-block" id="XLSXTarget.write"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.XLSXTarget.write">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XLSXTarget.read"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.XLSXTarget.read">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="CSVTarget"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.CSVTarget">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">CSVTarget</span><span class="p">(</span><span class="n">LocalTarget</span><span class="p">):</span>
+    <span class="n">file_ending</span> <span class="o">=</span> <span class="s1">&#39;csv&#39;</span>
+
+<div class="viewcode-block" id="CSVTarget.write"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.CSVTarget.write">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CSVTarget.read"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.CSVTarget.read">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="ParquetDirTarget"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.ParquetDirTarget">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">ParquetDirTarget</span><span class="p">(</span><span class="n">LocalTarget</span><span class="p">):</span>
+    <span class="n">file_ending</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">requires_pandas</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_spark_df</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">spark</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">set_param</span><span class="p">(</span><span class="s1">&#39;spark&#39;</span><span class="p">,</span> <span class="n">SparkContext</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ParquetDirTarget.write"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.ParquetDirTarget.write">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_spark_df</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ParquetDirTarget.read"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.ParquetDirTarget.read">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">get_df_from_parquet_dir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="JSONTarget"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.JSONTarget">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">JSONTarget</span><span class="p">(</span><span class="n">LocalTarget</span><span class="p">):</span>
+    <span class="n">file_ending</span> <span class="o">=</span> <span class="s1">&#39;json&#39;</span>
+    <span class="n">requires_pandas</span> <span class="o">=</span> <span class="kc">False</span>
+
+<div class="viewcode-block" id="JSONTarget.write"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.JSONTarget.write">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dct</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dct</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">dct</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;: &#39;</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="JSONTarget.read"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.JSONTarget.read">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="DirectoryTarget"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.DirectoryTarget">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">DirectoryTarget</span><span class="p">(</span><span class="n">LocalTarget</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Target to read directories. The read_file method has to be filled by the user and passed to</span>
+<span class="sd">    target by decorating it.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">file_ending</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">regex_pattern</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">luigi</span><span class="o">.</span><span class="n">LocalTarget</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
+            <span class="nb">format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">is_tmp</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">regex_pattern</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">regex_pattern</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
+
+<div class="viewcode-block" id="DirectoryTarget.write"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.DirectoryTarget.write">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Coming soon...&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DirectoryTarget.is_valid_file"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.DirectoryTarget.is_valid_file">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">is_valid_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks if file matches given regex</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            filename (str): file that need to be checked against regex</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: flag if file matches regex</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">regex_pattern</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DirectoryTarget.read"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.DirectoryTarget.read">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">filename</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_valid_file</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+                <span class="n">content</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">filename</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">content</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">yield</span> <span class="n">content</span></div>
+
+<div class="viewcode-block" id="DirectoryTarget.read_file"><a class="viewcode-back" href="../../api/luisy.html#luisy.targets.DirectoryTarget.read_file">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">read_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Needs to be passed by user. See &#39;</span>
+                                  <span class="s1">&#39;decorators.make_directory_output&#39;</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2022, Robert Bosch GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

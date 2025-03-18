@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>luisy.decorators &mdash; luisy  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            luisy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/about.html">Why?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributions.html">Contributions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/parameters.html">WrapperTasks and ConcatenationTasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/multi_file.html">Directory Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/cloud.html">Up- and Downloading Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/reruns.html">Trigger reruns by changing code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/spark.html">Interaction with PySpark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../task.html">Task structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../decorators.html">Decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reruns.html">Reruns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualize.html">Visualize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cloud.html">Cloud sync</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../helpers.html">Helper funcs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hash_update_mode.html">Hash Update Mode</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">Full reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/corporate_information.html">Corporate information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">luisy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">luisy.decorators</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for luisy.decorators</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2022 - for information on the respective copyright owner see the NOTICE.rst file or</span>
+<span class="c1"># the repository https://github.com/boschglobal/luisy</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module holds various decorators to be attached to :py:class:`~luisy.tasks.base.Task` objects.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luisy.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">Config</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luisy.targets</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">HDFTarget</span><span class="p">,</span>
+    <span class="n">PickleTarget</span><span class="p">,</span>
+    <span class="n">FeatherTarget</span><span class="p">,</span>
+    <span class="n">XLSXTarget</span><span class="p">,</span>
+    <span class="n">CSVTarget</span><span class="p">,</span>
+    <span class="n">ParquetDirTarget</span><span class="p">,</span>
+    <span class="n">JSONTarget</span><span class="p">,</span>
+    <span class="n">DirectoryTarget</span><span class="p">,</span>
+    <span class="n">DeltaTableTarget</span><span class="p">,</span>
+    <span class="n">AzureBlobStorageTarget</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luigi.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">inherits</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luigi</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExternalTask</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luisy.helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_string_repr</span>
+
+
+<div class="viewcode-block" id="requires"><a class="viewcode-back" href="../../api/luisy.html#luisy.decorators.requires">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">requires</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A backwards compatible extension to :py:class:`luigi.util.requires` which allows to access the</span>
+<span class="sd">    requirements in a dict like fashion.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">tasks_to_require</span><span class="p">,</span> <span class="n">as_dict</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">tasks_to_require</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;tasks_to_require cannot be empty&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tasks_to_require</span> <span class="o">=</span> <span class="n">tasks_to_require</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">as_dict</span> <span class="o">=</span> <span class="n">as_dict</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_that_requires</span><span class="p">):</span>
+        <span class="n">task_that_requires</span> <span class="o">=</span> <span class="n">inherits</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">tasks_to_require</span><span class="p">)(</span><span class="n">task_that_requires</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">_requires</span><span class="p">(</span><span class="n">_self</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tasks_to_require</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">_self</span><span class="o">.</span><span class="n">clone_parent</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_dict</span><span class="p">:</span>
+
+                    <span class="k">return</span> <span class="p">{</span>
+                        <span class="n">t</span><span class="o">.</span><span class="n">get_task_family</span><span class="p">():</span> <span class="n">_self</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks_to_require</span>
+                    <span class="p">}</span>
+
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">_self</span><span class="o">.</span><span class="n">clone_parents</span><span class="p">()</span>
+
+        <span class="n">task_that_requires</span><span class="o">.</span><span class="n">requires</span> <span class="o">=</span> <span class="n">_requires</span>
+        <span class="k">return</span> <span class="n">task_that_requires</span></div>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_make_output_decorator_factory</span><span class="p">(</span><span class="n">target_cls</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">output_decorator_factory</span><span class="p">(</span><span class="n">cls_py</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">output_decorator</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">target_cls</span> <span class="o">=</span> <span class="n">target_cls</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">target_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
+            <span class="k">return</span> <span class="bp">cls</span>
+        <span class="k">return</span> <span class="n">output_decorator</span><span class="p">(</span><span class="n">cls_py</span><span class="p">)</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">cls_py</span><span class="p">)</span> <span class="k">else</span> <span class="n">output_decorator</span>
+    <span class="k">return</span> <span class="n">output_decorator_factory</span>
+
+
+<span class="n">hdf_output</span> <span class="o">=</span> <span class="n">_make_output_decorator_factory</span><span class="p">(</span><span class="n">HDFTarget</span><span class="p">)</span>
+<span class="n">pickle_output</span> <span class="o">=</span> <span class="n">_make_output_decorator_factory</span><span class="p">(</span><span class="n">PickleTarget</span><span class="p">)</span>
+<span class="n">xlsx_output</span> <span class="o">=</span> <span class="n">_make_output_decorator_factory</span><span class="p">(</span><span class="n">XLSXTarget</span><span class="p">)</span>
+<span class="n">csv_output</span> <span class="o">=</span> <span class="n">_make_output_decorator_factory</span><span class="p">(</span><span class="n">CSVTarget</span><span class="p">)</span>
+<span class="n">json_output</span> <span class="o">=</span> <span class="n">_make_output_decorator_factory</span><span class="p">(</span><span class="n">JSONTarget</span><span class="p">)</span>
+<span class="n">feather_output</span> <span class="o">=</span> <span class="n">_make_output_decorator_factory</span><span class="p">(</span><span class="n">FeatherTarget</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="parquetdir_output"><a class="viewcode-back" href="../../api/luisy.html#luisy.decorators.parquetdir_output">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">parquetdir_output</span><span class="p">(</span><span class="n">cls_py</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">target_cls</span> <span class="o">=</span> <span class="n">ParquetDirTarget</span>
+
+        <span class="k">if</span> <span class="n">outdir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">def</span><span class="w"> </span><span class="nf">get_folder_name</span><span class="p">(</span><span class="n">self_</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">outdir</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">get_folder_name</span> <span class="o">=</span> <span class="n">get_folder_name</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="s1">&#39;get_folder_name&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;When using ParquetDirTarget, a method get_folder_name()&quot;</span>
+                <span class="s2">&quot;needs to be implemented in your luisy task&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">get_outfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">get_outdir</span><span class="p">(),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">get_folder_name</span><span class="p">()</span>
+            <span class="p">)</span>
+
+        <span class="bp">cls</span><span class="o">.</span><span class="n">get_outfile</span> <span class="o">=</span> <span class="n">get_outfile</span>
+        <span class="k">return</span> <span class="bp">cls</span>
+
+    <span class="k">return</span> <span class="n">decorator</span><span class="p">(</span><span class="n">cls_py</span><span class="p">)</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">cls_py</span><span class="p">)</span> <span class="k">else</span> <span class="n">decorator</span></div>
+
+
+<div class="viewcode-block" id="make_directory_output"><a class="viewcode-back" href="../../api/luisy.html#luisy.decorators.make_directory_output">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">make_directory_output</span><span class="p">(</span><span class="n">read_file_func</span><span class="p">,</span> <span class="n">regex_pattern</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function is used to give the user the ability to create his own directory outputs for</span>
+<span class="sd">    external Tasks. Decorating a :py:class:ExternalTask with this function allows the user to use</span>
+<span class="sd">    :py:meth:`luisy.ExternalTask.output().read` in the task that requires the external task. The</span>
+<span class="sd">    files will be passed one by one as a generator when calling task.input().read().</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        read_file_func: function read_file(file), where the user can define how his data is being</span>
+<span class="sd">            loaded. return the filecontent in this function. To skip specific incoming files, make</span>
+<span class="sd">            sure that your `read_file_func` function returns None.</span>
+<span class="sd">        regex_pattern (str): regex string that can be passed. All files found in the directory</span>
+<span class="sd">          will be checked against this regex and only be parsed if it matches.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        func: Decorator that can be attached to :py:class:`ExternalTask`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">directory_output</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ExternalTask</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;This decorator only works on ExternalTasks&quot;</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="s1">&#39;get_folder_name&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;When using the directory_output decorator, a method get_folder_name()&quot;</span>
+                <span class="s2">&quot;needs to be implemented in your luisy task&quot;</span>
+            <span class="p">)</span>
+
+        <span class="bp">cls</span><span class="o">.</span><span class="n">target_cls</span> <span class="o">=</span> <span class="n">DirectoryTarget</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">read_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">read_file_func</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">get_outfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">get_outdir</span><span class="p">(),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">get_folder_name</span><span class="p">()</span>
+            <span class="p">)</span>
+
+        <span class="bp">cls</span><span class="o">.</span><span class="n">target_cls</span><span class="o">.</span><span class="n">read_file</span> <span class="o">=</span> <span class="n">read_file</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">target_cls</span><span class="o">.</span><span class="n">regex_pattern</span> <span class="o">=</span> <span class="n">regex_pattern</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">get_outfile</span> <span class="o">=</span> <span class="n">get_outfile</span>
+        <span class="k">return</span> <span class="bp">cls</span>
+
+    <span class="k">return</span> <span class="n">directory_output</span></div>
+
+
+<div class="viewcode-block" id="project_name"><a class="viewcode-back" href="../../api/luisy.html#luisy.decorators.project_name">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">project_name</span><span class="p">(</span><span class="n">project_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sets the project_name of the task to `project_name` to overwrite the default behavior of</span>
+<span class="sd">    :py:class:`luisy.Task`</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        project_name (str): Name of the project</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">project_name</span> <span class="o">=</span> <span class="n">project_name</span>
+        <span class="k">return</span> <span class="bp">cls</span>
+
+    <span class="k">return</span> <span class="n">decorator</span></div>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_make_dir_layer</span><span class="p">(</span><span class="n">layer_name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dir_layer</span><span class="p">(</span><span class="n">cls_py</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+            <span class="k">def</span><span class="w"> </span><span class="nf">get_outdir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="n">out_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s1">&#39;working_dir&#39;</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_name</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">)</span>
+                <span class="n">out_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="n">out_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_sub_dir</span><span class="p">())</span>
+                <span class="k">return</span> <span class="n">out_dir</span>
+
+            <span class="bp">cls</span><span class="o">.</span><span class="n">get_outdir</span> <span class="o">=</span> <span class="n">get_outdir</span>
+            <span class="k">return</span> <span class="bp">cls</span>
+        <span class="k">return</span> <span class="n">decorator</span><span class="p">(</span><span class="n">cls_py</span><span class="p">)</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">cls_py</span><span class="p">)</span> <span class="k">else</span> <span class="n">decorator</span>
+    <span class="k">return</span> <span class="n">dir_layer</span>
+
+
+<div class="viewcode-block" id="auto_filename"><a class="viewcode-back" href="../../api/luisy.html#luisy.decorators.auto_filename">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">auto_filename</span><span class="p">(</span><span class="n">cls_py</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">excl_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">excl_none</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;Factory&quot; for a Decorator which automatically generates the basename of the outfile based on</span>
+<span class="sd">    the name of the class and the :py:class:`luigi.Parameter` objects attached to it. Parameters</span>
+<span class="sd">    allow the user to exclude some parameters and also to exclude None values in general</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        cls_py (class): class that gets decorated. This parameter is kind of a hack to allow</span>
+<span class="sd">            usage of this decorator without parenthesis &quot;()&quot;. So the end-user is able to call</span>
+<span class="sd">            `@auto_filename` (important for backwards compatibility),</span>
+<span class="sd">            `@auto_filename(excl_list=[&#39;x&#39;, &#39;y&#39;])` and `@auto_filename()` as well with all having</span>
+<span class="sd">            the class below decorated</span>
+<span class="sd">        excl_params (list): List of task parameters that should be excluded</span>
+<span class="sd">        excl_none (bool): If True, None values are not part of the filename</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        class: Decorated class</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">callable</span><span class="p">(</span><span class="n">cls_py</span><span class="p">)</span> <span class="ow">or</span> <span class="n">cls_py</span> <span class="ow">is</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">excl_params</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">excl_params</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_decorator</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">get_file_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_task_family</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_param_names</span><span class="p">()):</span>
+                <span class="k">if</span> <span class="n">p</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">excl_params</span> <span class="ow">and</span> <span class="n">p</span> <span class="o">!=</span> <span class="s1">&#39;working_dir&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">excl_none</span> <span class="ow">and</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="k">continue</span>
+                    <span class="n">param_value</span> <span class="o">=</span> <span class="n">get_string_repr</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+                    <span class="n">filename</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;_</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s1">=</span><span class="si">{</span><span class="n">param_value</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="k">return</span> <span class="n">filename</span>
+
+        <span class="bp">cls</span><span class="o">.</span><span class="n">get_file_name</span> <span class="o">=</span> <span class="n">get_file_name</span>
+        <span class="k">return</span> <span class="bp">cls</span>
+
+    <span class="k">return</span> <span class="n">_decorator</span><span class="p">(</span><span class="n">cls_py</span><span class="p">)</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">cls_py</span><span class="p">)</span> <span class="k">else</span> <span class="n">_decorator</span></div>
+
+
+<span class="n">interim</span> <span class="o">=</span> <span class="n">_make_dir_layer</span><span class="p">(</span><span class="s1">&#39;interim&#39;</span><span class="p">)</span>
+<span class="n">final</span> <span class="o">=</span> <span class="n">_make_dir_layer</span><span class="p">(</span><span class="s1">&#39;final&#39;</span><span class="p">)</span>
+<span class="n">raw</span> <span class="o">=</span> <span class="n">_make_dir_layer</span><span class="p">(</span><span class="s1">&#39;raw&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="deltatable_input"><a class="viewcode-back" href="../../api/luisy.html#luisy.decorators.deltatable_input">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">deltatable_input</span><span class="p">(</span><span class="n">catalog</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">table_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">_input</span><span class="p">(</span><span class="n">self_</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">DeltaTableTarget</span><span class="p">(</span>
+                <span class="n">table_name</span><span class="o">=</span><span class="n">table_name</span><span class="p">,</span>
+                <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">,</span>
+                <span class="n">catalog</span><span class="o">=</span><span class="n">catalog</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="bp">cls</span><span class="o">.</span><span class="n">input</span> <span class="o">=</span> <span class="n">_input</span>
+        <span class="k">return</span> <span class="bp">cls</span>
+
+    <span class="k">return</span> <span class="n">decorator</span></div>
+
+
+<div class="viewcode-block" id="deltatable_output"><a class="viewcode-back" href="../../api/luisy.html#luisy.decorators.deltatable_output">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">deltatable_output</span><span class="p">(</span><span class="n">catalog</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">table_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">output_decorator</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">target_cls</span> <span class="o">=</span> <span class="n">DeltaTableTarget</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">target_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;table_name&#39;</span><span class="p">:</span> <span class="n">table_name</span><span class="p">,</span>
+            <span class="s1">&#39;schema&#39;</span><span class="p">:</span> <span class="n">schema</span><span class="p">,</span>
+            <span class="s1">&#39;catalog&#39;</span><span class="p">:</span> <span class="n">catalog</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="bp">cls</span>
+
+    <span class="k">return</span> <span class="n">output_decorator</span></div>
+
+
+<div class="viewcode-block" id="azure_blob_storage_output"><a class="viewcode-back" href="../../api/luisy.html#luisy.decorators.azure_blob_storage_output">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">azure_blob_storage_output</span><span class="p">(</span>
+        <span class="n">endpoint</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">file_format</span><span class="o">=</span><span class="s2">&quot;parquet&quot;</span><span class="p">,</span> <span class="n">inferschema</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">target_cls</span> <span class="o">=</span> <span class="n">AzureBlobStorageTarget</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">target_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;endpoint&#39;</span><span class="p">:</span> <span class="n">endpoint</span><span class="p">,</span>
+            <span class="s1">&#39;directory&#39;</span><span class="p">:</span> <span class="n">directory</span><span class="p">,</span>
+            <span class="s1">&#39;file_format&#39;</span><span class="p">:</span> <span class="n">file_format</span><span class="p">,</span>
+            <span class="s1">&#39;inferschema&#39;</span><span class="p">:</span> <span class="n">inferschema</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="bp">cls</span>
+
+    <span class="k">return</span> <span class="n">decorator</span></div>
+
+
+<div class="viewcode-block" id="azure_blob_storage_input"><a class="viewcode-back" href="../../api/luisy.html#luisy.decorators.azure_blob_storage_input">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">azure_blob_storage_input</span><span class="p">(</span>
+        <span class="n">endpoint</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">file_format</span><span class="o">=</span><span class="s2">&quot;parquet&quot;</span><span class="p">,</span> <span class="n">inferschema</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">_input</span><span class="p">(</span><span class="n">self_</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">AzureBlobStorageTarget</span><span class="p">(</span>
+                <span class="n">endpoint</span><span class="o">=</span><span class="n">endpoint</span><span class="p">,</span>
+                <span class="n">directory</span><span class="o">=</span><span class="n">directory</span><span class="p">,</span>
+                <span class="n">file_format</span><span class="o">=</span><span class="n">file_format</span><span class="p">,</span>
+                <span class="n">inferschema</span><span class="o">=</span><span class="n">inferschema</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="bp">cls</span><span class="o">.</span><span class="n">input</span> <span class="o">=</span> <span class="n">_input</span>
+        <span class="k">return</span> <span class="bp">cls</span>
+
+    <span class="k">return</span> <span class="n">decorator</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2022, Robert Bosch GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

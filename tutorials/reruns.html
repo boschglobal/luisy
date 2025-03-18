@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rerun changed tasks &mdash; luisy  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Interaction with PySpark" href="spark.html" />
+    <link rel="prev" title="Cloud usage" href="cloud.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            luisy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/about.html">Why?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions.html">Contributions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameters.html">WrapperTasks and ConcatenationTasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi_file.html">Directory Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud.html">Up- and Downloading Files</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Trigger reruns by changing code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spark.html">Interaction with PySpark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../task.html">Task structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../decorators.html">Decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reruns.html">Reruns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../visualize.html">Visualize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cloud.html">Cloud sync</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../helpers.html">Helper funcs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hash_update_mode.html">Hash Update Mode</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/modules.html">Full reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../legal/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legal/corporate_information.html">Corporate information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">luisy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Rerun changed tasks</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorials/reruns.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rerun-changed-tasks">
+<h1>Rerun changed tasks<a class="headerlink" href="#rerun-changed-tasks" title="Permalink to this heading"></a></h1>
+<p>Consider the following pipeline, which we assume lives in the package
+<code class="code docutils literal notranslate"><span class="pre">example_project</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">luisy</span>
+
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">raw</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">csv_output</span><span class="p">()</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RawFileA</span><span class="p">(</span><span class="n">luisy</span><span class="o">.</span><span class="n">ExternalTask</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_file_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;file_a&#39;</span>
+
+
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">raw</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">csv_output</span><span class="p">()</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RawFileB</span><span class="p">(</span><span class="n">luisy</span><span class="o">.</span><span class="n">ExternalTask</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_file_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;file_b&#39;</span>
+
+
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">interim</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="n">RawFileA</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">InterimFile</span><span class="p">(</span><span class="n">luisy</span><span class="o">.</span><span class="n">Task</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># some processings</span>
+
+
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">final</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="n">InterimFile</span><span class="p">,</span> <span class="n">RawFileB</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FinalFile</span><span class="p">(</span><span class="n">luisy</span><span class="o">.</span><span class="n">Task</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># some processings</span>
+</pre></div>
+</div>
+<p>Assume the working-dir looks like this</p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">/projects/example_project/raw/RawFileA.csv</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">/projects/example_project/raw/RawFileB.csv</span></code></p></li>
+</ul>
+<p>and we invoke</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>luisy<span class="w"> </span>--module<span class="w"> </span>example_project<span class="w"> </span>FinalFile
+</pre></div>
+</div>
+<p>and afterwards, the following files exist:</p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">/projects/example_project/raw/RawFileA.csv</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">/projects/example_project/raw/RawFileB.csv</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">/projects/example_project/interim/InterimFile.csv</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">/projects/example_project/final/FinalFile.csv</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">/projects/example_project/.luisy.hash</span></code></p></li>
+</ul>
+<p>Now, if the code of of <code class="code docutils literal notranslate"><span class="pre">InterimFile</span></code> changes and the user runs</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>luisy<span class="w"> </span>--module<span class="w"> </span>example_project<span class="w"> </span>FinalFile
+</pre></div>
+</div>
+<p>again, the tasks <code class="code docutils literal notranslate"><span class="pre">InterimFile</span></code> and <code class="code docutils literal notranslate"><span class="pre">FinalFile</span></code> are both
+executed again.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To just check which tasks would be executed, we can execute</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>luisy<span class="w"> </span>--module<span class="w"> </span>example_project<span class="w"> </span>FinalFile<span class="w"> </span>--dry-run
+</pre></div>
+</div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cloud.html" class="btn btn-neutral float-left" title="Cloud usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="spark.html" class="btn btn-neutral float-right" title="Interaction with PySpark" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2022, Robert Bosch GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
