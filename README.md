@@ -1,3 +1,12 @@
+# Project Status: Archived
+This repository is no longer actively maintained.
+Due to shifting priorities and limited resources, we have decided to archive the repository and discontinue further development and maintenance.
+
+**What this means:**
+- No new features or updates will be added.
+- Issues and pull requests will no longer be reviewed or responded to.
+- You are welcome to fork the project and continue development under your own maintenance.
+
 # luisy
 
 
