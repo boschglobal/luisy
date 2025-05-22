@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>luisy.testing &mdash; luisy  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            luisy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/about.html">Why?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributions.html">Contributions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/parameters.html">WrapperTasks and ConcatenationTasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/multi_file.html">Directory Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/cloud.html">Up- and Downloading Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/reruns.html">Trigger reruns by changing code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/spark.html">Interaction with PySpark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../task.html">Task structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../decorators.html">Decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reruns.html">Reruns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualize.html">Visualize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cloud.html">Cloud sync</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../helpers.html">Helper funcs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hash_update_mode.html">Hash Update Mode</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">Full reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/corporate_information.html">Corporate information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">luisy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">luisy.testing</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for luisy.testing</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2022 - for information on the respective copyright owner see the NOTICE.rst file or</span>
+<span class="c1"># the repository https://github.com/boschglobal/luisy</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">luigi</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luigi.tools.deps</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_task_requires</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">contextlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExitStack</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">luisy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Config</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luisy.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_default_params</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">luigi.execution_summary</span><span class="w"> </span><span class="kn">import</span> <span class="n">LuigiStatusCode</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.errors.exceptions.connect</span><span class="w"> </span><span class="kn">import</span> <span class="n">AnalysisException</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">unittest.mock</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">patch</span><span class="p">,</span>
+    <span class="n">Mock</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="mock_target"><a class="viewcode-back" href="../../api/luisy.html#luisy.testing.mock_target">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">mock_target</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">output_store</span><span class="p">):</span>
+
+    <span class="n">target</span> <span class="o">=</span> <span class="n">Mock</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">output_store</span><span class="p">[</span><span class="n">task</span><span class="p">])</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">exists</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">output_store</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+        <span class="n">output_store</span><span class="p">[</span><span class="n">task</span><span class="p">]</span> <span class="o">=</span> <span class="n">obj</span>
+
+    <span class="n">target</span><span class="o">.</span><span class="n">read</span> <span class="o">=</span> <span class="n">read</span>
+    <span class="n">target</span><span class="o">.</span><span class="n">exists</span> <span class="o">=</span> <span class="n">exists</span>
+    <span class="n">target</span><span class="o">.</span><span class="n">write</span> <span class="o">=</span> <span class="n">write</span>
+
+    <span class="k">return</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="n">target</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="debug_run"><a class="viewcode-back" href="../../api/luisy.html#luisy.testing.debug_run">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">debug_run</span><span class="p">(</span><span class="n">tasks</span><span class="p">,</span> <span class="n">return_summary</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This is a helper Method which allows to run pipelines in tests and bypassing cli. This method</span>
+<span class="sd">    returns some useful information from the build as well in form of a dict.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tasks(list or luigi.Task): List of Tasks that should be run or a single</span>
+<span class="sd">            :py:class:`luigi.Task`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Dictionary with information about the executed tasks. I.e. dict[&#39;completed&#39;]</span>
+<span class="sd">            contains the tasks that have been completed in this run or dict[&#39;already_done&#39;]</span>
+<span class="sd">            contains tasks that have been completed before running luigi</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tasks</span><span class="p">,</span> <span class="n">luigi</span><span class="o">.</span><span class="n">Task</span><span class="p">):</span>
+        <span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span><span class="n">tasks</span><span class="p">]</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">luigi</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">tasks</span><span class="p">,</span> <span class="n">detailed_summary</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">local_scheduler</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">return_summary</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">luigi</span><span class="o">.</span><span class="n">execution_summary</span><span class="o">.</span><span class="n">_summary_dict</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">worker</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="get_all_dependencies"><a class="viewcode-back" href="../../api/luisy.html#luisy.testing.get_all_dependencies">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">get_all_dependencies</span><span class="p">(</span><span class="n">task</span><span class="p">):</span>
+
+    <span class="n">deps</span> <span class="o">=</span> <span class="n">get_task_requires</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">task_</span> <span class="ow">in</span> <span class="n">deps</span><span class="p">:</span>
+        <span class="n">deps</span> <span class="o">=</span> <span class="n">deps</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">get_all_dependencies</span><span class="p">(</span><span class="n">task_</span><span class="p">))</span>
+
+    <span class="n">deps</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">deps</span></div>
+
+
+<div class="viewcode-block" id="create_file"><a class="viewcode-back" href="../../api/luisy.html#luisy.testing.create_file">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">create_file</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LuisyTestCase"><a class="viewcode-back" href="../../api/luisy.html#luisy.testing.LuisyTestCase">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">LuisyTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LuisyTestCase.get_execution_summary"><a class="viewcode-back" href="../../api/luisy.html#luisy.testing.LuisyTestCase.get_execution_summary">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_execution_summary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="n">existing_outputs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">result</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_pipeline</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">existing_outputs</span><span class="o">=</span><span class="n">existing_outputs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">luigi</span><span class="o">.</span><span class="n">execution_summary</span><span class="o">.</span><span class="n">_summary_dict</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">worker</span><span class="p">)</span></div>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_run_pipeline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="n">existing_outputs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Runs the given task after providing the existing outputs.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">create_testing_config</span><span class="p">(</span><span class="n">working_dir</span><span class="o">=</span><span class="s1">&#39;/some/working_dir/&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">existing_outputs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">existing_outputs</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">output_store</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">t</span><span class="p">:</span> <span class="n">o</span> <span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">existing_outputs</span>
+        <span class="p">}</span>
+
+        <span class="n">all_tasks</span> <span class="o">=</span> <span class="n">get_all_dependencies</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+
+        <span class="n">patches</span> <span class="o">=</span> <span class="p">[</span><span class="n">mock_target</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">output_store</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">all_tasks</span><span class="p">]</span>
+
+        <span class="k">with</span> <span class="n">ExitStack</span><span class="p">()</span> <span class="k">as</span> <span class="n">stack</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">patch_</span> <span class="ow">in</span> <span class="n">patches</span><span class="p">:</span>
+                <span class="n">stack</span><span class="o">.</span><span class="n">enter_context</span><span class="p">(</span><span class="n">patch_</span><span class="p">)</span>
+
+            <span class="n">result</span> <span class="o">=</span> <span class="n">debug_run</span><span class="p">([</span><span class="n">task</span><span class="p">],</span> <span class="n">return_summary</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">output_store</span>
+
+<div class="viewcode-block" id="LuisyTestCase.run_pipeline"><a class="viewcode-back" href="../../api/luisy.html#luisy.testing.LuisyTestCase.run_pipeline">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">run_pipeline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="n">existing_outputs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">return_store</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that can be used to run luigi pipelines. You are able to pass existing outputs</span>
+<span class="sd">        which mock a specific task&#39;s output. This helps the user in testing without mocking his</span>
+<span class="sd">        task output or creating a temporary directory.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            task (luigi.Task): Task that should be run</span>
+<span class="sd">            existing_outputs (list): List of Tuples, where first element of tuple is the</span>
+<span class="sd">                Taskobject whose output should be mocked and the second element is the content of</span>
+<span class="sd">                the mocked task</span>
+<span class="sd">            return_store (bool): If true, the whole store gets returned as a dict. The store</span>
+<span class="sd">                contains all the outputs after the execution of the pipeline, where the tasks are</span>
+<span class="sd">                the keys and the values are their outputs. If false, only the output of the given</span>
+<span class="sd">                task is returned.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict or object: depending on `return_store` value, a dict with output of all tasks or</span>
+<span class="sd">                just the output of the root_task</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span><span class="p">,</span> <span class="n">output_store</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_pipeline</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">existing_outputs</span><span class="o">=</span><span class="n">existing_outputs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">LuigiStatusCode</span><span class="o">.</span><span class="n">SUCCESS</span><span class="p">:</span>
+            <span class="n">result_dict</span> <span class="o">=</span> <span class="n">luigi</span><span class="o">.</span><span class="n">execution_summary</span><span class="o">.</span><span class="n">_summary_dict</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">worker</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="n">result_dict</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">return_store</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">output_store</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">output_store</span><span class="p">[</span><span class="n">task</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="LuisyTestCase.assertSuccess"><a class="viewcode-back" href="../../api/luisy.html#luisy.testing.LuisyTestCase.assertSuccess">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">assertSuccess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="n">existing_outputs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">result</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_pipeline</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">existing_outputs</span><span class="o">=</span><span class="n">existing_outputs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">status</span><span class="p">,</span> <span class="n">LuigiStatusCode</span><span class="o">.</span><span class="n">SUCCESS</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LuisyTestCase.assertFail"><a class="viewcode-back" href="../../api/luisy.html#luisy.testing.LuisyTestCase.assertFail">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">assertFail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="n">existing_outputs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">result</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_pipeline</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">existing_outputs</span><span class="o">=</span><span class="n">existing_outputs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertNotEqual</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">status</span><span class="p">,</span> <span class="n">LuigiStatusCode</span><span class="o">.</span><span class="n">SUCCESS</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LuisyTestCase.assertMissing"><a class="viewcode-back" href="../../api/luisy.html#luisy.testing.LuisyTestCase.assertMissing">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">assertMissing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="n">existing_outputs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">result</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_pipeline</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">existing_outputs</span><span class="o">=</span><span class="n">existing_outputs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">status</span><span class="p">,</span> <span class="n">LuigiStatusCode</span><span class="o">.</span><span class="n">MISSING_EXT</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="DFMock"><a class="viewcode-back" href="../../api/luisy.html#luisy.testing.DFMock">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">DFMock</span><span class="p">(</span><span class="n">Mock</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table_uri</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">Mock</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">table_uri</span> <span class="o">=</span> <span class="n">table_uri</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+<div class="viewcode-block" id="DFMock.mode"><a class="viewcode-back" href="../../api/luisy.html#luisy.testing.DFMock.mode">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="DFMock.saveAsTable"><a class="viewcode-back" href="../../api/luisy.html#luisy.testing.DFMock.saveAsTable">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">saveAsTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table_name</span><span class="p">):</span>
+        <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">spark</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">table_name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span></div>
+
+<div class="viewcode-block" id="DFMock.toPandas"><a class="viewcode-back" href="../../api/luisy.html#luisy.testing.DFMock.toPandas">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">toPandas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="SparkMock"><a class="viewcode-back" href="../../api/luisy.html#luisy.testing.SparkMock">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">SparkMock</span><span class="p">(</span><span class="n">Mock</span><span class="p">):</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+<div class="viewcode-block" id="SparkMock.table"><a class="viewcode-back" href="../../api/luisy.html#luisy.testing.SparkMock.table">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table_uri</span><span class="p">):</span>
+
+        <span class="n">df</span> <span class="o">=</span> <span class="n">DFMock</span><span class="p">(</span>
+            <span class="n">table_uri</span><span class="o">=</span><span class="n">table_uri</span><span class="p">,</span>
+            <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">table_uri</span><span class="p">],</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">df</span></div>
+
+<div class="viewcode-block" id="SparkMock.sql"><a class="viewcode-back" href="../../api/luisy.html#luisy.testing.SparkMock.sql">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">sql</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qry</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">qry</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;SELECT 1 from&#39;</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">qry</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">raise</span> <span class="n">AnalysisException</span><span class="p">(</span><span class="s2">&quot;Table does not exist&quot;</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="create_testing_config"><a class="viewcode-back" href="../../api/luisy.html#luisy.testing.create_testing_config">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">create_testing_config</span><span class="p">(</span>
+    <span class="n">working_dir</span><span class="p">,</span>
+    <span class="n">storage_key</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">container_name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">account_name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">mock_spark</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a Config Object for testing purpose. Should be used when working with temporary</span>
+<span class="sd">    directories.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        working_dir (str): working dir for testing luisy tasks (mostly tmpdirs)</span>
+<span class="sd">        storage_key (str): storage_key that can be set if no environ variable can be used in tests.</span>
+<span class="sd">        account_name (str): Account name that can be set if no environ variable can be used in</span>
+<span class="sd">            tests.</span>
+<span class="sd">        container_name (str): Container name that can be set if no environ variable can be used in</span>
+<span class="sd">            tests.</span>
+<span class="sd">        **kwargs: params like `download` or `upload`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">params</span> <span class="o">=</span> <span class="n">get_default_params</span><span class="p">(</span><span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">params</span><span class="p">[</span><span class="s1">&#39;working_dir&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">working_dir</span>
+    <span class="n">params</span><span class="p">[</span><span class="s1">&#39;azure_storage_key&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">storage_key</span>
+    <span class="n">params</span><span class="p">[</span><span class="s1">&#39;azure_container_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">container_name</span>
+    <span class="n">params</span><span class="p">[</span><span class="s1">&#39;azure_account_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">account_name</span>
+    <span class="n">params</span><span class="p">[</span><span class="s1">&#39;spark&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">SparkMock</span><span class="p">()</span> <span class="k">if</span> <span class="n">mock_spark</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">params</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">params</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2022, Robert Bosch GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

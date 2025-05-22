@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Testing &mdash; luisy  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Visualize" href="visualize.html" />
+    <link rel="prev" title="Automatic rerun detection" href="reruns.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            luisy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about/about.html">Why?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about/authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributions.html">Contributions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/parameters.html">WrapperTasks and ConcatenationTasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/multi_file.html">Directory Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/cloud.html">Up- and Downloading Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/reruns.html">Trigger reruns by changing code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/spark.html">Interaction with PySpark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="task.html">Task structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decorators.html">Decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reruns.html">Reruns</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#run-a-pipeline">Run a pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-the-execution-summary">Test the execution summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visualize.html">Visualize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud.html">Cloud sync</a></li>
+<li class="toctree-l1"><a class="reference internal" href="helpers.html">Helper funcs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hash_update_mode.html">Hash Update Mode</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/modules.html">Full reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="legal/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal/corporate_information.html">Corporate information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">luisy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Testing</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/testing.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="testing">
+<h1>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h1>
+<p>The module <a class="reference internal" href="api/luisy.html#module-luisy.testing" title="luisy.testing"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luisy.testing</span></code></a> provides helpers to test pipelines
+end-to-end for test scenarios.</p>
+<section id="run-a-pipeline">
+<h2>Run a pipeline<a class="headerlink" href="#run-a-pipeline" title="Permalink to this heading"></a></h2>
+<p>This is how a test case may look like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">luisy.testing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LuisyTestCase</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_project.tasks</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">MyFinalTask</span><span class="p">,</span>
+    <span class="n">MyRawTask</span><span class="p">,</span>
+    <span class="n">MyOtherRawTask</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestMyPipeline</span><span class="p">(</span><span class="n">LuisyTestCase</span><span class="p">):</span>
+
+   <span class="k">def</span><span class="w"> </span><span class="nf">test_success</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">assertSuccess</span><span class="p">(</span>
+           <span class="n">task</span><span class="o">=</span><span class="n">MyFinalTask</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
+           <span class="n">existing_outputs</span><span class="o">=</span><span class="p">[</span>
+               <span class="p">(</span><span class="n">MyRawTask</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="p">{</span><span class="s1">&#39;some_data&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}),</span>
+               <span class="p">(</span><span class="n">MyRawTask</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="p">{</span><span class="s1">&#39;some_data&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}),</span>
+               <span class="p">(</span><span class="n">MyOtherRaw</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="n">df_test</span><span class="p">),</span>
+           <span class="p">]</span>
+        <span class="p">)</span>
+
+   <span class="k">def</span><span class="w"> </span><span class="nf">test_fail</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">assertFail</span><span class="p">(</span>
+           <span class="n">task</span><span class="o">=</span><span class="n">MyFinalTask</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
+           <span class="n">existing_outputs</span><span class="o">=</span><span class="p">[</span>
+               <span class="p">(</span><span class="n">MyRawTask</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="p">{</span><span class="s1">&#39;some_data&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}),</span>
+           <span class="p">]</span>
+        <span class="p">)</span>
+
+   <span class="k">def</span><span class="w"> </span><span class="nf">test_missing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">assertMissing</span><span class="p">(</span>
+           <span class="n">task</span><span class="o">=</span><span class="n">MyFinalTask</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
+           <span class="n">existing_outputs</span><span class="o">=</span><span class="p">[</span>
+               <span class="p">(</span><span class="n">MyRawTask</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="p">{</span><span class="s1">&#39;some_data&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}),</span>
+           <span class="p">]</span>
+        <span class="p">)</span>
+
+   <span class="k">def</span><span class="w"> </span><span class="nf">test_output</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="n">task_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_pipeline</span><span class="p">(</span>
+           <span class="n">task</span><span class="o">=</span><span class="n">MyFinalTask</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
+           <span class="n">existing_outputs</span><span class="o">=</span><span class="p">[</span>
+               <span class="p">(</span><span class="n">MyRawTask</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="p">{</span><span class="s1">&#39;some_data&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}),</span>
+               <span class="p">(</span><span class="n">MyRawTask</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="p">{</span><span class="s1">&#39;some_data&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}),</span>
+               <span class="p">(</span><span class="n">MyOtherRaw</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="n">df_test</span><span class="p">),</span>
+           <span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Performe some asserts on task_output</span>
+</pre></div>
+</div>
+<p>Using <a class="reference internal" href="api/luisy.html#luisy.testing.LuisyTestCase.run_pipeline" title="luisy.testing.LuisyTestCase.run_pipeline"><code class="xref py py-func docutils literal notranslate"><span class="pre">luisy.testing.LuisyTestCase.run_pipeline()</span></code></a>, the user
+can specify a task she would like to run and can provide outputs of
+some tasks that may be needed during execution. Here, the user can
+provide the output objects of the tasks as python objects using
+<code class="code docutils literal notranslate"><span class="pre">existing_outputs</span></code>, which is a list of tuples containing the task and the regarding output.</p>
+</section>
+<section id="test-the-execution-summary">
+<h2>Test the execution summary<a class="headerlink" href="#test-the-execution-summary" title="Permalink to this heading"></a></h2>
+<p>The most prominent test examples involve incorrect runs. For those, we
+would like to know which tasks fail. For this the helper
+<a class="reference internal" href="api/luisy.html#luisy.testing.LuisyTestCase.get_execution_summary" title="luisy.testing.LuisyTestCase.get_execution_summary"><code class="xref py py-func docutils literal notranslate"><span class="pre">luisy.testing.LuisyTestCase.get_execution_summary()</span></code></a> can be
+used to get the summary of the run:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TestMyPipeline</span><span class="p">(</span><span class="n">LuisyTestCase</span><span class="p">):</span>
+
+   <span class="k">def</span><span class="w"> </span><span class="nf">test_summary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="n">summary</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_execution_summary</span><span class="p">(</span>
+           <span class="n">task</span><span class="o">=</span><span class="n">MyFinalTask</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
+           <span class="n">existing_outputs</span><span class="o">=</span><span class="p">[</span>
+               <span class="p">(</span><span class="n">MyRawTask</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="p">{</span><span class="s1">&#39;some_data&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}),</span>
+           <span class="p">]</span>
+        <span class="p">)</span>
+
+     <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span>
+         <span class="n">summary</span><span class="p">[</span><span class="s1">&#39;upstream_missing_dependency&#39;</span><span class="p">],</span>
+         <span class="p">{</span><span class="n">MyFinalTask</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">)}</span>
+     <span class="p">)</span>
+</pre></div>
+</div>
+<p>The returned <code class="code docutils literal notranslate"><span class="pre">summary</span></code> is a <a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> holding the status
+of the tasks to be runned which then can be asserted by the user.</p>
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h2>
+<p>Consider the following pipeline</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">luisy</span>
+
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">raw</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">csv_output</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RawTask</span><span class="p">(</span><span class="n">luisy</span><span class="o">.</span><span class="n">ExternalTask</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">luigi</span><span class="o">.</span><span class="n">IntParameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_file_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;some_export_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">interim</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="n">RawTask</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">InterimTask</span><span class="p">(</span><span class="n">luisy</span><span class="o">.</span><span class="n">Task</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">luigi</span><span class="o">.</span><span class="n">IntParameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">()</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">final</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="n">InterimTask</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FinalTask</span><span class="p">(</span><span class="n">luisy</span><span class="o">.</span><span class="n">Task</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">()</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A testcase for <code class="code docutils literal notranslate"><span class="pre">FinalTask</span></code> which just does a transpose  may look
+like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TestFinalTask</span><span class="p">(</span><span class="n">LuisyTestCase</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]})</span>
+        <span class="n">existing_outputs</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="n">InterimTask</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">df_test</span><span class="p">)</span>
+        <span class="p">]</span>
+
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_pipeline</span><span class="p">(</span><span class="n">FinalTask</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">existing_outputs</span><span class="o">=</span><span class="n">existing_outputs</span><span class="p">)</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_frame_equal</span><span class="p">(</span>
+            <span class="n">df</span><span class="p">,</span>
+            <span class="n">df_test</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+<p>Testing the pipeline from <code class="code docutils literal notranslate"><span class="pre">RawTask</span></code> to <code class="code docutils literal notranslate"><span class="pre">FinalTask</span></code>, the
+user only has to give a valid output for the <code class="code docutils literal notranslate"><span class="pre">RawTask</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TestFinalTask</span><span class="p">(</span><span class="n">LuisyTestCase</span><span class="p">):</span>
+
+   <span class="k">def</span><span class="w"> </span><span class="nf">test_run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]})</span>
+
+       <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_pipeline</span><span class="p">(</span>
+           <span class="n">task</span><span class="o">=</span><span class="n">FinalTask</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+           <span class="n">existing_outputs</span><span class="o">=</span><span class="p">[</span>
+               <span class="p">(</span><span class="n">RawTask</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">df_test</span><span class="p">)</span>
+           <span class="p">]</span>
+       <span class="p">)</span>
+       <span class="n">pd</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_frame_equal</span><span class="p">(</span>
+           <span class="n">df</span><span class="p">,</span>
+           <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+               <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]},</span>
+               <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]</span>
+           <span class="p">)</span>
+       <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="reruns.html" class="btn btn-neutral float-left" title="Automatic rerun detection" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="visualize.html" class="btn btn-neutral float-right" title="Visualize" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2022, Robert Bosch GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

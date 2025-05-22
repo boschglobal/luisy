@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multi File Management / Directory Output &mdash; luisy  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Cloud usage" href="cloud.html" />
+    <link rel="prev" title="WrapperTask and ConcatenationTask" href="parameters.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            luisy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/about.html">Why?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions.html">Contributions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameters.html">WrapperTasks and ConcatenationTasks</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Directory Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud.html">Up- and Downloading Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reruns.html">Trigger reruns by changing code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spark.html">Interaction with PySpark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../task.html">Task structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../decorators.html">Decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reruns.html">Reruns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../visualize.html">Visualize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cloud.html">Cloud sync</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../helpers.html">Helper funcs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hash_update_mode.html">Hash Update Mode</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/modules.html">Full reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../legal/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legal/corporate_information.html">Corporate information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">luisy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Multi File Management / Directory Output</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorials/multi_file.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="multi-file-management-directory-output">
+<h1>Multi File Management / Directory Output<a class="headerlink" href="#multi-file-management-directory-output" title="Permalink to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is an experimental feature, which will probably be changed in future versions</p>
+</div>
+<p>Working with time sequences or images we often do not have the possibility to load all of our data
+into one huge dataset into the memory of our local machine. Using <a class="reference internal" href="../api/luisy.html#module-luisy" title="luisy"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luisy</span></code></a> can be a
+challenge in this case, because having thousands of task instances (one task per image/curve) slows
+down the scheduler, which results in long computation times.</p>
+<p>This section shows you a template, that you can use when facing this problem. There are several
+ways of handling multiple files, but we noticed that this was the most robust method.</p>
+<p>Having lots of curves or images inside a directory requires us to use the <code class="xref py py-func docutils literal notranslate"><span class="pre">luisy.decorators</span>
+<span class="pre">.make_output_directory()</span></code> function to create our own output decorator to read these files properly.
+This allows us to define our own method of parsing/reading the files that are lying inside the
+raw directory.</p>
+<p>In the following pipeline we want to read all <cite>‘.png’</cite> images one by one and process them in
+other tasks. To do that, we need to define a function on how to handle the files that are
+contained in external raw folder. Using the package <code class="xref py py-mod docutils literal notranslate"><span class="pre">scikit-image</span></code>, we read each incoming
+<cite>‘filepath’</cite> with the method <code class="xref py py-func docutils literal notranslate"><span class="pre">skimage.io.imread()</span></code>. Note that only <cite>‘.png’</cite> files are read
+. The rest of the incoming files will be skipped by returning None in our function. In this case
+we also want the filepath to be returned because the id of the curve is saved inside the file
+basename.</p>
+<p>The usage of <a class="reference internal" href="../api/luisy.html#luisy.decorators.make_directory_output" title="luisy.decorators.make_directory_output"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_directory_output()</span></code></a> allows us to pass our read
+function to a decorator, which then decorates our <a class="reference internal" href="../api/luisy.tasks.html#luisy.tasks.base.ExternalTask" title="luisy.tasks.base.ExternalTask"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExternalTask</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">luisy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luisy.decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_directory_output</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">read_image</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">filepath</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.png&#39;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+
+<span class="n">image_directory_output</span> <span class="o">=</span> <span class="n">make_directory_output</span><span class="p">(</span><span class="n">read_image</span><span class="p">)</span>
+
+<span class="nd">@image_directory_output</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">raw</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ExportDirectory</span><span class="p">(</span><span class="n">luisy</span><span class="o">.</span><span class="n">ExternalTask</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Input directory with (multiple) image files</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_folder_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+</pre></div>
+</div>
+<p>In the next step we want to require the files we have set in our <code class="xref py py-class docutils literal notranslate"><span class="pre">ExportDirectory</span></code>
+task above and save them as numpy arrays to a pickle file one by one.
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">ExportDirectory().read()</span></code> returns a generator, which yields the files to the time when
+they’re read. This gives us the advantage to work memory efficient. A challenge will now be to
+continue to handle these files separately. This can be achieved by defining read/write
+functionalities inside your task.</p>
+<p><a class="reference internal" href="../api/luisy.html#module-luisy" title="luisy"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luisy</span></code></a> usually works with <a class="reference internal" href="../api/luisy.html#luisy.targets.LocalTarget" title="luisy.targets.LocalTarget"><code class="xref py py-class docutils literal notranslate"><span class="pre">luisy.targets.LocalTarget</span></code></a>. This class checks
+whether the file it points to exists on your local machine. Since we have directories full
+of files instead of individual files, we need to manage the files ourselves. A fairly clean way
+of doing this is to process all files in a temporary directory and after processing, move them to
+our target directory. We will then write all processed file_paths to a file in the same directory.</p>
+<p>On the one hand, this prevents failed tasks from generating output (even when they fail), since
+the files are not moved until all files have been successfully processed. On the other hand, this
+makes further processing and subsequent tasks easier, since the information about the files is
+saved in a list and can be read out in the next task.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">write_file</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">))</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">read_file</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_image_id</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">move_file</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">):</span>
+    <span class="n">shutil</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">destination</span>
+
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">interim</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="n">ExportDirectory</span><span class="p">)</span>
+<span class="c1"># (@pickle_output) luisy.Task is pickle_output by default</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ToNumpy</span><span class="p">(</span><span class="n">luisy</span><span class="o">.</span><span class="n">Task</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">processed_files</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmp_dir</span><span class="p">:</span>
+            <span class="c1"># Process every file passed by the generator of required external Task</span>
+            <span class="k">for</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">image</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">()</span><span class="o">.</span><span class="n">read</span><span class="p">():</span>
+                <span class="n">image_id</span> <span class="o">=</span> <span class="n">get_image_id</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+                <span class="n">filename</span> <span class="o">=</span> <span class="n">image_id</span> <span class="o">+</span> <span class="s1">&#39;.pkl&#39;</span>
+                <span class="n">tmpfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="n">tmp_dir</span><span class="p">,</span>
+                    <span class="n">filename</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">write_file</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">tmpfile</span><span class="p">)</span>
+                <span class="n">processed_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+            <span class="c1"># Move successfully processed files to outdir</span>
+            <span class="n">saved_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">move_file</span><span class="p">(</span>
+                <span class="n">source</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">,</span> <span class="n">file</span><span class="p">),</span>
+                <span class="n">destination</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_outdir</span><span class="p">(),</span> <span class="n">file</span><span class="p">)</span>
+                <span class="p">)</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">processed_files</span><span class="p">]</span>
+
+        <span class="c1"># Tell luisy that task had success by writing the saved files to pickle</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">saved_files</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Further tasks can use this pattern on and on until you preprocessed your data well enough for
+training. Let’s for example take the images and filter on the red channel of the image data:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@luisy</span><span class="o">.</span><span class="n">final</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="n">ToNumpy</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RedChannel</span><span class="p">(</span><span class="n">luisy</span><span class="o">.</span><span class="n">Task</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_image_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">filepath</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">()</span><span class="o">.</span><span class="n">read</span><span class="p">():</span>
+            <span class="n">image_id</span> <span class="o">=</span> <span class="n">get_image_id</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">read_file</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+            <span class="k">yield</span> <span class="n">image_id</span><span class="p">,</span> <span class="n">data</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">():</span>
+        <span class="n">processed_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmpfile</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmp_dir</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">image_id</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_files</span><span class="p">():</span>
+                <span class="n">red_channel</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">filename</span> <span class="o">=</span> <span class="n">image_id</span> <span class="o">+</span> <span class="s1">&#39;.pkl&#39;</span>
+                <span class="n">tmp_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="n">tmp_dir</span><span class="p">,</span>
+                    <span class="n">filename</span>
+                <span class="p">)</span>
+                <span class="n">write_file</span><span class="p">(</span><span class="n">red_channel</span><span class="p">,</span> <span class="n">tmp_file</span><span class="p">)</span>
+                <span class="n">processed_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+            <span class="c1"># Move successfully processed files to outdir</span>
+            <span class="n">saved_files</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">move_file</span><span class="p">(</span>
+                <span class="n">source</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">,</span> <span class="n">file</span><span class="p">),</span>
+                <span class="n">destination</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_outdir</span><span class="p">(),</span> <span class="n">file</span><span class="p">)</span>
+                <span class="p">)</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">processed_files</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">saved_files</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This way of dealing with multiple files comes with a little bit of boilerplate inside your
+pipeline, but seems like the most robust way. Future updates of luisy will probably improve this
+functionality, so stay tuned.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="parameters.html" class="btn btn-neutral float-left" title="WrapperTask and ConcatenationTask" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cloud.html" class="btn btn-neutral float-right" title="Cloud usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2022, Robert Bosch GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

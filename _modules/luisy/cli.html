@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>luisy.cli &mdash; luisy  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            luisy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/about.html">Why?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributions.html">Contributions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/parameters.html">WrapperTasks and ConcatenationTasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/multi_file.html">Directory Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/cloud.html">Up- and Downloading Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/reruns.html">Trigger reruns by changing code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/spark.html">Interaction with PySpark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../task.html">Task structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../decorators.html">Decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reruns.html">Reruns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualize.html">Visualize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cloud.html">Cloud sync</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../helpers.html">Helper funcs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hash_update_mode.html">Hash Update Mode</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">Full reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/corporate_information.html">Corporate information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">luisy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">luisy.cli</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for luisy.cli</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2022 - for information on the respective copyright owner see the NOTICE.rst file or</span>
+<span class="c1"># the repository https://github.com/boschglobal/luisy</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module contains the entrypoint of luisy. Here we catch the CLI arguments of the user and</span>
+<span class="sd">parse them inside a function. We also separate luigi params from luisy params here. After setting up</span>
+<span class="sd">the luisy parameters in our :py:class:`luisy.config.Config` singleton, the logic of luisy is</span>
+<span class="sd">called.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luisy.luigi_interface</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">PipelineMode</span><span class="p">,</span>
+    <span class="n">HashUpdateMode</span><span class="p">,</span>
+    <span class="n">get_root_task</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luisy.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_default_params</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="disable_azure_logging"><a class="viewcode-back" href="../../api/luisy.html#luisy.cli.disable_azure_logging">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">disable_azure_logging</span><span class="p">():</span>
+    <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;azure.core.pipeline.policies.http_logging_policy&quot;</span><span class="p">)</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="parse_args"><a class="viewcode-back" href="../../api/luisy.html#luisy.cli.parse_args">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">parse_args</span><span class="p">(</span><span class="n">argv</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Method to get all luisy args out of the argv given inside the cli. Unknown arguments will be</span>
+<span class="sd">    returned separately, to later forward them to luigi</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        argv: Should (conceptually) be ``sys.argv[1:]``</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: dict of parsed luisy arguments and rest of</span>
+<span class="sd">            `argv` in an unparsed format</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;luisy Parser&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">get_default_params</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">:</span>
+            <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--&#39;</span> <span class="o">+</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">val</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--&#39;</span> <span class="o">+</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">val</span><span class="p">)</span>
+
+    <span class="n">args_luisy</span><span class="p">,</span> <span class="n">args_luigi</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_known_args</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span>
+    <span class="n">args_luisy</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">val</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">(</span><span class="n">args_luisy</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">args_luisy</span><span class="p">,</span> <span class="n">args_luigi</span></div>
+
+
+<div class="viewcode-block" id="luisy_run"><a class="viewcode-back" href="../../api/luisy.html#luisy.cli.luisy_run">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">luisy_run</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    luisy CLI Call</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        argv: Should (conceptually) be ``sys.argv[1:]``</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">disable_azure_logging</span><span class="p">()</span>
+    <span class="n">args_luisy</span><span class="p">,</span> <span class="n">args_luigi</span> <span class="o">=</span> <span class="n">parse_args</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span>
+    <span class="n">root_task</span> <span class="o">=</span> <span class="n">get_root_task</span><span class="p">(</span><span class="n">args_luigi</span><span class="p">)</span>
+    <span class="n">force_hash_update</span> <span class="o">=</span> <span class="n">args_luisy</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;hash_update_mode&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">force_hash_update</span><span class="p">:</span>
+        <span class="n">ret_code</span> <span class="o">=</span> <span class="n">HashUpdateMode</span><span class="p">(</span>
+            <span class="n">args_luisy</span><span class="o">=</span><span class="n">args_luisy</span><span class="p">,</span>
+            <span class="n">root_task</span><span class="o">=</span><span class="n">root_task</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Run the pipeline</span>
+        <span class="n">ret_code</span> <span class="o">=</span> <span class="n">PipelineMode</span><span class="p">(</span>
+            <span class="n">args_luisy</span><span class="o">=</span><span class="n">args_luisy</span><span class="p">,</span>
+            <span class="n">args_luigi</span><span class="o">=</span><span class="n">args_luigi</span><span class="p">,</span>
+            <span class="n">root_task</span><span class="o">=</span><span class="n">root_task</span><span class="p">,</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">ret_code</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="build"><a class="viewcode-back" href="../../api/luisy.html#luisy.cli.build">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">workers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">local_scheduler</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">args_luisy</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Similar to :py:func:`luigi.build`, it executes a task and along with upstream requirements.</span>
+<span class="sd">    There, it uses the hashing functionality to detect tasks that need a rerun.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        task (luisy.base.Task): The luisy task to be executed (along with its upstream</span>
+<span class="sd">            requirements).</span>
+<span class="sd">        workers (int): Number of (luigi) workers</span>
+<span class="sd">        local_scheduler (bool): Whether to use the local scheduler of luigi</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        luisy.luigi_interface: Coordinator: The coordinator object of the luisy/luigi build</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">args_luigi</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;--workers=</span><span class="si">{</span><span class="n">workers</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">local_scheduler</span><span class="p">:</span>
+        <span class="n">args_luigi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;--local-scheduler&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s1">&#39;no_ask&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">args_luisy</span><span class="p">:</span>
+        <span class="n">args_luisy</span><span class="p">[</span><span class="s1">&#39;no_ask&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">if</span> <span class="s1">&#39;hash_update_mode&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">args_luisy</span><span class="p">:</span>
+        <span class="n">hash_update_mode</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">hash_update_mode</span> <span class="o">=</span> <span class="n">args_luisy</span><span class="p">[</span><span class="s1">&#39;hash_update_mode&#39;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">hash_update_mode</span><span class="p">:</span>
+        <span class="n">coordinator</span> <span class="o">=</span> <span class="n">HashUpdateMode</span><span class="p">(</span>
+            <span class="n">args_luisy</span><span class="o">=</span><span class="n">args_luisy</span><span class="p">,</span>
+            <span class="n">root_task</span><span class="o">=</span><span class="n">task</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Run the pipeline</span>
+        <span class="n">coordinator</span> <span class="o">=</span> <span class="n">PipelineMode</span><span class="p">(</span>
+            <span class="n">args_luisy</span><span class="o">=</span><span class="n">args_luisy</span><span class="p">,</span>
+            <span class="n">args_luigi</span><span class="o">=</span><span class="n">args_luigi</span><span class="p">,</span>
+            <span class="n">root_task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span>
+            <span class="n">run_luigi_cli</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+
+    <span class="n">coordinator</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">coordinator</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2022, Robert Bosch GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

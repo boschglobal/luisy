@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contributions &mdash; luisy  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting started" href="tutorials/getting_started.html" />
+    <link rel="prev" title="Changelog" href="about/changelog.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            luisy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about/about.html">Why?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about/authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about/changelog.html">Changelog</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Contributions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#add-your-changes">Add your changes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#coding-style">Coding style</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#commit-your-changes">Commit your changes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#commit-messages">Commit messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#git-configuration">Git configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#test-your-changes">Test your changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#document-your-code">Document your code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bump-the-version">Bump the version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#check-the-licensing">Check the licensing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#copyright-note">Copyright note</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sign-your-work">Sign your work</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#individual-vs-corporate-contributors">Individual vs. Corporate Contributors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#maintain-copyright-holders">Maintain copyright holders</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#open-a-pull-request">Open a pull request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#update-the-requirements">Update the requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-cite-luisy">How to cite luisy?</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/parameters.html">WrapperTasks and ConcatenationTasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/multi_file.html">Directory Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/cloud.html">Up- and Downloading Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/reruns.html">Trigger reruns by changing code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/spark.html">Interaction with PySpark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="task.html">Task structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decorators.html">Decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reruns.html">Reruns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualize.html">Visualize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud.html">Cloud sync</a></li>
+<li class="toctree-l1"><a class="reference internal" href="helpers.html">Helper funcs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hash_update_mode.html">Hash Update Mode</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/modules.html">Full reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="legal/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal/corporate_information.html">Corporate information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">luisy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Contributions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/contributions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="contributions">
+<span id="id1"></span><h1>Contributions<a class="headerlink" href="#contributions" title="Permalink to this heading"></a></h1>
+<p>This guide helps you to contributing code changes to luisy.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In case you found something that does not work as expected, please
+create an issue here on GitHub including</p>
+<ul class="simple">
+<li><p>A description of the bug</p></li>
+<li><p>Steps to reproduce the issue</p></li>
+<li><p>The version of luisy and python that causes the problem</p></li>
+</ul>
+</div>
+<section id="add-your-changes">
+<h2>Add your changes<a class="headerlink" href="#add-your-changes" title="Permalink to this heading"></a></h2>
+<p>Once your planned update is aligned with the maintainers,
+you should create a fork on which you implement your changes.
+Creating and pushing to feature branches in the luisy repository is not possible.
+After development you create a pull request from your fork. For more details see
+<a class="reference external" href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork">Creating a pull request from a fork</a>.</p>
+<p>Please add code that is absolutely necessary for your changes only and
+try to keep the requirements of luisy as slim as possible.</p>
+<p>Before starting implementation, the <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">PEP8 recommendations</a>  and the <a class="reference external" href="https://docs.python-guide.org/writing/style/">writing
+guidelines</a>
+may be a good read.</p>
+<ul class="simple">
+<li><p>We work in python virtual environments, a fast way of creating a
+virtual environment <code class="code docutils literal notranslate"><span class="pre">venv_luisy</span></code>, with the currently pinned
+dependencies is provided by <code class="code docutils literal notranslate"><span class="pre">make</span> <span class="pre">sync-venv</span></code></p></li>
+<li><p>All code must be PEP8 compatible and each line of code should have
+at most <code class="code docutils literal notranslate"><span class="pre">100</span></code> characters.</p></li>
+<li><p>Bucketize your changes into modular functions where each function
+does only one thing.</p></li>
+<li><p>Avoid <a class="reference external" href="https://docs.python.org/3.10/library/functions.html#print" title="(in Python v3.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code></a> statements, use loggers of the <a class="reference external" href="https://docs.python.org/3.10/library/logging.html#module-logging" title="(in Python v3.10)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging</span></code></a>
+module instead. Each luisy module should have an own logger of name
+<code class="code docutils literal notranslate"><span class="pre">__name__</span></code></p></li>
+<li><p>Reduce inline comments to an absolute minimum. Use speaking
+variable and function names instead and document important notes in
+the doc-string of the respective method.</p></li>
+<li><p>Use speaking names. For instance, methods should have meaningful
+names representing their functionality like <code class="code docutils literal notranslate"><span class="pre">compute_score()</span></code>
+instead of simply <code class="code docutils literal notranslate"><span class="pre">score</span></code>. Don’t fear long method names!</p></li>
+<li><p>In case you need utility functions, please add them to
+<a class="reference internal" href="api/luisy.html#module-luisy.helpers" title="luisy.helpers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luisy.helpers</span></code></a></p></li>
+</ul>
+<section id="coding-style">
+<h3>Coding style<a class="headerlink" href="#coding-style" title="Permalink to this heading"></a></h3>
+<p>Good code is not code having a good wall time along, but is also is
+easy to adapt, extend and maintain and most importantly, looks
+beautiful!  Here are some things, that should be avoided:</p>
+<p>Unindented parameter wrappings:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ugly,</span>
+<span class="n">my_function_with_many_args</span><span class="p">(</span><span class="n">arg_a</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                           <span class="n">arg_b</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+                           <span class="n">arg_c</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+
+<span class="c1"># Beautiful, because if the length of the function name changes,</span>
+<span class="c1"># only one line needs to be changed</span>
+<span class="n">my_function_with_many_args</span><span class="p">(</span>
+   <span class="n">arg_a</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+   <span class="n">arg_b</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+   <span class="n">arg_c</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Unnecessary parameters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ugly, because readers need to memorize an additional variable</span>
+<span class="n">arg_only_needed_as_argument</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">my_function</span><span class="p">(</span><span class="n">arg</span><span class="o">=</span><span class="n">arg_only_needed_as_argument</span><span class="p">)</span>
+
+<span class="c1"># Beautiful</span>
+<span class="n">my_function</span><span class="p">(</span><span class="n">arg</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Unintuitive parameters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ugly, as unintuitive</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="c1"># Beautiful</span>
+<span class="n">number_of_elements</span> <span class="o">=</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="commit-your-changes">
+<h2>Commit your changes<a class="headerlink" href="#commit-your-changes" title="Permalink to this heading"></a></h2>
+<section id="commit-messages">
+<h3>Commit messages<a class="headerlink" href="#commit-messages" title="Permalink to this heading"></a></h3>
+<p><a class="reference internal" href="api/luisy.html#module-luisy" title="luisy"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luisy</span></code></a> is versionized by git. Please make sure to write
+clear and precise messages that explain your changes shortly.
+Avoid messages like <code class="code docutils literal notranslate"><span class="pre">my</span> <span class="pre">latest</span> <span class="pre">edits</span></code>, <code class="code docutils literal notranslate"><span class="pre">fix</span> <span class="pre">problem</span></code>, or
+<code class="code docutils literal notranslate"><span class="pre">code</span> <span class="pre">working</span> <span class="pre">again</span></code>. Instead, use messages like <code class="code docutils literal notranslate"><span class="pre">fix</span>
+<span class="pre">float</span> <span class="pre">bug</span> <span class="pre">in</span> <span class="pre">csv</span> <span class="pre">target</span></code>, <code class="code docutils literal notranslate"><span class="pre">add</span> <span class="pre">target</span> <span class="pre">for</span> <span class="pre">.ABC</span> <span class="pre">files</span></code> or <code class="code docutils literal notranslate"><span class="pre">update</span>
+<span class="pre">docu</span> <span class="pre">of</span> <span class="pre">decorators</span></code>.</p>
+<p>Use imperative messages, that is, write <code class="code docutils literal notranslate"><span class="pre">adapt</span> <span class="pre">changelog</span> <span class="pre">to</span> <span class="pre">new</span>
+<span class="pre">version</span></code> instead of <code class="code docutils literal notranslate"><span class="pre">changelog</span> <span class="pre">to</span> <span class="pre">new</span> <span class="pre">version</span> <span class="pre">adapted</span></code></p>
+<p>Please also see the official git <a class="reference external" href="https://www.git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#_commit_guidelines">commit guidelines</a>.</p>
+</section>
+<section id="git-configuration">
+<h3>Git configuration<a class="headerlink" href="#git-configuration" title="Permalink to this heading"></a></h3>
+<p>Please configure your git client so that your identity</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>user.name<span class="w"> </span>&lt;Firstname<span class="w"> </span>Lastname&gt;
+git<span class="w"> </span>config<span class="w"> </span>user.email<span class="w"> </span>&lt;yourmail@yourprovider&gt;
+</pre></div>
+</div>
+</section>
+</section>
+<section id="test-your-changes">
+<h2>Test your changes<a class="headerlink" href="#test-your-changes" title="Permalink to this heading"></a></h2>
+<p>The correctness of each functionality of luisy has to be assured by
+unit tests, the more the better. If you add new functionality to
+luisy, there need to be new tests assuring they work correctly.
+In most cases, tests involving functionality of the module
+<code class="code docutils literal notranslate"><span class="pre">luisy.MyModule.py</span></code> can be found in the testfile
+<code class="code docutils literal notranslate"><span class="pre">tests/test_mymodule.py</span></code>. luisy uses <cite>unittest</cite> to write tests,
+and <cite>pytest</cite> to run them. If you add a new module or a new
+functionality within an existing module, it often make sense to set up
+an own unittest class. For instance, assume that we add the following
+function to <a class="reference internal" href="api/luisy.html#module-luisy.helpers" title="luisy.helpers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luisy.helpers</span></code></a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">integer_addition</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+   <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">int</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Both values must be integers&#39;</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</pre></div>
+</div>
+<p>for instance, the file
+<code class="code docutils literal notranslate"><span class="pre">tests/test_helpers</span></code> may look like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luisy.helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">integer_addition</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestIntegerAddition</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+   <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">      </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">      This method is called prior to any method of this class with</span>
+<span class="sd">      the prefix :code:`test_`. Can be used to set up objects that</span>
+<span class="sd">      are needed in any testcase but that will be changed by the</span>
+<span class="sd">      test.</span>
+<span class="sd">      &quot;&quot;&quot;</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">large_int</span> <span class="o">=</span> <span class="mi">400</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">true_float</span> <span class="o">=</span> <span class="mf">123.567</span>
+
+   <span class="k">def</span><span class="w"> </span><span class="nf">test_exception_on_floats</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+         <span class="n">integer_addition</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">large_int</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">large_float</span><span class="p">)</span>
+
+   <span class="k">def</span><span class="w"> </span><span class="nf">test_exception_on_strings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+         <span class="n">integer_addition</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">large_int</span><span class="p">,</span> <span class="s2">&quot;4000&quot;</span><span class="p">)</span>
+
+   <span class="k">def</span><span class="w"> </span><span class="nf">test_correct_addition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
+         <span class="n">integer_addition</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">large_int</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">large_int</span><span class="p">),</span>
+         <span class="mi">800</span>
+      <span class="p">)</span>
+</pre></div>
+</div>
+<p>To learn more on the <a class="reference external" href="https://docs.python.org/3.10/library/unittest.html#module-unittest" title="(in Python v3.10)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">unittest</span></code></a> module, please see its
+official <a class="reference external" href="https://docs.python.org/3/library/unittest.html">documentation</a>
+You may also want to have a look at <a class="reference internal" href="api/luisy.html#module-luisy.testing" title="luisy.testing"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luisy.testing</span></code></a> for
+utilities helping you writing tests.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Your changes to luisy can only be accepted if <strong>all</strong> unit tests of
+luisy pass, involving those checking the PEP8 conditions. This can
+checked locally running</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;not slow&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We recommend this <a class="reference external" href="https://docs.python-guide.org/writing/tests/">guide</a> on how to write tests
+in python.</p>
+</div>
+</section>
+<section id="document-your-code">
+<h2>Document your code<a class="headerlink" href="#document-your-code" title="Permalink to this heading"></a></h2>
+<p>It is worth noting that the documentation that explains what is going
+on is as important as the software functionality added to luisy.
+The documentation of luisy consists of doc-strings attached to each
+class, method and function, as well as individual pieces of
+documentation (like a guide on parameter tuning) which can be found
+under the directory <code class="code docutils literal notranslate"><span class="pre">docs/</span></code>. All docstrings should follow the
+<a class="reference external" href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html">Google standard</a>
+of python docstrings.</p>
+<p>For instance, the documentation of a function should at least contain
+descriptions on how the in- and output of the function looks like and
+what the function does. Ideally, the doc-string also contains
+examples how the function should be used. An optimal doc-string may
+looks like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">integer_addition</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">   </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">   Adds two integer numbers after making sure that both are indeed</span>
+<span class="sd">   of type integer.</span>
+
+<span class="sd">   .. note::</span>
+
+<span class="sd">      Some numpy integer types may cause problems</span>
+
+<span class="sd">   .. todo::</span>
+
+<span class="sd">      Extend to integer types of numpy</span>
+
+<span class="sd">   Examples</span>
+<span class="sd">   --------</span>
+
+<span class="sd">   .. code-block:: python</span>
+<span class="sd">      integer_addition(1, 2) # returns 3</span>
+
+<span class="sd">   Args:</span>
+<span class="sd">      a (int): An integer number</span>
+<span class="sd">      b (int): An integer number</span>
+
+<span class="sd">   Returns:</span>
+<span class="sd">      int: The sum of both inputs</span>
+
+<span class="sd">   Raises:</span>
+<span class="sd">      ValueError: If any of the input is of non-integer type</span>
+
+
+<span class="sd">   &quot;&quot;&quot;</span>
+   <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">int</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Both values must be integers&#39;</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</pre></div>
+</div>
+<p>The full documentation of luisy can be build with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>setup.py<span class="w"> </span>doc<span class="w"> </span>-W
+</pre></div>
+</div>
+<p>The HTML-documentation is then located under
+<cite>build/sphinx/html/index.html</cite></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Changes with no documentation will not be accepted. Make sure that
+your documentation builds without errors or warnings!</p>
+</div>
+</section>
+<section id="bump-the-version">
+<h2>Bump the version<a class="headerlink" href="#bump-the-version" title="Permalink to this heading"></a></h2>
+<p>The luisy uses
+<a class="reference external" href="https://semver.org/">semantic versioning</a> to determine how its
+version should increment given a software change. Roughly speaking,
+given the version number <code class="code docutils literal notranslate"><span class="pre">MAJOR.MINOR.PATCH</span></code>, then</p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">MAJOR</span></code> should be incremented if the changes make incompatible
+API changes.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">MINOR</span></code> should be incremented if new functionality is added in
+a backward compatible manner.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">PATCH</span></code> should be incremented if backwards compatible bugs are
+fixed.</p></li>
+</ul>
+<p>The version of luisy can be adjusted by modifying the file
+<code class="code docutils literal notranslate"><span class="pre">VERSION</span></code>. If you are unsure how your changes affect the
+version number, feel free to contact one of the maintainers of luisy
+to clarify this.</p>
+<p>To document your changes on a higher level, we recommend to also write
+a short description of your changes into the <code class="code docutils literal notranslate"><span class="pre">CHANGELOG.rst</span></code>.</p>
+</section>
+<section id="check-the-licensing">
+<h2>Check the licensing<a class="headerlink" href="#check-the-licensing" title="Permalink to this heading"></a></h2>
+<p>Your contribution must be licensed under the Apache-2.0 license used
+by this project.</p>
+<section id="copyright-note">
+<h3>Copyright note<a class="headerlink" href="#copyright-note" title="Permalink to this heading"></a></h3>
+<p>Include the following copyright notice at the head of a newly added</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copyright (c) 2022 - for information on the respective copyright owner see the NOTICE.rst file or</span>
+<span class="c1"># the repository https://github.com/boschglobal/luisy</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+</pre></div>
+</div>
+</section>
+<section id="sign-your-work">
+<h3>Sign your work<a class="headerlink" href="#sign-your-work" title="Permalink to this heading"></a></h3>
+<p>This project tracks patch provenance and licensing using the Developer
+Certificate of Origin 1.1 (DCO) from
+<a class="reference external" href="https://developercertificate.org">developercertificate.org</a> and
+Signed-off-by tags initially developed by the Linux kernel project.</p>
+<blockquote>
+<div><p>Developer Certificate of Origin
+Version 1.1</p>
+<p>Copyright (C) 2004, 2006 The Linux Foundation and its contributors.</p>
+<p>Everyone is permitted to copy and distribute verbatim copies of this
+license document, but changing it is not allowed.</p>
+<p>Developer’s Certificate of Origin 1.1</p>
+<p>By making a contribution to this project, I certify that:</p>
+<ol class="loweralpha simple">
+<li><p>The contribution was created in whole or in part by me and I
+have the right to submit it under the open source license
+indicated in the file; or</p></li>
+<li><p>The contribution is based upon previous work that, to the best
+of my knowledge, is covered under an appropriate open source
+license and I have the right under that license to submit that
+work with modifications, whether created in whole or in part
+by me, under the same open source license (unless I am
+permitted to submit under a different license), as indicated
+in the file; or</p></li>
+<li><p>The contribution was provided directly to me by some other
+person who certified (a), (b) or (c) and I have not modified
+it.</p></li>
+<li><p>I understand and agree that this project and the contribution
+are public and that a record of the contribution (including all
+personal information I submit with it, including my sign-off) is
+maintained indefinitely and may be redistributed consistent with
+this project or the open source license(s) involved.</p></li>
+</ol>
+</div></blockquote>
+<p>With the sign-off in a commit message you certify that you authored
+the patch or otherwise have the right to submit it under an open
+source license. The procedure is simple: To certify above Developer’s
+Certificate of Origin 1.1 for your contribution just append a line</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Signed-off-by:<span class="w"> </span>Random<span class="w"> </span>J<span class="w"> </span>Developer<span class="w"> </span>&lt;random@developer.example.org&gt;
+</pre></div>
+</div>
+<p>to <strong>every</strong> ommit message using your real name or your pseudonym and
+a valid email address.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have set your <code class="code docutils literal notranslate"><span class="pre">user.name</span></code> and <code class="code docutils literal notranslate"><span class="pre">user.email</span></code> in git
+configs you can automatically sign the commit by running the
+git-commit command with the <code class="code docutils literal notranslate"><span class="pre">-s</span></code> option.</p>
+</div>
+</section>
+<section id="individual-vs-corporate-contributors">
+<h3>Individual vs. Corporate Contributors<a class="headerlink" href="#individual-vs-corporate-contributors" title="Permalink to this heading"></a></h3>
+<p>Often employers or academic institution have ownership over code that
+is written in certain circumstances, so please do due diligence to
+ensure that you have the right to submit the code.</p>
+<p>If you are a developer who is authorized to contribute to <cite>luisy</cite> on
+behalf of your employer, then please use your corporate email address
+in the Signed-off-by tag. Otherwise please use a personal email
+address.</p>
+</section>
+<section id="maintain-copyright-holders">
+<h3>Maintain copyright holders<a class="headerlink" href="#maintain-copyright-holders" title="Permalink to this heading"></a></h3>
+<p>Each contributor is responsible for identifying themselves in the
+<cite>NOTICE.rst</cite> file, the project’s list of copyright holders and authors.
+Please add the respective information corresponding to the
+Signed-off-by tag as part of your first pull request.</p>
+<p>If you are a developer who is authorized to contribute to luisy on
+behalf of your employer, then add your company / organization to the
+list of copyright holders in the <cite>NOTICE.rst</cite> file. As author of a
+corporate contribution you can also add your name and corporate email
+address as in the Signed-off-by tag.</p>
+<p>If your contribution is covered by this project’s DCO’s clause “(c)”, please add the
+appropriate copyright holder(s) to the <cite>NOTICE.rst</cite> file as part of
+your contribution.</p>
+</section>
+</section>
+<section id="open-a-pull-request">
+<h2>Open a pull request<a class="headerlink" href="#open-a-pull-request" title="Permalink to this heading"></a></h2>
+<p>In case you</p>
+<ul class="simple">
+<li><p>added your necessary changes described in the issue or feature request</p></li>
+<li><p>wrote tests for your changes</p></li>
+<li><p>wrote documentation for your changes</p></li>
+<li><p>have adjusted the version of luisy</p></li>
+<li><p>have all unit tests pass locally</p></li>
+</ul>
+<p>your changes are ready to be reviewed. Now, to have your changes merged as fast
+as possible, please do the following:</p>
+<ul class="simple">
+<li><p>open a pull request from your fork to the
+<cite>main</cite> branch of luisy.</p></li>
+<li><p>add at least one of the maintainers as reviewer.</p></li>
+<li><p>add a small description to your pull request in case your changes
+differ from those in the corresponding issue or if you want to
+point the reviewers to certain aspects of your implementation.</p></li>
+<li><p>resolve any merge conflicts manually by merging the main branch locally
+into your branch.</p></li>
+<li><p>make sure that the triggered GitHub actions pass and
+resolve problems if not.</p></li>
+</ul>
+</section>
+<section id="update-the-requirements">
+<h2>Update the requirements<a class="headerlink" href="#update-the-requirements" title="Permalink to this heading"></a></h2>
+<p>In case new libraries are needed
+<a class="reference external" href="https://en.wikipedia.org/wiki/Dependency_hell">(are they really?)</a>
+we divide them into dependencies for the running system and those needed
+for development.
+Requirements for the development should be added to requirements_dev.in
+and pinned only as much as needed. Requirements for the usage should go
+to requirements.txt and pinning should be used as little as possible.
+With <code class="code docutils literal notranslate"><span class="pre">make</span> <span class="pre">requirements</span></code> we create a exactly pinned
+<code class="code docutils literal notranslate"><span class="pre">requirements_dev.txt</span></code> file which can be used for development and
+docker images, e.g. for testing. With <code class="code docutils literal notranslate"><span class="pre">make</span> <span class="pre">update-requirements</span></code>
+we can update the pinned <cite>requirements_dev.txt</cite> to the latest
+dependencies. In the case of a conflict, this has to be resolved first.
+Note: Only dependency conflicts are spotted via <code class="code docutils literal notranslate"><span class="pre">pip-compile</span></code>
+(which is called by <code class="code docutils literal notranslate"><span class="pre">make</span> <span class="pre">(update-)requirements</span></code>) - you need to
+test for errors resulting from upgraded dependencies yourself.</p>
+</section>
+<section id="how-to-cite-luisy">
+<h2>How to cite luisy?<a class="headerlink" href="#how-to-cite-luisy" title="Permalink to this heading"></a></h2>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span>@misc<span class="nb">{</span>luisy,
+   author = <span class="nb">{{</span><span class="k">\em</span> luisy<span class="nb">}</span> authors<span class="nb">}</span>,
+   title = <span class="nb">{</span>luisy, a python framework for reproducible and large
+            scale data pipelines based on luigi<span class="nb">}</span>,
+   note = <span class="nb">{</span>Version X.Y.Z<span class="nb">}</span>,
+ <span class="nb">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="about/changelog.html" class="btn btn-neutral float-left" title="Changelog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tutorials/getting_started.html" class="btn btn-neutral float-right" title="Getting started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2022, Robert Bosch GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

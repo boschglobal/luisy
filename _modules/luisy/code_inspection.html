@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>luisy.code_inspection &mdash; luisy  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            luisy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/about.html">Why?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributions.html">Contributions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/parameters.html">WrapperTasks and ConcatenationTasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/multi_file.html">Directory Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/cloud.html">Up- and Downloading Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/reruns.html">Trigger reruns by changing code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/spark.html">Interaction with PySpark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../task.html">Task structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../decorators.html">Decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reruns.html">Reruns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualize.html">Visualize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cloud.html">Cloud sync</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../helpers.html">Helper funcs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hash_update_mode.html">Hash Update Mode</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">Full reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/corporate_information.html">Corporate information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">luisy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">luisy.code_inspection</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for luisy.code_inspection</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2022 - for information on the respective copyright owner see the NOTICE.rst file or</span>
+<span class="c1"># the repository https://github.com/boschglobal/luisy</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">ast</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">distlib.database</span><span class="w"> </span><span class="kn">import</span> <span class="n">DistributionPath</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requirements</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="RequirementFileNotFound"><a class="viewcode-back" href="../../api/luisy.html#luisy.code_inspection.RequirementFileNotFound">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">RequirementFileNotFound</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="create_hashes"><a class="viewcode-back" href="../../api/luisy.html#luisy.code_inspection.create_hashes">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">create_hashes</span><span class="p">(</span><span class="n">task_list</span><span class="p">,</span> <span class="n">requirements_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Produces a hash for each luisy Task in the &#39;task_list&#39;.</span>
+<span class="sd">    The hash changes as soon as any of the code that is inside the ClassDef of a task (or any</span>
+<span class="sd">    other code used by the task) changes.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        task_list (list[luisy.Task]): List of task classes</span>
+<span class="sd">        requirements_path (str): location if requirements.txt, if None, try to get it automatically</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list[str]: The hash values for the tasks in hexadecimal.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">hashes_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">requirements_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1">#  This should work with any task from the list</span>
+        <span class="n">task_class</span> <span class="o">=</span> <span class="n">task_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">requirements_path</span> <span class="o">=</span> <span class="n">get_requirements_path</span><span class="p">(</span><span class="n">task_class</span><span class="p">)</span>
+            <span class="n">requirements_dict</span> <span class="o">=</span> <span class="n">get_requirements_dict</span><span class="p">(</span><span class="n">requirements_path</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">RequirementFileNotFound</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s1">&#39;No requirements.txt found.&#39;</span>
+                <span class="s1">&#39;Will try to infer from installed version&#39;</span>
+            <span class="p">)</span>
+            <span class="n">requirements_dict</span> <span class="o">=</span> <span class="n">get_all_deps_with_versions</span><span class="p">(</span>
+                <span class="n">task_class</span><span class="o">.</span><span class="vm">__module__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">requirements_dict</span> <span class="o">=</span> <span class="n">get_requirements_dict</span><span class="p">(</span><span class="n">requirements_path</span><span class="p">)</span>
+
+    <span class="n">deps_map</span> <span class="o">=</span> <span class="n">create_deps_map</span><span class="p">(</span><span class="n">requirements_dict</span><span class="p">)</span>  <span class="c1"># req -&gt; dep, one line per dep</span>
+
+    <span class="k">for</span> <span class="n">task_class</span> <span class="ow">in</span> <span class="n">task_list</span><span class="p">:</span>
+        <span class="n">module</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmodule</span><span class="p">(</span><span class="n">task_class</span><span class="p">)</span>
+        <span class="n">hashes</span><span class="p">,</span> <span class="n">imported_packages</span><span class="p">,</span> <span class="n">vis_data</span> <span class="o">=</span> <span class="n">walk_nodes</span><span class="p">(</span><span class="n">task_class</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">module</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+        <span class="n">df_reqs</span> <span class="o">=</span> <span class="n">map_imports_to_requirements</span><span class="p">(</span><span class="n">imported_packages</span><span class="p">,</span> <span class="n">requirements_dict</span><span class="p">,</span> <span class="n">deps_map</span><span class="p">)</span>
+
+        <span class="c1"># Exclude luisy, as we don&#39;t want that a bugfix or new feature in luisy leads to</span>
+        <span class="c1"># re-execution of all pipelines</span>
+        <span class="n">df_reqs</span> <span class="o">=</span> <span class="n">df_reqs</span><span class="p">[</span><span class="n">df_reqs</span><span class="p">[</span><span class="s1">&#39;package&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;luisy&#39;</span><span class="p">]</span>
+
+        <span class="n">version_info_to_hash</span> <span class="o">=</span> <span class="n">df_reqs</span><span class="o">.</span><span class="n">requirement_line</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="n">version_info_to_hash</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>  <span class="c1"># order comes from a set</span>
+        <span class="n">to_hash</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">hashes</span> <span class="o">+</span> <span class="n">version_info_to_hash</span><span class="p">)</span>
+        <span class="n">final_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">to_hash</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+        <span class="n">hashes_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">final_hash</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">hashes_list</span></div>
+
+
+<div class="viewcode-block" id="walk_nodes"><a class="viewcode-back" href="../../api/luisy.html#luisy.code_inspection.walk_nodes">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">walk_nodes</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">module_name</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">parent_module</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function that recursively visits AST nodes.</span>
+<span class="sd">    These nodes are either ClassDefs, FunctionDefs or simply Name nodes.</span>
+<span class="sd">    For each node</span>
+
+<span class="sd">    * the sourcecode within the node body is hashed and added to a return list</span>
+<span class="sd">    * the names of external packages used inside the node body is added to a return list</span>
+<span class="sd">    * if there are variable names coming from outside the node body, but from the same package as</span>
+<span class="sd">      the node, the function also visits these nodes</span>
+
+<span class="sd">     Args:</span>
+<span class="sd">        module_name (str): module name of current node</span>
+<span class="sd">        parent (str): name of parent node</span>
+<span class="sd">        parent_module (str): name of module of parent node</span>
+<span class="sd">        variable_name (str): name of AST node. Class name, Function name, or a module variable.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: Triple of list of hashes, set of strings representing the imported packages, and a</span>
+<span class="sd">        list of dicts holding the visualization data collected during traversal of</span>
+<span class="sd">        the ast syntax tree. Each dict represents an AST node. Contains names of node and its</span>
+<span class="sd">        parent, modules names of node and parent and node type. This info can be used to plot</span>
+<span class="sd">        the dependency graph.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">visualization_data</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Module &#39;</span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s2">&#39; does not contain any variable named &quot;</span>
+                             <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">variable_name</span><span class="si">}</span><span class="s2">&#39;!&quot;</span><span class="p">)</span>
+    <span class="n">attr_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">))</span><span class="o">.</span><span class="vm">__name__</span>
+    <span class="k">if</span> <span class="n">attr_type</span> <span class="o">==</span> <span class="s1">&#39;module&#39;</span><span class="p">:</span>  <span class="c1"># check if variable is itself a module</span>
+        <span class="n">module_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">variable_name</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
+    <span class="n">module_source</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getsource</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
+    <span class="n">module_tree</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">module_source</span><span class="p">)</span>
+    <span class="n">node</span> <span class="o">=</span> <span class="n">module_tree</span>  <span class="c1"># node is the whole module</span>
+
+    <span class="k">if</span> <span class="n">attr_type</span> <span class="o">!=</span> <span class="s1">&#39;module&#39;</span><span class="p">:</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">get_node</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">module_tree</span><span class="p">)</span>  <span class="c1"># node is a branch of the module tree</span>
+
+    <span class="n">visualization_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">variable_name</span><span class="p">,</span>
+            <span class="s2">&quot;parent&quot;</span><span class="p">:</span> <span class="n">parent</span><span class="p">,</span>
+            <span class="s2">&quot;module&quot;</span><span class="p">:</span> <span class="n">module_name</span><span class="p">,</span>
+            <span class="s2">&quot;parent_module&quot;</span><span class="p">:</span> <span class="n">parent_module</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">hashes</span> <span class="o">=</span> <span class="p">[</span><span class="n">produce_node_hash</span><span class="p">(</span><span class="n">node</span><span class="p">)]</span>
+
+    <span class="c1"># df containing all imports in module</span>
+    <span class="n">df_imports</span> <span class="o">=</span> <span class="n">get_import_data</span><span class="p">(</span><span class="n">module_tree</span><span class="p">)</span>
+    <span class="c1"># all variables used inside node, but defined outside</span>
+    <span class="n">var_names</span> <span class="o">=</span> <span class="n">get_varnames_delta</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+    <span class="c1">#  filter imports that are used inside node</span>
+    <span class="n">df_relevant_imports</span> <span class="o">=</span> <span class="n">df_imports</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">df_imports</span><span class="o">.</span><span class="n">used_name</span><span class="p">,</span> <span class="n">var_names</span><span class="p">)]</span>  <span class="c1"># .loc keeps columns in empty case</span>
+    <span class="n">df_relevant_imports</span> <span class="o">=</span> <span class="n">df_relevant_imports</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span> <span class="n">df_relevant_imports</span><span class="o">.</span><span class="n">package</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">is_standard</span><span class="p">)]</span>
+    <span class="c1"># join external imports with requirements file</span>
+    <span class="n">package</span> <span class="o">=</span> <span class="n">module_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">df_internal_imports</span> <span class="o">=</span> <span class="n">df_relevant_imports</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_relevant_imports</span><span class="o">.</span><span class="n">package</span><span class="o">.</span><span class="n">values</span> <span class="o">==</span> <span class="n">package</span><span class="p">]</span>
+    <span class="n">imported_packages</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">df_relevant_imports</span><span class="o">.</span><span class="n">package</span><span class="p">)</span>
+    <span class="n">imported_packages</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="n">package</span><span class="p">)</span>  <span class="c1"># imports of external libraries</span>
+
+    <span class="c1"># filter variables that come from the module itself</span>
+    <span class="n">vars_same_module</span> <span class="o">=</span> <span class="n">var_names</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">var_names</span><span class="p">,</span> <span class="n">df_imports</span><span class="o">.</span><span class="n">used_name</span><span class="p">)]</span>
+
+    <span class="c1"># call function recursively on package-internal nodes</span>
+    <span class="n">varnames_next_level</span> <span class="o">=</span> <span class="n">vars_same_module</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="o">+</span> <span class="n">df_internal_imports</span><span class="o">.</span><span class="n">varname</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">module_names_next_level</span> <span class="o">=</span> <span class="p">[</span><span class="n">module_name</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span>
+        <span class="n">vars_same_module</span><span class="p">)</span> <span class="o">+</span> <span class="n">df_internal_imports</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">var_</span><span class="p">,</span> <span class="n">mod_</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">varnames_next_level</span><span class="p">,</span> <span class="n">module_names_next_level</span><span class="p">):</span>
+        <span class="c1"># drop special case like __name__  , or recursive calls</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">var_</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;__&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">var_</span> <span class="o">!=</span> <span class="n">variable_name</span><span class="p">:</span>
+            <span class="n">hashes_c</span><span class="p">,</span> <span class="n">imports_c</span><span class="p">,</span> <span class="n">digraph_data_c</span> <span class="o">=</span> <span class="n">walk_nodes</span><span class="p">(</span><span class="n">var_</span><span class="p">,</span> <span class="n">mod_</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">variable_name</span><span class="p">,</span>
+                                                             <span class="n">parent_module</span><span class="o">=</span><span class="n">module_name</span><span class="p">)</span>
+            <span class="n">hashes</span> <span class="o">=</span> <span class="n">hashes</span> <span class="o">+</span> <span class="n">hashes_c</span>
+            <span class="n">imported_packages</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">imports_c</span><span class="p">)</span>
+            <span class="n">visualization_data</span> <span class="o">=</span> <span class="n">visualization_data</span> <span class="o">+</span> <span class="n">digraph_data_c</span>
+    <span class="k">return</span> <span class="n">hashes</span><span class="p">,</span> <span class="n">imported_packages</span><span class="p">,</span> <span class="n">visualization_data</span></div>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_remove_docstrings</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Removes the doc-strings</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">FunctionDef</span><span class="p">,</span> <span class="n">ast</span><span class="o">.</span><span class="n">ClassDef</span><span class="p">,</span> <span class="n">ast</span><span class="o">.</span><span class="n">Module</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">body</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">body</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ast</span><span class="o">.</span><span class="n">Expr</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">body</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">ast</span><span class="o">.</span><span class="n">Str</span><span class="p">):</span>
+                <span class="c1"># Cut-off that element from the body</span>
+                <span class="c1"># The reason why we do not set it to the empty string is that we also want to have</span>
+                <span class="c1"># the same doc-string if someone adds a doc-string, not just changes it</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">body</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">_node</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">body</span><span class="p">:</span>
+            <span class="n">_remove_docstrings</span><span class="p">(</span><span class="n">_node</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="produce_node_hash"><a class="viewcode-back" href="../../api/luisy.html#luisy.code_inspection.produce_node_hash">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">produce_node_hash</span><span class="p">(</span><span class="n">class_node</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Produce hash for AST node, normally ClassDef or FunctionDef or Constant.</span>
+<span class="sd">    invariant to: comments, spaces, blank lines.</span>
+<span class="sd">    not invariant to: variable renaming</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_remove_docstrings</span><span class="p">(</span><span class="n">class_node</span><span class="p">)</span>
+    <span class="n">st</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">class_node</span><span class="p">,</span> <span class="n">annotate_fields</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># no need to include unambiguous field names.</span>
+    <span class="n">hash_</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">hash_</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="get_import_data"><a class="viewcode-back" href="../../api/luisy.html#luisy.code_inspection.get_import_data">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">get_import_data</span><span class="p">(</span><span class="n">module_tree</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get imports of a module.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        module_tree(ast.AST): Syntax tree of module</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        pandas.DataFrame: Data about imports to the module.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">ImportReturner</span><span class="p">()</span>
+    <span class="n">v</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">module_tree</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">import_data</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;used_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">row</span><span class="o">.</span><span class="n">varname</span> <span class="k">if</span> <span class="n">row</span><span class="o">.</span><span class="n">asname</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">row</span><span class="o">.</span><span class="n">asname</span><span class="p">,</span>
+                                   <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;package&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">st</span><span class="p">:</span> <span class="n">st</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;module&quot;</span><span class="p">,</span> <span class="s2">&quot;varname&quot;</span><span class="p">,</span> <span class="s2">&quot;asname&quot;</span><span class="p">,</span> <span class="s2">&quot;used_name&quot;</span><span class="p">,</span> <span class="s2">&quot;package&quot;</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+<div class="viewcode-block" id="ImportReturner"><a class="viewcode-back" href="../../api/luisy.html#luisy.code_inspection.ImportReturner">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">ImportReturner</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">NodeVisitor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Scans syntax tree for imports.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">import_data</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="ImportReturner.star_import_in_imports"><a class="viewcode-back" href="../../api/luisy.html#luisy.code_inspection.ImportReturner.star_import_in_imports">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">star_import_in_imports</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lst</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">any</span><span class="p">([</span><span class="n">import_node</span><span class="p">[</span><span class="s2">&quot;varname&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;*&#39;</span> <span class="k">for</span> <span class="n">import_node</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="ImportReturner.generic_visit"><a class="viewcode-back" href="../../api/luisy.html#luisy.code_inspection.ImportReturner.generic_visit">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">generic_visit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="n">imports</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_imports</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">imports</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">star_import_in_imports</span><span class="p">(</span><span class="n">imports</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Star import not supported by luisy hash creation!&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">import_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">import_data</span> <span class="o">+</span> <span class="n">imports</span>
+        <span class="n">ast</span><span class="o">.</span><span class="n">NodeVisitor</span><span class="o">.</span><span class="n">generic_visit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImportReturner.filter_imports"><a class="viewcode-back" href="../../api/luisy.html#luisy.code_inspection.ImportReturner.filter_imports">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">filter_imports</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;Import&quot;</span><span class="p">:</span>
+            <span class="n">aliases</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">names</span>
+            <span class="k">return</span> <span class="p">[{</span><span class="s2">&quot;module&quot;</span><span class="p">:</span> <span class="n">alias</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;varname&quot;</span><span class="p">:</span> <span class="n">alias</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;asname&quot;</span><span class="p">:</span> <span class="n">alias</span><span class="o">.</span><span class="n">asname</span><span class="p">}</span> <span class="k">for</span> <span class="n">alias</span>
+                    <span class="ow">in</span>
+                    <span class="n">aliases</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;ImportFrom&quot;</span><span class="p">:</span>
+            <span class="n">mod</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">module</span>
+            <span class="n">aliases</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">names</span>
+            <span class="k">return</span> <span class="p">[{</span><span class="s2">&quot;module&quot;</span><span class="p">:</span> <span class="n">mod</span><span class="p">,</span> <span class="s2">&quot;varname&quot;</span><span class="p">:</span> <span class="n">alias</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;asname&quot;</span><span class="p">:</span> <span class="n">alias</span><span class="o">.</span><span class="n">asname</span><span class="p">}</span> <span class="k">for</span> <span class="n">alias</span> <span class="ow">in</span>
+                    <span class="n">aliases</span><span class="p">]</span></div></div>
+
+
+<div class="viewcode-block" id="get_varnames_delta"><a class="viewcode-back" href="../../api/luisy.html#luisy.code_inspection.get_varnames_delta">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">get_varnames_delta</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find all variable names that are used the node body, but defined outside the node body.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">vr</span> <span class="o">=</span> <span class="n">VariablesReturner</span><span class="p">()</span>
+    <span class="n">vr</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+    <span class="n">df_names</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">vr</span><span class="o">.</span><span class="n">variable_names</span><span class="p">)</span>  <span class="c1"># lists loaded and stored varnames inside node</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_names</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+    <span class="n">df_load</span> <span class="o">=</span> <span class="n">df_names</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;kind == &#39;Load&#39;&quot;</span><span class="p">)</span>
+    <span class="n">df_store</span> <span class="o">=</span> <span class="n">df_names</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">df_names</span><span class="p">[</span><span class="s2">&quot;kind&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;Store&quot;</span><span class="p">,</span> <span class="s2">&quot;arg&quot;</span><span class="p">,</span> <span class="s2">&quot;FunctionDef&quot;</span><span class="p">,</span> <span class="s2">&quot;ClassDef&quot;</span><span class="p">,</span>
+                                                       <span class="s2">&quot;ExceptHandler&quot;</span><span class="p">])]</span>
+    <span class="n">df_load</span> <span class="o">=</span> <span class="n">df_load</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s2">&quot;lineno&quot;</span><span class="p">:</span> <span class="s2">&quot;min&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="n">df_store</span> <span class="o">=</span> <span class="n">df_store</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s2">&quot;lineno&quot;</span><span class="p">:</span> <span class="s2">&quot;min&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="n">df_match</span> <span class="o">=</span> <span class="n">df_store</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_load</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+
+    <span class="n">ids_to_ignore</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df_match</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;self&quot;</span><span class="p">]</span>
+    <span class="n">df_names_outside_classdef</span> <span class="o">=</span> <span class="n">df_load</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">df_load</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">ids_to_ignore</span><span class="p">)]</span>
+    <span class="n">filter_builtins</span> <span class="o">=</span> <span class="n">df_names_outside_classdef</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">is_builtin</span><span class="p">)</span>
+    <span class="n">df_names_outside_classdef</span> <span class="o">=</span> <span class="n">df_names_outside_classdef</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">filter_builtins</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">df_names_outside_classdef</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">values</span></div>
+
+
+<div class="viewcode-block" id="VariablesReturner"><a class="viewcode-back" href="../../api/luisy.html#luisy.code_inspection.VariablesReturner">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">VariablesReturner</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">NodeVisitor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Scans syntax tree for variable names. While visiting all nodes of the ast syntax tree,</span>
+<span class="sd">    save all names that are loaded or stored. These include FunctionDefs, ClassDefs, Function</span>
+<span class="sd">    arguments or the Exception Handler context name.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variable_names</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="VariablesReturner.filter_variables"><a class="viewcode-back" href="../../api/luisy.html#luisy.code_inspection.VariablesReturner.filter_variables">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">filter_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;Name&quot;</span><span class="p">:</span>
+            <span class="n">ctx</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">ctx</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">node</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">&quot;lineno&quot;</span><span class="p">:</span> <span class="n">node</span><span class="o">.</span><span class="n">lineno</span><span class="p">}</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;arg&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">node</span><span class="o">.</span><span class="n">arg</span><span class="p">,</span> <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;arg&quot;</span><span class="p">,</span> <span class="s2">&quot;lineno&quot;</span><span class="p">:</span> <span class="n">node</span><span class="o">.</span><span class="n">lineno</span><span class="p">}</span>
+
+        <span class="c1">#  Function Defs and Class Defs can also be inside another class def</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;FunctionDef&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;FunctionDef&quot;</span><span class="p">,</span> <span class="s2">&quot;lineno&quot;</span><span class="p">:</span> <span class="n">node</span><span class="o">.</span><span class="n">lineno</span><span class="p">}</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;ClassDef&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;ClassDef&quot;</span><span class="p">,</span> <span class="s2">&quot;lineno&quot;</span><span class="p">:</span> <span class="n">node</span><span class="o">.</span><span class="n">lineno</span><span class="p">}</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;ExceptHandler&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;ExceptHandler&quot;</span><span class="p">,</span> <span class="s2">&quot;lineno&quot;</span><span class="p">:</span> <span class="n">node</span><span class="o">.</span><span class="n">lineno</span><span class="p">}</span></div>
+
+<div class="viewcode-block" id="VariablesReturner.generic_visit"><a class="viewcode-back" href="../../api/luisy.html#luisy.code_inspection.VariablesReturner.generic_visit">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">generic_visit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="n">var_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_variables</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">var_names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">variable_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var_names</span><span class="p">)</span>
+        <span class="n">ast</span><span class="o">.</span><span class="n">NodeVisitor</span><span class="o">.</span><span class="n">generic_visit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="get_node"><a class="viewcode-back" href="../../api/luisy.html#luisy.code_inspection.get_node">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">get_node</span><span class="p">(</span><span class="n">node_name</span><span class="p">,</span> <span class="n">module_tree</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find a node with given name in the upper level of a module.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">module_tree</span><span class="o">.</span><span class="n">body</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;Assign&quot;</span><span class="p">:</span>
+            <span class="n">target_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">targets</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">node_name</span> <span class="ow">in</span> <span class="n">target_names</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="n">value</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;FunctionDef&quot;</span><span class="p">,</span> <span class="s2">&quot;ClassDef&quot;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">node_name</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">node</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Node &#39;</span><span class="si">{</span><span class="n">node_name</span><span class="si">}</span><span class="s2">&#39; was not found in AST tree.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_requirements_path"><a class="viewcode-back" href="../../api/luisy.html#luisy.code_inspection.get_requirements_path">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">get_requirements_path</span><span class="p">(</span><span class="n">task_class</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Tries to automatically find the path of requirements file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">path_</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getfile</span><span class="p">(</span><span class="n">task_class</span><span class="p">)</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">groups</span> <span class="o">=</span> <span class="n">path_</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">RequirementFileNotFound</span><span class="p">(</span>
+                <span class="s2">&quot;Requirements file not could not be found automatically!&quot;</span>
+            <span class="p">)</span>
+        <span class="n">path_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">groups</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">req_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_</span><span class="p">,</span> <span class="s2">&quot;requirements.txt&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">req_path</span><span class="p">):</span>
+            <span class="k">break</span>
+    <span class="k">return</span> <span class="n">req_path</span></div>
+
+
+<div class="viewcode-block" id="get_requirements_dict"><a class="viewcode-back" href="../../api/luisy.html#luisy.code_inspection.get_requirements_dict">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">get_requirements_dict</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Open the requirements file and create a dictionary which maps each package to its</span>
+<span class="sd">    corresponding line in the requirements.txt. This line contains all version info and will be used</span>
+<span class="sd">    for the hash later.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">reqs_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">req</span> <span class="ow">in</span> <span class="n">requirements</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+            <span class="n">reqs_dict</span><span class="p">[</span><span class="n">req</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">reqs_dict</span></div>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_harmonize_package_name</span><span class="p">(</span><span class="n">package_name</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">package_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="create_deps_map"><a class="viewcode-back" href="../../api/luisy.html#luisy.code_inspection.create_deps_map">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">create_deps_map</span><span class="p">(</span><span class="n">requirements_dict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Map each requirement to its dependencies.</span>
+<span class="sd">    Both keys and values are in unified format. That means to apply: .lower().replace(&quot;-&quot;,&quot;_&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">deps_map</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">req</span> <span class="ow">in</span> <span class="n">requirements_dict</span><span class="p">:</span>  <span class="c1"># here we need the Pypi name</span>
+        <span class="n">deps</span> <span class="o">=</span> <span class="p">[</span><span class="n">_harmonize_package_name</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">get_all_deps</span><span class="p">(</span><span class="n">req</span><span class="p">)]</span>
+        <span class="n">deps_map</span><span class="p">[</span><span class="n">_harmonize_package_name</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">lower</span><span class="p">())]</span> <span class="o">=</span> <span class="n">deps</span>
+    <span class="k">return</span> <span class="n">deps_map</span></div>
+
+
+<div class="viewcode-block" id="get_all_deps_with_versions"><a class="viewcode-back" href="../../api/luisy.html#luisy.code_inspection.get_all_deps_with_versions">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">get_all_deps_with_versions</span><span class="p">(</span><span class="n">package</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get names of all dependencies of &#39;package&#39; using &#39;pipdeptree&#39; including their required version.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        package(str): package for which we want deps.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Dict where the keys are the package names and the values are the version constraints</span>
+<span class="sd">        of all dependencies.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Underlines in package names become hyphens due to a strange behavior of setuptools</span>
+    <span class="n">package</span> <span class="o">=</span> <span class="n">package</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>
+    <span class="n">reqs</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span>
+            <span class="s2">&quot;-m&quot;</span><span class="p">,</span> <span class="s2">&quot;pipdeptree&quot;</span><span class="p">,</span> <span class="s2">&quot;--package&quot;</span><span class="p">,</span>
+            <span class="n">package</span><span class="p">,</span>
+            <span class="s2">&quot;-w&quot;</span><span class="p">,</span> <span class="s2">&quot;silence&quot;</span><span class="p">,</span> <span class="s2">&quot;--json-tree&quot;</span>
+        <span class="p">],</span>
+        <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">DEVNULL</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">reqs_list</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">reqs</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">reqs_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{}</span>
+
+    <span class="n">reqs_list</span> <span class="o">=</span> <span class="n">reqs_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;dependencies&#39;</span><span class="p">,</span> <span class="p">[])</span>
+
+    <span class="n">reqs_dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">_harmonize_package_name</span><span class="p">(</span><span class="n">req</span><span class="p">[</span><span class="s1">&#39;package_name&#39;</span><span class="p">]):</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">_harmonize_package_name</span><span class="p">(</span><span class="n">req</span><span class="p">[</span><span class="s1">&#39;package_name&#39;</span><span class="p">]),</span>
+                <span class="n">req</span><span class="p">[</span><span class="s1">&#39;required_version&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Any&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+            <span class="p">])</span> <span class="k">for</span> <span class="n">req</span> <span class="ow">in</span> <span class="n">reqs_list</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">reqs_dict</span></div>
+
+
+<div class="viewcode-block" id="get_all_deps"><a class="viewcode-back" href="../../api/luisy.html#luisy.code_inspection.get_all_deps">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">get_all_deps</span><span class="p">(</span><span class="n">package</span><span class="p">):</span>
+    <span class="n">reqs_dict</span> <span class="o">=</span> <span class="n">get_all_deps_with_versions</span><span class="p">(</span><span class="n">package</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">reqs_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="map_imports_to_requirements"><a class="viewcode-back" href="../../api/luisy.html#luisy.code_inspection.map_imports_to_requirements">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">map_imports_to_requirements</span><span class="p">(</span><span class="n">imported_packages</span><span class="p">,</span> <span class="n">requirements_dict</span><span class="p">,</span> <span class="n">deps_map</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given a list of packages, look whether they are in the requirements of the repository.</span>
+<span class="sd">    If it is not a direct requirement, look if it is a dependency of a requirements.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        imported_packages(iterable[str]): list of package names</span>
+<span class="sd">        requirements_dict(dict): dict returned by ...</span>
+<span class="sd">        deps_map(dict): dict returned by</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pandas.DataFrame: Dictionary listing for each package, one or several lines of the</span>
+<span class="sd">        requirements file that concern it.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">package_name_to_pypi</span> <span class="o">=</span> <span class="n">make_pypi_mapper</span><span class="p">()</span>
+    <span class="n">imported_packages</span> <span class="o">=</span> <span class="p">[</span><span class="n">package_name_to_pypi</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">imported_packages</span><span class="p">]</span>
+    <span class="n">requirements_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">):</span> <span class="n">v</span> <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">requirements_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    <span class="n">imports_to_req</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">package</span> <span class="ow">in</span> <span class="n">imported_packages</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">package</span> <span class="ow">in</span> <span class="n">requirements_dict</span><span class="p">:</span>
+            <span class="n">imports_to_req</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">{</span><span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="n">package</span><span class="p">,</span> <span class="s2">&quot;requirement_line&quot;</span><span class="p">:</span> <span class="n">requirements_dict</span><span class="p">[</span><span class="n">package</span><span class="p">]})</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># Not directly in requirements file.</span>
+            <span class="k">for</span> <span class="n">req</span> <span class="ow">in</span> <span class="n">deps_map</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">package</span> <span class="ow">in</span> <span class="n">deps_map</span><span class="p">[</span><span class="n">req</span><span class="p">]:</span>
+                    <span class="n">imports_to_req</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="p">{</span><span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="n">package</span><span class="p">,</span> <span class="s2">&quot;requirement_line&quot;</span><span class="p">:</span> <span class="n">requirements_dict</span><span class="p">[</span><span class="n">req</span><span class="p">]})</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">imports_to_req</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">df_reqs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;package&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;requirement_line&#39;</span><span class="p">:</span> <span class="p">[]})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">df_reqs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">imports_to_req</span><span class="p">)</span>
+    <span class="n">is_in_reqs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">imported_packages</span><span class="p">,</span> <span class="n">df_reqs</span><span class="o">.</span><span class="n">package</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_in_reqs</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+        <span class="n">not_found</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">imported_packages</span><span class="p">)[</span><span class="o">~</span><span class="n">is_in_reqs</span><span class="p">]</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Imported packages </span><span class="si">{</span><span class="n">not_found</span><span class="si">}</span><span class="s2"> &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;could not be mapped to requirements file&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df_reqs</span></div>
+
+
+<div class="viewcode-block" id="is_builtin"><a class="viewcode-back" href="../../api/luisy.html#luisy.code_inspection.is_builtin">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">is_builtin</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function is work in progress and will be improved with every upcoming error.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s2">&quot;__module__&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">==</span> <span class="s1">&#39;builtins&#39;</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;builtin_function_or_method&#39;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>  <span class="c1"># variable is not defined</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="is_standard"><a class="viewcode-back" href="../../api/luisy.html#luisy.code_inspection.is_standard">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">is_standard</span><span class="p">(</span><span class="n">package_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determines whether a package is in the python standard lib.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">package_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;sys&quot;</span><span class="p">]:</span>  <span class="c1"># did not work like for the others</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">major</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="o">.</span><span class="n">major</span>
+        <span class="n">minor</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="o">.</span><span class="n">minor</span>
+        <span class="n">std_folder</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;python</span><span class="si">{</span><span class="n">major</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">minor</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">case_1</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">std_folder</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">package_name</span><span class="si">}</span><span class="s2">.py&quot;</span><span class="p">)</span>
+        <span class="n">case_2</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">std_folder</span><span class="p">,</span> <span class="n">package_name</span><span class="p">,</span> <span class="s2">&quot;__init__.py&quot;</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">find_spec</span><span class="p">(</span><span class="n">package_name</span><span class="p">)</span><span class="o">.</span><span class="n">origin</span>
+        <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># have to actually load module to determine file.</span>
+            <span class="n">mod</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">__import__</span><span class="p">(</span><span class="n">package_name</span><span class="p">)</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="vm">__file__</span>
+        <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">case_1</span><span class="p">)</span> <span class="ow">or</span> <span class="n">path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">case_2</span><span class="p">)</span> <span class="ow">or</span> <span class="n">path</span> <span class="o">==</span> <span class="s1">&#39;built-in&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="make_pypi_mapper"><a class="viewcode-back" href="../../api/luisy.html#luisy.code_inspection.make_pypi_mapper">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">make_pypi_mapper</span><span class="p">():</span>
+    <span class="n">special_pypi</span> <span class="o">=</span> <span class="n">get_irregular_pypi_names</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">package_name_to_pypi</span><span class="p">(</span><span class="n">package</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        If the standardized package name is not the Pypi name, return standardized pypi-name</span>
+<span class="sd">        the node, the function also visits these nodes</span>
+
+<span class="sd">         Args:</span>
+<span class="sd">            package(str): name of python package, (standardized with .lower().replace(&quot;-&quot;, &quot;_&quot;))</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            package(str): Pypi name (standardized with .lower().replace(&quot;-&quot;, &quot;_&quot;)) if the latter</span>
+<span class="sd">            differs from package name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">package</span> <span class="ow">in</span> <span class="n">special_pypi</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">special_pypi</span><span class="p">[</span><span class="n">package</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">package</span>
+
+    <span class="k">return</span> <span class="n">package_name_to_pypi</span></div>
+
+
+<div class="viewcode-block" id="get_irregular_pypi_names"><a class="viewcode-back" href="../../api/luisy.html#luisy.code_inspection.get_irregular_pypi_names">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">get_irregular_pypi_names</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get pypi name for given package if they differ.</span>
+<span class="sd">     unify everything to format lower().replace(&quot;-&quot;,&quot;_&quot;)  is not the package name</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">distlib_logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;distlib&quot;</span><span class="p">)</span>
+    <span class="n">distlib_logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>  <span class="c1"># too much info</span>
+    <span class="n">dist_path</span> <span class="o">=</span> <span class="n">DistributionPath</span><span class="p">(</span><span class="n">include_egg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">map_</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">dist</span> <span class="ow">in</span> <span class="n">dist_path</span><span class="o">.</span><span class="n">get_distributions</span><span class="p">():</span>
+        <span class="n">modules</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">dist</span><span class="o">.</span><span class="n">modules</span><span class="p">]</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">modules</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">modules</span> <span class="o">!=</span> <span class="p">[</span><span class="n">name</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">modules</span><span class="p">:</span>
+                <span class="n">map_</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="k">return</span> <span class="n">map_</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2022, Robert Bosch GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

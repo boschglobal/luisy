@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>luisy &mdash; luisy  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Why luisy?" href="about/about.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            luisy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about/about.html">Why?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about/authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributions.html">Contributions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/parameters.html">WrapperTasks and ConcatenationTasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/multi_file.html">Directory Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/cloud.html">Up- and Downloading Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/reruns.html">Trigger reruns by changing code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/spark.html">Interaction with PySpark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="task.html">Task structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decorators.html">Decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reruns.html">Reruns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualize.html">Visualize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud.html">Cloud sync</a></li>
+<li class="toctree-l1"><a class="reference internal" href="helpers.html">Helper funcs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hash_update_mode.html">Hash Update Mode</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/modules.html">Full reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="legal/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal/corporate_information.html">Corporate information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">luisy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">luisy</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="luisy">
+<h1>luisy<a class="headerlink" href="#luisy" title="Permalink to this heading"></a></h1>
+<p><cite>luisy</cite> is a Python framework that extends luigi and further
+simplifies building data science pipelines by reducing development
+complexity. Thus, it makes <strong>LUIgi more eaSY</strong>.</p>
+<section id="an-example-pipeline">
+<h2>An example pipeline<a class="headerlink" href="#an-example-pipeline" title="Permalink to this heading"></a></h2>
+<p>This is how an end-to-end luisy pipeline may look like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">luisy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">raw</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">csv_output</span><span class="p">(</span><span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">InputFile</span><span class="p">(</span><span class="n">luisy</span><span class="o">.</span><span class="n">ExternalTask</span><span class="p">):</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">luisy</span><span class="o">.</span><span class="n">Parameter</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_file_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;file_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">interim</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="n">InputFile</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ProcessedFile</span><span class="p">(</span><span class="n">luisy</span><span class="o">.</span><span class="n">Task</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">()</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="c1"># Some more preprocessings</span>
+        <span class="c1"># ...</span>
+        <span class="c1"># Write to disk</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">final</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MergedFile</span><span class="p">(</span><span class="n">luisy</span><span class="o">.</span><span class="n">ConcatenationTask</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">requires</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">]:</span>
+            <span class="k">yield</span> <span class="n">ProcessedFile</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Learn more about luisy in our <a class="reference internal" href="tutorials/getting_started.html"><span class="doc">Tutorials</span></a>.</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about/about.html">Why?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about/authors.html">Authors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about/authors.html#notice">NOTICE</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about/changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about/changelog.html#changes">Changelog</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributions.html">Contributions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributions.html#add-your-changes">Add your changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributions.html#commit-your-changes">Commit your changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributions.html#test-your-changes">Test your changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributions.html#document-your-code">Document your code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributions.html#bump-the-version">Bump the version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributions.html#check-the-licensing">Check the licensing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributions.html#open-a-pull-request">Open a pull request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributions.html#update-the-requirements">Update the requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributions.html#how-to-cite-luisy">How to cite luisy?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/getting_started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/getting_started.html#setting-up-your-working-dir">Setting up your working_dir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/getting_started.html#running-a-basic-pipeline-in-luisy">Running a basic pipeline in luisy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/getting_started.html#read-output-of-executed-pipeline">Read output of executed pipeline</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/parameters.html">WrapperTasks and ConcatenationTasks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/parameters.html#triggering-multiple-task-instances">Triggering multiple Task instances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/parameters.html#concatenation-task">Concatenation Task</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/parameters.html#wrappertask">WrapperTask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/parameters.html#dynamic-dependencies">Dynamic Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/parameters.html#triggering-different-executions">Triggering different executions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/multi_file.html">Directory Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/cloud.html">Up- and Downloading Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/reruns.html">Trigger reruns by changing code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/spark.html">Interaction with PySpark</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/spark.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/spark.html#example-pipeline">Example pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/spark.html#running-a-pipeline">Running a pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/spark.html#using-databricks">Using databricks</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="task.html">Task structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decorators.html">Decorators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="decorators.html#local-targets">Local targets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decorators.html#cloud-targets">Cloud targets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decorators.html#cloud-inputs">Cloud inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decorators.html#directory-structure">Directory structure</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reruns.html">Reruns</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reruns.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reruns.html#mechanics-of-the-hash-computation">Mechanics of the hash computation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#run-a-pipeline">Run a pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#test-the-execution-summary">Test the execution summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visualize.html">Visualize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud.html">Cloud sync</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cloud.html#how-the-synchronisation-works">How the synchronisation works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud.html#downloading">Downloading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud.html#uploading">Uploading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud.html#tree-traverse">Tree traverse</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="helpers.html">Helper funcs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="helpers.html#find-executed-tasks">Find executed Tasks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hash_update_mode.html">Hash Update Mode</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/modules.html">Full reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/luisy.html">luisy package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/luisy.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.tasks.html">luisy.tasks package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/luisy.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/luisy.html#module-luisy.cli">luisy.cli module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.cli.build"><code class="docutils literal notranslate"><span class="pre">build()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.cli.disable_azure_logging"><code class="docutils literal notranslate"><span class="pre">disable_azure_logging()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.cli.luisy_run"><code class="docutils literal notranslate"><span class="pre">luisy_run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.cli.parse_args"><code class="docutils literal notranslate"><span class="pre">parse_args()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/luisy.html#module-luisy.code_inspection">luisy.code_inspection module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.code_inspection.ImportReturner"><code class="docutils literal notranslate"><span class="pre">ImportReturner</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.code_inspection.RequirementFileNotFound"><code class="docutils literal notranslate"><span class="pre">RequirementFileNotFound</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.code_inspection.VariablesReturner"><code class="docutils literal notranslate"><span class="pre">VariablesReturner</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.code_inspection.create_deps_map"><code class="docutils literal notranslate"><span class="pre">create_deps_map()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.code_inspection.create_hashes"><code class="docutils literal notranslate"><span class="pre">create_hashes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.code_inspection.get_all_deps"><code class="docutils literal notranslate"><span class="pre">get_all_deps()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.code_inspection.get_all_deps_with_versions"><code class="docutils literal notranslate"><span class="pre">get_all_deps_with_versions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.code_inspection.get_import_data"><code class="docutils literal notranslate"><span class="pre">get_import_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.code_inspection.get_irregular_pypi_names"><code class="docutils literal notranslate"><span class="pre">get_irregular_pypi_names()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.code_inspection.get_node"><code class="docutils literal notranslate"><span class="pre">get_node()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.code_inspection.get_requirements_dict"><code class="docutils literal notranslate"><span class="pre">get_requirements_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.code_inspection.get_requirements_path"><code class="docutils literal notranslate"><span class="pre">get_requirements_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.code_inspection.get_varnames_delta"><code class="docutils literal notranslate"><span class="pre">get_varnames_delta()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.code_inspection.is_builtin"><code class="docutils literal notranslate"><span class="pre">is_builtin()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.code_inspection.is_standard"><code class="docutils literal notranslate"><span class="pre">is_standard()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.code_inspection.make_pypi_mapper"><code class="docutils literal notranslate"><span class="pre">make_pypi_mapper()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.code_inspection.map_imports_to_requirements"><code class="docutils literal notranslate"><span class="pre">map_imports_to_requirements()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.code_inspection.produce_node_hash"><code class="docutils literal notranslate"><span class="pre">produce_node_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.code_inspection.walk_nodes"><code class="docutils literal notranslate"><span class="pre">walk_nodes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/luisy.html#module-luisy.config">luisy.config module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.config.Config"><code class="docutils literal notranslate"><span class="pre">Config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.config.Singleton"><code class="docutils literal notranslate"><span class="pre">Singleton</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.config.activate_download"><code class="docutils literal notranslate"><span class="pre">activate_download()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.config.add_working_dir"><code class="docutils literal notranslate"><span class="pre">add_working_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.config.change_working_dir"><code class="docutils literal notranslate"><span class="pre">change_working_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.config.get_default_params"><code class="docutils literal notranslate"><span class="pre">get_default_params()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.config.pass_args"><code class="docutils literal notranslate"><span class="pre">pass_args()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.config.remove_working_dir"><code class="docutils literal notranslate"><span class="pre">remove_working_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.config.set_working_dir"><code class="docutils literal notranslate"><span class="pre">set_working_dir()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/luisy.html#module-luisy.decorators">luisy.decorators module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.decorators.auto_filename"><code class="docutils literal notranslate"><span class="pre">auto_filename()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.decorators.azure_blob_storage_input"><code class="docutils literal notranslate"><span class="pre">azure_blob_storage_input()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.decorators.azure_blob_storage_output"><code class="docutils literal notranslate"><span class="pre">azure_blob_storage_output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.decorators.csv_output"><code class="docutils literal notranslate"><span class="pre">csv_output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.decorators.deltatable_input"><code class="docutils literal notranslate"><span class="pre">deltatable_input()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.decorators.deltatable_output"><code class="docutils literal notranslate"><span class="pre">deltatable_output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.decorators.feather_output"><code class="docutils literal notranslate"><span class="pre">feather_output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.decorators.final"><code class="docutils literal notranslate"><span class="pre">final()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.decorators.hdf_output"><code class="docutils literal notranslate"><span class="pre">hdf_output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.decorators.interim"><code class="docutils literal notranslate"><span class="pre">interim()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.decorators.json_output"><code class="docutils literal notranslate"><span class="pre">json_output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.decorators.make_directory_output"><code class="docutils literal notranslate"><span class="pre">make_directory_output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.decorators.parquetdir_output"><code class="docutils literal notranslate"><span class="pre">parquetdir_output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.decorators.pickle_output"><code class="docutils literal notranslate"><span class="pre">pickle_output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.decorators.project_name"><code class="docutils literal notranslate"><span class="pre">project_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.decorators.raw"><code class="docutils literal notranslate"><span class="pre">raw()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.decorators.requires"><code class="docutils literal notranslate"><span class="pre">requires</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.decorators.xlsx_output"><code class="docutils literal notranslate"><span class="pre">xlsx_output()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/luisy.html#module-luisy.default_params">luisy.default_params module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/luisy.html#module-luisy.file_system">luisy.file_system module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.file_system.AzureContainer"><code class="docutils literal notranslate"><span class="pre">AzureContainer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/luisy.html#module-luisy.hashes">luisy.hashes module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.hashes.HashMapping"><code class="docutils literal notranslate"><span class="pre">HashMapping</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.hashes.HashSynchronizer"><code class="docutils literal notranslate"><span class="pre">HashSynchronizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.hashes.TaskHashEntry"><code class="docutils literal notranslate"><span class="pre">TaskHashEntry</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.hashes.compute_hashes"><code class="docutils literal notranslate"><span class="pre">compute_hashes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.hashes.get_upstream_tasks"><code class="docutils literal notranslate"><span class="pre">get_upstream_tasks()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/luisy.html#module-luisy.helpers">luisy.helpers module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.helpers.RegexParam"><code class="docutils literal notranslate"><span class="pre">RegexParam</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.helpers.RegexTaskPattern"><code class="docutils literal notranslate"><span class="pre">RegexTaskPattern</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.helpers.add_filter_info"><code class="docutils literal notranslate"><span class="pre">add_filter_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.helpers.get_all_reqs"><code class="docutils literal notranslate"><span class="pre">get_all_reqs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.helpers.get_df_from_parquet_dir"><code class="docutils literal notranslate"><span class="pre">get_df_from_parquet_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.helpers.get_related_instances"><code class="docutils literal notranslate"><span class="pre">get_related_instances()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.helpers.get_start_date"><code class="docutils literal notranslate"><span class="pre">get_start_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.helpers.get_stop_date"><code class="docutils literal notranslate"><span class="pre">get_stop_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.helpers.get_string_repr"><code class="docutils literal notranslate"><span class="pre">get_string_repr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.helpers.remove_parent_directories"><code class="docutils literal notranslate"><span class="pre">remove_parent_directories()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.helpers.wrap_in_brackets"><code class="docutils literal notranslate"><span class="pre">wrap_in_brackets()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/luisy.html#module-luisy.luigi_interface">luisy.luigi_interface module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.luigi_interface.COLORS"><code class="docutils literal notranslate"><span class="pre">COLORS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.luigi_interface.CmdPrinter"><code class="docutils literal notranslate"><span class="pre">CmdPrinter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.luigi_interface.Coordinator"><code class="docutils literal notranslate"><span class="pre">Coordinator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.luigi_interface.HashUpdateMode"><code class="docutils literal notranslate"><span class="pre">HashUpdateMode</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.luigi_interface.PipelineMode"><code class="docutils literal notranslate"><span class="pre">PipelineMode</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.luigi_interface.get_root_task"><code class="docutils literal notranslate"><span class="pre">get_root_task()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.luigi_interface.run_luigi"><code class="docutils literal notranslate"><span class="pre">run_luigi()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/luisy.html#module-luisy.targets">luisy.targets module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.targets.AzureBlobStorageTarget"><code class="docutils literal notranslate"><span class="pre">AzureBlobStorageTarget</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.targets.CSVTarget"><code class="docutils literal notranslate"><span class="pre">CSVTarget</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.targets.CloudTarget"><code class="docutils literal notranslate"><span class="pre">CloudTarget</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.targets.DeltaTableTarget"><code class="docutils literal notranslate"><span class="pre">DeltaTableTarget</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.targets.DirectoryTarget"><code class="docutils literal notranslate"><span class="pre">DirectoryTarget</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.targets.FeatherTarget"><code class="docutils literal notranslate"><span class="pre">FeatherTarget</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.targets.HDFTarget"><code class="docutils literal notranslate"><span class="pre">HDFTarget</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.targets.JSONTarget"><code class="docutils literal notranslate"><span class="pre">JSONTarget</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.targets.LocalTarget"><code class="docutils literal notranslate"><span class="pre">LocalTarget</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.targets.LuisyTarget"><code class="docutils literal notranslate"><span class="pre">LuisyTarget</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.targets.ParquetDirTarget"><code class="docutils literal notranslate"><span class="pre">ParquetDirTarget</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.targets.PickleTarget"><code class="docutils literal notranslate"><span class="pre">PickleTarget</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.targets.SparkTarget"><code class="docutils literal notranslate"><span class="pre">SparkTarget</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.targets.XLSXTarget"><code class="docutils literal notranslate"><span class="pre">XLSXTarget</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/luisy.html#module-luisy.testing">luisy.testing module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.testing.DFMock"><code class="docutils literal notranslate"><span class="pre">DFMock</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.testing.LuisyTestCase"><code class="docutils literal notranslate"><span class="pre">LuisyTestCase</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.testing.SparkMock"><code class="docutils literal notranslate"><span class="pre">SparkMock</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.testing.create_file"><code class="docutils literal notranslate"><span class="pre">create_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.testing.create_testing_config"><code class="docutils literal notranslate"><span class="pre">create_testing_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.testing.debug_run"><code class="docutils literal notranslate"><span class="pre">debug_run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.testing.get_all_dependencies"><code class="docutils literal notranslate"><span class="pre">get_all_dependencies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.testing.mock_target"><code class="docutils literal notranslate"><span class="pre">mock_target()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/luisy.html#module-luisy.visualize">luisy.visualize module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.visualize.add_children"><code class="docutils literal notranslate"><span class="pre">add_children()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.visualize.create_label"><code class="docutils literal notranslate"><span class="pre">create_label()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.visualize.make_dependency_graph"><code class="docutils literal notranslate"><span class="pre">make_dependency_graph()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.visualize.simple_task_string"><code class="docutils literal notranslate"><span class="pre">simple_task_string()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.visualize.unique_types"><code class="docutils literal notranslate"><span class="pre">unique_types()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/luisy.html#luisy.visualize.visualize_task"><code class="docutils literal notranslate"><span class="pre">visualize_task()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/luisy.html#module-luisy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="legal/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal/corporate_information.html">Corporate information</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="legal/corporate_information.html#name-and-address">Name and address</a></li>
+<li class="toctree-l2"><a class="reference internal" href="legal/corporate_information.html#members-of-the-board-of-management">Members of the Board of Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="legal/corporate_information.html#your-contact-at-bosch">Your contact at Bosch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="legal/corporate_information.html#register-entries">Register Entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="legal/corporate_information.html#value-added-tax-identification-number">Value-added tax identification number</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="about/about.html" class="btn btn-neutral float-right" title="Why luisy?" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2022, Robert Bosch GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

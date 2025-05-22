@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloud synchronisation &mdash; luisy  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Helpers" href="helpers.html" />
+    <link rel="prev" title="Visualize" href="visualize.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            luisy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about/about.html">Why?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about/authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributions.html">Contributions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/parameters.html">WrapperTasks and ConcatenationTasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/multi_file.html">Directory Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/cloud.html">Up- and Downloading Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/reruns.html">Trigger reruns by changing code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/spark.html">Interaction with PySpark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="task.html">Task structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decorators.html">Decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reruns.html">Reruns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualize.html">Visualize</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Cloud sync</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#how-the-synchronisation-works">How the synchronisation works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#downloading">Downloading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uploading">Uploading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tree-traverse">Tree traverse</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="helpers.html">Helper funcs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hash_update_mode.html">Hash Update Mode</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/modules.html">Full reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="legal/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal/corporate_information.html">Corporate information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">luisy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Cloud synchronisation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/cloud.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cloud-synchronisation">
+<h1>Cloud synchronisation<a class="headerlink" href="#cloud-synchronisation" title="Permalink to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is an experimental feature. Expect sharp edges and bugs.</p>
+</div>
+<p>Each <code class="xref py py-class docutils literal notranslate"><span class="pre">luisy.Task</span></code> comes with the parameters <code class="code docutils literal notranslate"><span class="pre">upload</span></code>
+and <code class="code docutils literal notranslate"><span class="pre">download</span></code> that allow to synchronize the target of a task
+with the Azure cloud.</p>
+<section id="how-the-synchronisation-works">
+<h2>How the synchronisation works<a class="headerlink" href="#how-the-synchronisation-works" title="Permalink to this heading"></a></h2>
+<p>If a <a class="reference internal" href="api/luisy.html#module-luisy" title="luisy"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luisy</span></code></a> pipeline is invoked the
+following steps are performed subsequently:</p>
+<ul class="simple">
+<li><p>Starting at the root-task given by the user, all upstream tasks
+are detected and their hash is determined using the local
+code-base (see also <a class="reference internal" href="reruns.html#rerun"><span class="std std-ref">Overview</span></a> for more details).</p></li>
+<li><p>Compared with the hashes in the local filesystem, the tasks whose
+hashes have changed are detected.</p></li>
+<li><p>All local files whose tasks need a rerun are deleted</p></li>
+<li><p>Using luigi, the pipeline is executed. If <code class="code docutils literal notranslate"><span class="pre">--download</span></code> is
+used, <a class="reference internal" href="api/luisy.html#module-luisy" title="luisy"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luisy</span></code></a> checks for each task whether a file with the
+correct hash resides in the cloud. If so, the file is downloaded
+instead of executing the task locally.</p></li>
+<li><p>After the pipeline has run through, <strong>all</strong> files of the pipeline whose
+hash is different from the hash in the cloud are uploaded if
+<code class="code docutils literal notranslate"><span class="pre">--upload</span></code> is specified.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Notice that <code class="code docutils literal notranslate"><span class="pre">--download</span></code> and <code class="code docutils literal notranslate"><span class="pre">--upload</span></code> are asymmetric to some
+extend: Only what is needed is downloaded but everything is
+uploaded. The reason is that we want to minimize the data on the
+clients locally but everything should be available in the cloud
+storage.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As any other synchronization-tool, up- and downloading to your
+cloud storage system creates additional costs for you at your cloud
+provider service. Dependend on your cloud service, the costs
+can depend on the file sizes as well as on the number of files.
+luisy has no control over and is not in charge for these costs.</p>
+</div>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h2>
+<p>To use this service, the access token for the
+the storage has to be set:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">LUISY_AZURE_STORAGE_KEY</span><span class="o">=</span>SECRET_KEY
+<span class="nb">export</span><span class="w"> </span><span class="nv">LUISY_AZURE_CONTAINER_NAME</span><span class="o">=</span>CONTAINER_NAME
+<span class="nb">export</span><span class="w"> </span><span class="nv">LUISY_AZURE_ACCOUNT_NAME</span><span class="o">=</span>ACCOUNT_NAME
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The account name can be read of the Azure URL:  <a class="reference external" href="https://[ACCOUNT_NAME].blob.core.windows.net">https://[ACCOUNT_NAME].blob.core.windows.net</a></p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Dont add this to your .bashrc or something similar. The secret key is sensitive and should
+never be stored unencrypted. By adding a space in front of the <cite>export</cite> command, you ensure
+that this command will not be saved inside your <cite>.bash_history</cite>.</p>
+</div>
+<p>Here, we use the container <code class="code docutils literal notranslate"><span class="pre">projects</span></code>. There, a folder of the
+name of the project (that is, the python package where the task lives
+in) has to be created.</p>
+</section>
+<section id="downloading">
+<h2>Downloading<a class="headerlink" href="#downloading" title="Permalink to this heading"></a></h2>
+<p>If <code class="code docutils literal notranslate"><span class="pre">--download</span></code> is added to task execution, like</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>luisy<span class="w"> </span>--download<span class="w"> </span>--module<span class="w"> </span>my_module.tasks<span class="w"> </span>MyTask
+</pre></div>
+</div>
+<p>then if the task is not yet completed (that is, if its outfile does
+not exists), then it is checked whether the file exists in the cloud.
+If the file exists in the cloud, then the file is downloaded and the
+task is marked as complete.</p>
+</section>
+<section id="uploading">
+<h2>Uploading<a class="headerlink" href="#uploading" title="Permalink to this heading"></a></h2>
+<p>If <code class="code docutils literal notranslate"><span class="pre">--upload</span></code> is added to task execution, like</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>luisy<span class="w"> </span>--upload<span class="w"> </span>--module<span class="w"> </span>my_module.tasks<span class="w"> </span>MyTask
+</pre></div>
+</div>
+<p>then the result of the task is uploaded to the cloud. This can also be
+added to tasks that have already been executed, in this case, just the
+upload is done.</p>
+</section>
+<section id="tree-traverse">
+<h2>Tree traverse<a class="headerlink" href="#tree-traverse" title="Permalink to this heading"></a></h2>
+<p>If a task is called with both <code class="code docutils literal notranslate"><span class="pre">--upload</span></code> and <code class="code docutils literal notranslate"><span class="pre">--download</span></code>,
+like</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>luisy<span class="w"> </span>--upload<span class="w"> </span>--download<span class="w"> </span>--module<span class="w"> </span>my_module.tasks<span class="w"> </span>MyTask
+</pre></div>
+</div>
+<p>then uploading and downloading is done recursively through the tree
+for all tasks whose completion is checked, provided all involved tasks
+are <code class="xref py py-class docutils literal notranslate"><span class="pre">luisy.Tasks</span></code> that correctly forward the parameters,
+like with <code class="xref py py-class docutils literal notranslate"><span class="pre">luisy.requires</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">luisy.inherits</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="visualize.html" class="btn btn-neutral float-left" title="Visualize" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="helpers.html" class="btn btn-neutral float-right" title="Helpers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2022, Robert Bosch GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

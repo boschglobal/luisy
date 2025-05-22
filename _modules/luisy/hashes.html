@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>luisy.hashes &mdash; luisy  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            luisy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/about.html">Why?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributions.html">Contributions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/parameters.html">WrapperTasks and ConcatenationTasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/multi_file.html">Directory Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/cloud.html">Up- and Downloading Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/reruns.html">Trigger reruns by changing code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/spark.html">Interaction with PySpark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../task.html">Task structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../decorators.html">Decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reruns.html">Reruns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualize.html">Visualize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cloud.html">Cloud sync</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../helpers.html">Helper funcs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hash_update_mode.html">Hash Update Mode</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">Full reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/corporate_information.html">Corporate information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">luisy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">luisy.hashes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for luisy.hashes</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2022 - for information on the respective copyright owner see the NOTICE.rst file or</span>
+<span class="c1"># the repository https://github.com/boschglobal/luisy</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">luisy.code_inspection</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_hashes</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luisy.testing</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_all_dependencies</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luisy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Task</span><span class="p">,</span>
+    <span class="n">ExternalTask</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luisy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Config</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luisy.targets</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParquetDirTarget</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">luisy.config</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">add_working_dir</span><span class="p">,</span>
+    <span class="n">remove_working_dir</span><span class="p">,</span>
+    <span class="n">change_working_dir</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="TaskHashEntry"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.TaskHashEntry">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">TaskHashEntry</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class manages all available hash entries in a luisy run. Each task of luisy has its own</span>
+<span class="sd">    hash depending on the code version. So in one luisy run, a task can have multiple hashes:</span>
+<span class="sd">    - hash in local `luisy.hash` file</span>
+<span class="sd">    - hash in cloud `luisy_hash` file (cloud)</span>
+<span class="sd">    - hash that was computed in this current run</span>
+
+<span class="sd">    Most of the methods of this class do comparisons between those hashes to give luisy an</span>
+<span class="sd">    idea of what needs to be executed, downloaded, uploaded and which hashes need to be refreshed</span>
+<span class="sd">    in `.luisy.hash` file online or locally.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        hash_new (str): hash of current luisy run</span>
+<span class="sd">        hash_local (str or None): hash of local &#39;luisy.hash&#39; file (if available)</span>
+<span class="sd">        hash_cloud (str or None): hash of cloud &#39;luisy.hash&#39; file (if available)</span>
+<span class="sd">        task (luisy.Task): instance of task which all the hashes belong to</span>
+<span class="sd">        filename (str): output filename of task (key inside `luisy.hash` file)</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        Can this be moved inside a Task instance?</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hash_new</span><span class="p">,</span> <span class="n">hash_local</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hash_cloud</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hash_new</span> <span class="o">=</span> <span class="n">hash_new</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hash_local</span> <span class="o">=</span> <span class="n">hash_local</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hash_cloud</span> <span class="o">=</span> <span class="n">hash_cloud</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">=</span> <span class="n">task</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
+
+<div class="viewcode-block" id="TaskHashEntry.in_cloud"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.TaskHashEntry.in_cloud">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">in_cloud</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: if Task has a hash saved in the cloud</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_cloud</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="TaskHashEntry.has_outdated_cloud_hash"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.TaskHashEntry.has_outdated_cloud_hash">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">has_outdated_cloud_hash</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: if Task has a hash saved in the cloud and this is outdated</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_cloud</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_new</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_cloud</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="TaskHashEntry.in_local"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.TaskHashEntry.in_local">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">in_local</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_local</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="TaskHashEntry.is_downloadable"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.TaskHashEntry.is_downloadable">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">is_downloadable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_cloud</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_outdated_cloud_hash</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="TaskHashEntry.has_outdated_local_hash"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.TaskHashEntry.has_outdated_local_hash">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">has_outdated_local_hash</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_local</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_new</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_local</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="TaskHashEntry.is_external_task"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.TaskHashEntry.is_external_task">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">is_external_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="p">,</span> <span class="n">ExternalTask</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TaskHashEntry.has_parquet_output"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.TaskHashEntry.has_parquet_output">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">has_parquet_output</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">issubclass</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">target_cls</span><span class="p">,</span> <span class="n">ParquetDirTarget</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TaskHashEntry.needs_local_execution"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.TaskHashEntry.needs_local_execution">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">needs_local_execution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">has_outdated_local_hash</span><span class="p">()</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_local</span><span class="p">())</span> <span class="ow">and</span> <span class="ow">not</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_downloadable</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="TaskHashEntry.needs_to_be_downloaded"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.TaskHashEntry.needs_to_be_downloaded">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">needs_to_be_downloaded</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">has_outdated_local_hash</span><span class="p">()</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_local</span><span class="p">())</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_downloadable</span><span class="p">()</span></div></div>
+
+
+<div class="viewcode-block" id="HashSynchronizer"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashSynchronizer">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">HashSynchronizer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class to keep hashmappings of a luisy run synched. Calling the HashSynchronizer.initialize()</span>
+<span class="sd">    loads the following Hashmappings, that will be managed in this class:</span>
+<span class="sd">    - current run of luisy</span>
+<span class="sd">    - local `.luisy.hash`</span>
+<span class="sd">    - cloud `.luisy.hash`</span>
+
+<span class="sd">    This class manages the synchronization between those hashmappings when luisy did some updates</span>
+<span class="sd">    on them. It also offers some functions that gives the user information on which tasks to</span>
+<span class="sd">    download/upload/rerun/...</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tasks(dict): values are Tasks of current luisy run, keys are corresponding filenames.</span>
+<span class="sd">        root_task(luisy.Task): Root task of the current luisy run (needed to get `project name`)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tasks</span><span class="p">,</span> <span class="n">root_task</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span> <span class="o">=</span> <span class="n">tasks</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root_task</span> <span class="o">=</span> <span class="n">root_task</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hash_entries</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="HashSynchronizer.check_params"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashSynchronizer.check_params">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">check_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="n">task_filenames</span> <span class="o">=</span> <span class="p">[</span><span class="n">remove_working_dir</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">output</span><span class="p">()</span><span class="o">.</span><span class="n">path</span><span class="p">)</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+
+        <span class="k">assert</span> <span class="nb">all</span><span class="p">([</span><span class="n">filename</span> <span class="ow">in</span> <span class="n">task_filenames</span> <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashmapping_new</span><span class="o">.</span><span class="n">hashes</span><span class="o">.</span><span class="n">keys</span><span class="p">()])</span></div>
+
+<div class="viewcode-block" id="HashSynchronizer.initialize"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashSynchronizer.initialize">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes all hashmappings needed in this class:</span>
+<span class="sd">        - hash_mapping_new: computed by current pipeline</span>
+<span class="sd">        - hash_mapping_local: loaded from local `luisy.hash` file</span>
+<span class="sd">        - hash_mapping_cloud: loaded from `luisy.hash` file in cloud</span>
+
+<span class="sd">        Also sets up list of hash_entries, which are used to compare hashmappings.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_initialize_hashmappings</span><span class="p">()</span>
+        <span class="n">hashes_new</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashmapping_new</span><span class="o">.</span><span class="n">hashes</span>
+        <span class="n">hashes_local</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashmapping_local</span><span class="o">.</span><span class="n">hashes</span>
+        <span class="n">hashes_cloud</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashmapping_cloud</span><span class="o">.</span><span class="n">hashes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_params</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">hashes_new</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hash_entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TaskHashEntry</span><span class="p">(</span>
+                <span class="n">hash_new</span><span class="o">=</span><span class="n">hashes_new</span><span class="p">[</span><span class="n">filename</span><span class="p">]</span> <span class="k">if</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">hashes_new</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">hash_local</span><span class="o">=</span><span class="n">hashes_local</span><span class="p">[</span><span class="n">filename</span><span class="p">]</span> <span class="k">if</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">hashes_local</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">hash_cloud</span><span class="o">=</span><span class="n">hashes_cloud</span><span class="p">[</span><span class="n">filename</span><span class="p">]</span> <span class="k">if</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">hashes_cloud</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">filename</span><span class="p">]</span> <span class="k">if</span> <span class="n">filename</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
+            <span class="p">))</span></div>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_initialize_hashmappings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hashmapping_new</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_new_hashes</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hashmapping_local</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_local_hash_file</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hashmapping_cloud</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_cloud_hash_file</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_external_cloud_hashes</span><span class="p">()</span>
+
+<div class="viewcode-block" id="HashSynchronizer.compute_new_hashes"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashSynchronizer.compute_new_hashes">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">compute_new_hashes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Compute hashes of tasks&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">HashMapping</span><span class="o">.</span><span class="n">compute_from_tasks</span><span class="p">(</span>
+            <span class="n">tasks</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">,</span>
+            <span class="n">project_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_task</span><span class="o">.</span><span class="n">project_name</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="HashSynchronizer.read_local_hash_file"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashSynchronizer.read_local_hash_file">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">read_local_hash_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Read Hashes from disk&#39;</span><span class="p">)</span>
+        <span class="n">hashes</span> <span class="o">=</span> <span class="n">HashMapping</span><span class="o">.</span><span class="n">load_from_local</span><span class="p">(</span>
+            <span class="n">project_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_task</span><span class="o">.</span><span class="n">project_name</span>
+        <span class="p">)</span>
+        <span class="n">hashes</span><span class="o">.</span><span class="n">clean_up</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">hashes</span></div>
+
+<div class="viewcode-block" id="HashSynchronizer.read_cloud_hash_file"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashSynchronizer.read_cloud_hash_file">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">read_cloud_hash_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s1">&#39;download&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s1">&#39;upload&#39;</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Read Hashes from cloud&#39;</span><span class="p">)</span>
+            <span class="n">hashes</span> <span class="o">=</span> <span class="n">HashMapping</span><span class="o">.</span><span class="n">load_from_cloud</span><span class="p">(</span>
+                <span class="n">project_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_task</span><span class="o">.</span><span class="n">project_name</span>
+            <span class="p">)</span>
+            <span class="n">hashes</span><span class="o">.</span><span class="n">clean_up</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">hashes</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">HashMapping</span><span class="p">(</span><span class="n">hashes</span><span class="o">=</span><span class="p">{},</span> <span class="n">local</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">project_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_task</span><span class="o">.</span><span class="n">project_name</span><span class="p">)</span></div>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_add_external_cloud_hashes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        It might be that some files in the cloud are added by a none-luisy system, like a Databricks</span>
+<span class="sd">        cluster that writes some parquets to the blob-storage correctly. Those files cannot be</span>
+<span class="sd">        versioned with luisy and we have to assume that these files are immutable. Thus, we will</span>
+<span class="sd">        check if any tasks in the pipeline point to such files and will add their hashes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">filename</span><span class="p">,</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">target_cls</span><span class="p">,</span> <span class="n">ParquetDirTarget</span><span class="p">):</span>
+
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashmapping_cloud</span><span class="o">.</span><span class="n">get_hash</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">continue</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">hashmapping_cloud</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+                    <span class="n">filepath</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
+                    <span class="n">task_hash</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hashmapping_cloud</span><span class="o">.</span><span class="n">get_hash</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+                <span class="p">)</span>
+
+<div class="viewcode-block" id="HashSynchronizer.get_outdated_local_hash_entries"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashSynchronizer.get_outdated_local_hash_entries">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_outdated_local_hash_entries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Out dated tasks without external tasks as external tasks should not be reran at all</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: hash entries of tasks that are outdated (no external tasks included)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">hash_entry</span> <span class="k">for</span> <span class="n">hash_entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_entries</span> <span class="k">if</span>
+            <span class="n">hash_entry</span><span class="o">.</span><span class="n">has_outdated_local_hash</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">hash_entry</span><span class="o">.</span><span class="n">is_external_task</span><span class="p">()</span>
+        <span class="p">]</span></div>
+
+<div class="viewcode-block" id="HashSynchronizer.get_new_local_hash_entries"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashSynchronizer.get_new_local_hash_entries">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_new_local_hash_entries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Tasks that are non existent on local machine</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: hash entries that are not present in local luisy.hash</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">hash_entry</span> <span class="k">for</span> <span class="n">hash_entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_entries</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">hash_entry</span><span class="o">.</span><span class="n">in_local</span><span class="p">()]</span></div>
+
+<div class="viewcode-block" id="HashSynchronizer.get_downloadable_hash_entries"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashSynchronizer.get_downloadable_hash_entries">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_downloadable_hash_entries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Identifies which of the files available in the cloud have the hash needed for the local</span>
+<span class="sd">        execution.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: List of hash entries that can be downloaded from the cloud having the latest hash</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">hash_entry</span> <span class="k">for</span> <span class="n">hash_entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_entries</span>
+                <span class="k">if</span> <span class="n">hash_entry</span><span class="o">.</span><span class="n">is_downloadable</span><span class="p">()]</span></div>
+
+<div class="viewcode-block" id="HashSynchronizer.get_new_cloud_hash_entries"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashSynchronizer.get_new_cloud_hash_entries">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_new_cloud_hash_entries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Non existent tasks in the cloud</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: hash entries that do not exist in cloud yet</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">hash_entry</span> <span class="k">for</span> <span class="n">hash_entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_entries</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">hash_entry</span><span class="o">.</span><span class="n">in_cloud</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">hash_entry</span><span class="o">.</span><span class="n">has_parquet_output</span><span class="p">()]</span></div>
+
+<div class="viewcode-block" id="HashSynchronizer.get_outdated_cloud_hash_entries"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashSynchronizer.get_outdated_cloud_hash_entries">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_outdated_cloud_hash_entries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Outdated tasks in cloud</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: hash entries of outdated tasks in cloud</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">hash_entry</span> <span class="k">for</span> <span class="n">hash_entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_entries</span>
+                <span class="k">if</span> <span class="n">hash_entry</span><span class="o">.</span><span class="n">has_outdated_cloud_hash</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">hash_entry</span><span class="o">.</span><span class="n">has_parquet_output</span><span class="p">()]</span></div>
+
+<div class="viewcode-block" id="HashSynchronizer.get_all_hash_entries_that_need_a_run"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashSynchronizer.get_all_hash_entries_that_need_a_run">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_all_hash_entries_that_need_a_run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Outdated or non existing local tasks</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: Hash entries of tasks that will be refreshed in this luisy run</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_new_local_hash_entries</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_outdated_local_hash_entries</span><span class="p">()))</span></div>
+
+<div class="viewcode-block" id="HashSynchronizer.get_local_execution_hash_entries"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashSynchronizer.get_local_execution_hash_entries">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_local_execution_hash_entries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Tasks that need to be executed locally because they cannot be downloaded</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: hashmappings with tasks that need to be executed locally</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">hash_entry</span> <span class="k">for</span> <span class="n">hash_entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_entries</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">hash_entry</span><span class="o">.</span><span class="n">needs_local_execution</span><span class="p">())]</span></div>
+
+<div class="viewcode-block" id="HashSynchronizer.get_download_hash_entries"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashSynchronizer.get_download_hash_entries">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_download_hash_entries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">       Non existent local tasks that are available with their newest versions in the cloud</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: hashmappings that will be downloaded</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">hash_entry</span> <span class="k">for</span> <span class="n">hash_entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_entries</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">hash_entry</span><span class="o">.</span><span class="n">needs_to_be_downloaded</span><span class="p">())]</span></div>
+
+<div class="viewcode-block" id="HashSynchronizer.get_upload_hash_entries"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashSynchronizer.get_upload_hash_entries">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_upload_hash_entries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        All outdated or non existing tasks in cloud</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: hash entries to upload</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_outdated_cloud_hash_entries</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_new_cloud_hash_entries</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="HashSynchronizer.clear_outdated_tasks"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashSynchronizer.clear_outdated_tasks">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">clear_outdated_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Clears the output of all tasks that are outdated locally</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            This can also be implemented for cloud clearing here. Currently the rerun tasks in</span>
+<span class="sd">            the cloud are just overwritten when saved online</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">hash_entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_outdated_local_hash_entries</span><span class="p">():</span>
+            <span class="n">hash_entry</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">clean</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="HashSynchronizer.synchronize_local_hashes"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashSynchronizer.synchronize_local_hashes">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">synchronize_local_hashes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">failed_tasks</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function updates all local hashes to the hashes from the current run. Failed tasks</span>
+<span class="sd">        can be given as an argument to prevent luisy from setting hashes that have not been</span>
+<span class="sd">        executed.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            failed_tasks (list): Failed tasks in luigi run</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">executed_tasks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_new_local_hash_entries</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_outdated_local_hash_entries</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">hash_entry</span> <span class="ow">in</span> <span class="n">executed_tasks</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">hash_entry</span><span class="o">.</span><span class="n">task</span> <span class="ow">in</span> <span class="n">failed_tasks</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Task for </span><span class="si">{</span><span class="n">hash_entry</span><span class="o">.</span><span class="n">filename</span><span class="si">}</span><span class="s2"> failed, will not update hash&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="n">outfile</span> <span class="o">=</span> <span class="n">hash_entry</span><span class="o">.</span><span class="n">filename</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hashmapping_local</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+                <span class="n">filepath</span><span class="o">=</span><span class="n">outfile</span><span class="p">,</span>
+                <span class="n">task_hash</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hashmapping_new</span><span class="o">.</span><span class="n">get_hash</span><span class="p">(</span><span class="n">outfile</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hashmapping_local</span><span class="o">.</span><span class="n">save</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="HashSynchronizer.synchronize_cloud_hashes"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashSynchronizer.synchronize_cloud_hashes">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">synchronize_cloud_hashes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">failed_tasks</span><span class="p">,</span> <span class="n">upload_tasks</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function updates all online/cloud hashes to the hashes from the current run. Failed</span>
+<span class="sd">        tasks can be given as an argument to prevent luisy from setting hashes that have not been</span>
+<span class="sd">        uploaded. In addition, if `upload_tasks` is True, this method uploads all the tasks that</span>
+<span class="sd">        have outdated hash entries as well.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            failed_tasks (list): Failed tasks in luigi run</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">hash_entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_upload_hash_entries</span><span class="p">():</span>
+            <span class="c1"># Only upload successfully tasks</span>
+            <span class="k">if</span> <span class="n">hash_entry</span><span class="o">.</span><span class="n">task</span> <span class="ow">in</span> <span class="n">failed_tasks</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Task for </span><span class="si">{</span><span class="n">hash_entry</span><span class="o">.</span><span class="n">filename</span><span class="si">}</span><span class="s2"> failed, will not upload&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">upload_tasks</span><span class="p">:</span>
+                <span class="n">hash_entry</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span><span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hashmapping_cloud</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+                <span class="n">filepath</span><span class="o">=</span><span class="n">hash_entry</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span>
+                <span class="n">task_hash</span><span class="o">=</span><span class="n">hash_entry</span><span class="o">.</span><span class="n">hash_new</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="c1"># Update the cloud file after each upload to not start all over again in terms</span>
+            <span class="c1"># of crashes</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hashmapping_cloud</span><span class="o">.</span><span class="n">save</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="HashSynchronizer.set_files_to_download"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashSynchronizer.set_files_to_download">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">set_files_to_download</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets files that need to be downloaded when luigi is executed. Files that need to be</span>
+<span class="sd">        downloaded will be set inside the Config() singleton and checked in the</span>
+<span class="sd">        :py:meth`luisy.Target.exists()` method.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            Can this be done dynamically during luigi run?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">_files_to_download</span> <span class="o">=</span> <span class="p">[</span><span class="n">add_working_dir</span><span class="p">(</span><span class="n">hash_entry</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span> <span class="k">for</span> <span class="n">hash_entry</span> <span class="ow">in</span>
+                                       <span class="bp">self</span><span class="o">.</span><span class="n">get_download_hash_entries</span><span class="p">()]</span></div></div>
+
+
+<div class="viewcode-block" id="HashMapping"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashMapping">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">HashMapping</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Maps generic file identifiers to hashes of the tasks. To work in different working-dirs, the</span>
+<span class="sd">    file identifiers are the paths to the file with the working-dir removed.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        hashes (dict): Dict where the keys are file identifiers and the values are hashes of the</span>
+<span class="sd">            tasks creating the respective files.</span>
+<span class="sd">        local (bool): Whether the files of the hashes are located locally or remotely (i.e., the</span>
+<span class="sd">            cloud).</span>
+<span class="sd">        project_name (str): Identifier of the project. Typically the string marked by the</span>
+<span class="sd">            decorator :py:func:`luisy.decorators.project_name`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hashes</span><span class="p">,</span> <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">project_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hashes</span> <span class="o">=</span> <span class="n">hashes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">local</span> <span class="o">=</span> <span class="n">local</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project_name</span> <span class="o">=</span> <span class="n">project_name</span>
+
+<div class="viewcode-block" id="HashMapping.get_local_hash_path"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashMapping.get_local_hash_path">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_local_hash_path</span><span class="p">(</span><span class="n">project_name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">working_dir</span><span class="p">,</span>
+            <span class="n">project_name</span><span class="p">,</span>
+            <span class="s1">&#39;.luisy.hash&#39;</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="HashMapping.get_cloud_hash_path"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashMapping.get_cloud_hash_path">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_cloud_hash_path</span><span class="p">(</span><span class="n">project_name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">change_working_dir</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">HashMapping</span><span class="o">.</span><span class="n">get_local_hash_path</span><span class="p">(</span><span class="n">project_name</span><span class="p">),</span>
+            <span class="n">dir_current</span><span class="o">=</span><span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">working_dir</span><span class="p">,</span>
+            <span class="n">dir_new</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="HashMapping.get_hash"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashMapping.get_hash">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_hash</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="HashMapping.load_from_local"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashMapping.load_from_local">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_from_local</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">project_name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Loads the mapping from the local :code:`.luisy.hash` file available in the working-dir of</span>
+<span class="sd">        the project.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            project_name (str): Name of the project.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            HashMapping: The mapping of the hashes</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">HashMapping</span><span class="o">.</span><span class="n">get_local_hash_path</span><span class="p">(</span><span class="n">project_name</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Read hashes from </span><span class="si">{</span><span class="n">filepath</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">hashes</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># If no hash-file exists, set up one</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;No hash-file there, will create one. May have to run some tasks&#39;</span><span class="p">)</span>
+            <span class="n">hashes</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">return</span> <span class="n">HashMapping</span><span class="p">(</span><span class="n">hashes</span><span class="p">,</span> <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">project_name</span><span class="o">=</span><span class="n">project_name</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="HashMapping.update"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashMapping.update">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">task_hash</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hashes</span><span class="p">[</span><span class="n">filepath</span><span class="p">]</span> <span class="o">=</span> <span class="n">task_hash</span></div>
+
+<div class="viewcode-block" id="HashMapping.load_from_cloud"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashMapping.load_from_cloud">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_from_cloud</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">project_name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Loads the mapping from the cloud version of :code:`.luisy.hash` in the cloud-storage of the</span>
+<span class="sd">        project.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            project_name (str): Name of the project.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            HashMapping: The mapping of the hashes</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">fs</span> <span class="o">=</span> <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">fs</span>
+
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">HashMapping</span><span class="o">.</span><span class="n">get_cloud_hash_path</span><span class="p">(</span><span class="n">project_name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;File available. Start download&#39;</span><span class="p">)</span>
+            <span class="n">hashes</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">load_json</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;No hash file in cloud&#39;</span><span class="p">)</span>
+            <span class="n">hashes</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">return</span> <span class="n">HashMapping</span><span class="p">(</span><span class="n">hashes</span><span class="p">,</span> <span class="n">local</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">project_name</span><span class="o">=</span><span class="n">project_name</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="HashMapping.compute_from_tasks"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashMapping.compute_from_tasks">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_from_tasks</span><span class="p">(</span><span class="n">tasks</span><span class="p">,</span> <span class="n">project_name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Computes the mapping from a dict of tasks.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tasks (dict): Dict where the values are :py:class:`luisy.Task` objects and the keys are</span>
+<span class="sd">                their file identifiers (i.e., the filepaths without the working-directory).</span>
+<span class="sd">            project_name (str): Name of the project.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            HashMapping: The mapping of the hashes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">hashes</span> <span class="o">=</span> <span class="n">compute_hashes</span><span class="p">(</span>
+            <span class="n">tasks</span><span class="p">,</span>
+            <span class="n">requirements_path</span><span class="o">=</span><span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s1">&#39;requirements_path&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">HashMapping</span><span class="p">(</span><span class="n">hashes</span><span class="p">,</span> <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">project_name</span><span class="o">=</span><span class="n">project_name</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="HashMapping.save"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashMapping.save">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Saves the hashes either to disc (if :code:`local=True`) or to the cloud storage (if</span>
+<span class="sd">        :code:`local=False`)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">local</span><span class="p">:</span>
+            <span class="n">filepath</span> <span class="o">=</span> <span class="n">HashMapping</span><span class="o">.</span><span class="n">get_local_hash_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_name</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">filepath</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">filepath</span><span class="p">),</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Write hashes to </span><span class="si">{</span><span class="n">filepath</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;w+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hashes</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fs</span> <span class="o">=</span> <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">fs</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Upload hashes to cloud&#39;</span><span class="p">)</span>
+            <span class="n">filepath</span> <span class="o">=</span> <span class="n">HashMapping</span><span class="o">.</span><span class="n">get_cloud_hash_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_name</span><span class="p">)</span>
+            <span class="n">fs</span><span class="o">.</span><span class="n">save_json</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashes</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="HashMapping.items"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashMapping.items">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashes</span><span class="o">.</span><span class="n">items</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="HashMapping.exists"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashMapping.exists">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Tests whether the output behind filepath exists, either locally or in the cloud.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">local</span><span class="p">:</span>
+            <span class="n">filepath_local</span> <span class="o">=</span> <span class="n">add_working_dir</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filepath_local</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fs</span> <span class="o">=</span> <span class="n">Config</span><span class="p">()</span><span class="o">.</span><span class="n">fs</span>
+            <span class="k">return</span> <span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="HashMapping.clean_up"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.HashMapping.clean_up">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">clean_up</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks if for all existing hashes the outfiles are there. If not, the hashes are removed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">filepaths</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hashes</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">filepath</span> <span class="ow">in</span> <span class="n">filepaths</span><span class="p">:</span>
+            <span class="c1"># TODO Better integration?</span>
+            <span class="k">if</span> <span class="n">filepath</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;DeltaTable&#39;</span><span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">filepath</span><span class="si">}</span><span class="s2"> not existing any more, clean up&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">hashes</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="get_upstream_tasks"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.get_upstream_tasks">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">get_upstream_tasks</span><span class="p">(</span><span class="n">task</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes all upstream tasks of the given tasks by enumerating the computational DAG.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        task (luisy.base.Task): A luisy task object</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Dict where the values are the upstream tasks and the keys are the respective output</span>
+<span class="sd">        files.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tasks</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">dep</span> <span class="ow">in</span> <span class="n">get_all_dependencies</span><span class="p">(</span><span class="n">task</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dep</span><span class="p">,</span> <span class="n">Task</span><span class="p">):</span>
+            <span class="n">tasks</span><span class="p">[</span><span class="n">remove_working_dir</span><span class="p">(</span><span class="n">dep</span><span class="o">.</span><span class="n">output</span><span class="p">()</span><span class="o">.</span><span class="n">path</span><span class="p">)]</span> <span class="o">=</span> <span class="n">dep</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s1">&#39;None-luisy Tasks in your pipeline detected.&#39;</span>
+                <span class="s1">&#39;Those tasks may prevent the rerun-functionality to work correctly!&#39;</span>
+            <span class="p">)</span>
+    <span class="k">return</span> <span class="n">tasks</span></div>
+
+
+<div class="viewcode-block" id="compute_hashes"><a class="viewcode-back" href="../../api/luisy.html#luisy.hashes.compute_hashes">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">compute_hashes</span><span class="p">(</span><span class="n">tasks</span><span class="p">,</span> <span class="n">requirements_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes the hashes for all tasks</span>
+
+<span class="sd">    Args:</span>
+
+<span class="sd">        tasks (dict): Dict where the values are :py:class:`luisy.Task` objects and the keys are the</span>
+<span class="sd">            paths to their output.</span>
+<span class="sd">        requirements_path (str): Path to the code:`requirement.txt`. Defaults to `None` and will</span>
+<span class="sd">            be read-off the config.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Dict where the keys are the outfiles of the tasks handed in and the values are the</span>
+<span class="sd">        hashes.</span>
+
+<span class="sd">    TODO:</span>
+<span class="sd">        Can this be moved to TaskHashEntry?</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">filenames</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tasks</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="n">task_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">tasks</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">]</span>
+
+    <span class="n">tasks_objects</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">tasks_classes</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">task_list</span><span class="p">:</span>
+        <span class="n">task_class</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">task_class</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tasks_classes</span><span class="p">:</span>
+            <span class="n">tasks_classes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">task_class</span><span class="p">)</span>
+            <span class="n">tasks_objects</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+
+    <span class="n">hashes</span> <span class="o">=</span> <span class="n">create_hashes</span><span class="p">(</span><span class="n">tasks_classes</span><span class="p">,</span> <span class="n">requirements_path</span><span class="o">=</span><span class="n">requirements_path</span><span class="p">)</span>
+    <span class="n">hash_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">tasks_classes</span><span class="p">,</span> <span class="n">hashes</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="n">filename</span><span class="p">:</span> <span class="n">hash_dict</span><span class="p">[</span><span class="nb">type</span><span class="p">(</span><span class="n">task</span><span class="p">)]</span> <span class="k">for</span> <span class="n">filename</span><span class="p">,</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2022, Robert Bosch GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

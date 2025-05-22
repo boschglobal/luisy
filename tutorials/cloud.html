@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloud usage &mdash; luisy  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Rerun changed tasks" href="reruns.html" />
+    <link rel="prev" title="Multi File Management / Directory Output" href="multi_file.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            luisy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/about.html">Why?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions.html">Contributions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameters.html">WrapperTasks and ConcatenationTasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi_file.html">Directory Output</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Up- and Downloading Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reruns.html">Trigger reruns by changing code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spark.html">Interaction with PySpark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../task.html">Task structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../decorators.html">Decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reruns.html">Reruns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../visualize.html">Visualize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cloud.html">Cloud sync</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../helpers.html">Helper funcs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hash_update_mode.html">Hash Update Mode</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/modules.html">Full reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../legal/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legal/corporate_information.html">Corporate information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">luisy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Cloud usage</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorials/cloud.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cloud-usage">
+<h1>Cloud usage<a class="headerlink" href="#cloud-usage" title="Permalink to this heading"></a></h1>
+<p>This section shows you how to make use of download and upload
+functionality that luisy offers.  To use the luisy cloud features,
+make sure to have your <cite>LUISY_AZURE_STORAGE_KEY</cite>,
+<cite>LUISY_AZURE_ACCOUNT_NAME</cite>, and <cite>LUISY_AZURE_CONTAINER_NAME</cite> set in
+the environment variables of your system. More information <a class="reference internal" href="../cloud.html"><span class="doc">Cloud
+synchronisation</span></a>.  Consider the following small pipeline in
+the module <code class="code docutils literal notranslate"><span class="pre">luisy_playground</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">luisy</span>
+
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">raw</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">csv_output</span><span class="p">()</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FileA</span><span class="p">(</span><span class="n">luisy</span><span class="o">.</span><span class="n">ExternalTask</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_file_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;file_a&#39;</span>
+
+
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">raw</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">csv_output</span><span class="p">()</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FileB</span><span class="p">(</span><span class="n">luisy</span><span class="o">.</span><span class="n">ExternalTask</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_file_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;file_b&#39;</span>
+
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">interim</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="n">FileA</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MultipliedFile</span><span class="p">(</span><span class="n">luisy</span><span class="o">.</span><span class="n">Task</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># some processings</span>
+
+
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">final</span>
+<span class="nd">@luisy</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="n">MultipliedFile</span><span class="p">,</span> <span class="n">FileB</span><span class="p">,</span> <span class="n">as_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FinalFile</span><span class="p">(</span><span class="n">luisy</span><span class="o">.</span><span class="n">Task</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># some processings</span>
+</pre></div>
+</div>
+<p>Assume the cloud storage holds the following files:</p>
+<ul class="simple">
+<li><p><cite>/projects/luisy_playground/raw/file_a.csv</cite></p></li>
+<li><p><cite>/projects/luisy_playground/raw/file_b.csv</cite></p></li>
+<li><p><cite>/projects/luisy_playground/interim/MultipliedFile.csv</cite></p></li>
+</ul>
+<p>Assume a user has no files available locally. If the user initially runs</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>luigi<span class="w"> </span>--module<span class="w"> </span>my_module.tasks<span class="w"> </span>FinalFile<span class="w"> </span>--download<span class="w"> </span>--local-scheduler
+</pre></div>
+</div>
+<p>then <a class="reference internal" href="../api/luisy.html#module-luisy" title="luisy"><code class="xref py py-mod docutils literal notranslate"><span class="pre">luisy</span></code></a> first checks whether the output of <cite>FinalFile</cite> is
+available locally. It is then checked whether it’s in the cloud. It’s
+not, end hence its requirements, <code class="code docutils literal notranslate"><span class="pre">MultipliedFile</span></code> and
+<code class="code docutils literal notranslate"><span class="pre">FileB</span></code>, are checked. Both are also not available locally, but
+as they are in the cloud, they are downloaded to his local system.
+Afterwards, the task <code class="code docutils literal notranslate"><span class="pre">FinalFile</span></code> is executed locally. Thus,
+after the pipeline ran, the local file system of the user looks like
+this:</p>
+<ul class="simple">
+<li><p><cite>/projects/luisy_playground/raw/file_b.csv</cite></p></li>
+<li><p><cite>/projects/luisy_playground/interim/MultipliedFile.csv</cite></p></li>
+<li><p><cite>/projects/luisy_playground/final/FinalFile.csv</cite></p></li>
+</ul>
+<p>If the user now runs</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>luisy<span class="w"> </span>--module<span class="w"> </span>my_module.tasks<span class="w"> </span>FinalFile<span class="w"> </span>--upload
+</pre></div>
+</div>
+<p>the target of <code class="code docutils literal notranslate"><span class="pre">FinalFile</span></code> is uploaded to the cloud.</p>
+<p>This (and this is hot stuff), allows any other user to run:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">my_module.tasks</span><span class="w"> </span><span class="kn">import</span> <span class="n">FinalFile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">luisy</span>
+
+<span class="c1"># if env variable not set</span>
+<span class="n">luisy</span><span class="o">.</span><span class="n">set_working_dir</span><span class="p">(</span><span class="s1">&#39;my_working_dir&#39;</span><span class="p">)</span>
+
+<span class="n">luisy</span><span class="o">.</span><span class="n">activate_download</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">FinalFile</span><span class="p">()</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="multi_file.html" class="btn btn-neutral float-left" title="Multi File Management / Directory Output" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="reruns.html" class="btn btn-neutral float-right" title="Rerun changed tasks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2022, Robert Bosch GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

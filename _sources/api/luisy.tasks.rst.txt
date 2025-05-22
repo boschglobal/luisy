@@ -1,0 +1,21 @@
+luisy.tasks package
+===================
+
+Submodules
+----------
+
+luisy.tasks.base module
+-----------------------
+
+.. automodule:: luisy.tasks.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: luisy.tasks
+   :members:
+   :undoc-members:
+   :show-inheritance:
